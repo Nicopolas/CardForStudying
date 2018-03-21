@@ -26,8 +26,8 @@ public class CardsFragment extends BaseFragment {
     private TextView mWordTranslationView;
     public Button mExampleButton;
 
-    public List<Word> mListWord = mDataList;
-    public int index = 0;
+    public List<Word> mListWord;
+    //public int index = 0;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -133,6 +133,7 @@ public class CardsFragment extends BaseFragment {
     }
 
     public void putDataInElements() {
+        mListWord = mDataList;//переделать не приравнивать массивы
         mWordTextView.setText(mListWord.get(index).getMeaningWord());
         mWordTranscriptionView.setText(mListWord.get(index).getMeaningWordTranscription());
         mWordTranslationView.setText(mListWord.get(index).getTranslationWord().replace("сущ.:", "\nсущ.:").replace("глаг.:", "\nглаг.:").replace("прил.:", "\nприл.:"));

@@ -24,16 +24,15 @@ public class Word {
         mWordId = UUID.randomUUID();
     }
 
-    public Word(String mMeaningWord, String mMeaningWordTranscription, String mTranslationWord, Map<String, String> mExample) {
+    public Word(String mMeaningWord, String mMeaningWordTranscription, String mTranslationWord, String mInTest, String mRatingWord, String mWordId, Map<String, String> mExample) {
         this.mMeaningWord = mMeaningWord;
         this.mMeaningWordTranscription = mMeaningWordTranscription;
         this.mTranslationWord = mTranslationWord;
         this.mExample = new HashMap<>();
         this.mExample.putAll(mExample);
-
-        mInTest = false;
-        mRatingWord = 0;
-        mWordId = UUID.randomUUID();
+        this.mInTest = Boolean.valueOf(mInTest);
+        this.mRatingWord = Integer.valueOf(mRatingWord);
+        this.mWordId = UUID.fromString(mWordId);
     }
 
     public String getMeaningWord() {

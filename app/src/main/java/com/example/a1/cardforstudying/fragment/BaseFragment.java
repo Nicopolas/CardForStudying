@@ -74,7 +74,7 @@ public abstract class BaseFragment extends Fragment {
             Log.e(TAG, getResources().getString(R.string.err_mListWordIsEmpty));
             makeToast(R.string.err_mListWordIsEmpty);
         }
-        putDataInElements();
+        this.putDataInElements();
     }
 
     public abstract void putDataInElements();

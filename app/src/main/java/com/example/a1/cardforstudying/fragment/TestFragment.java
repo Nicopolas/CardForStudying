@@ -29,8 +29,8 @@ public class TestFragment extends BaseFragment {
     private Button mThirdWordButton;
     private Button mFourthWordButton;
 
-    public List<Word> mListWord = mDataList;
-    public int index = 0;
+    public List<Word> mListWord;
+    //public int index = 0; //проблема с наследованием от BaseFragment (изменяется индекс родительского класса)
     public int mRightButtonIndex = 0;
 
     @Override
@@ -150,6 +150,7 @@ public class TestFragment extends BaseFragment {
     }
 
     public void putDataInElements() {
+        mListWord = mDataList; //переделать (добавлть слова в тест, только есть есть признак mInTest) (не приравнивать массивы)
         mWordTextView.setText(mListWord.get(index).getMeaningWord());
         mWordTranscriptionView.setText(mListWord.get(index).getMeaningWordTranscription());
 
