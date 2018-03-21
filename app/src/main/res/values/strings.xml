@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Cards For Studying</string>
+    <string name="fictitious_meaning_word">Word</string>
+    <string name="fictitious_meaning_word_transcription">|wɜːrd|</string>
+    <string name="first_button_word">Слово</string>
+    <string name="second_button_word">Мир</string>
+    <string name="third_button_word">Фраза</string>
+    <string name="fourth_button_word">Суслик</string>
+    <string name="fictitious_word_translation_view">
+        <string>\nсущ.: слово, текст, сообщение</string>
+        <string>\nглаг.: выражать словами, формулировать</string>
+    </string>
+    <string name="example">Пример</string>
+    <string name="err_inDeveloping">В разарботке</string>
+    <string name="err_mListWordIsEmpty">Не найдено ни одного слова в словаре</string>
+    <string name="err_empty_dictionary">В активном словаре меньше четырех слов</string>
+    <string name="empty_dictionary">В активном словаре нет слов</string>
+    <string name="fewer_than_four_on_dictionary">Для построения теста \nдолжно быть отмечено больше четырех слов</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="correct_answer_message">Верно</string>
+    <string name="incorrect_answer_message">Попробуй еще раз</string>
+</resources>

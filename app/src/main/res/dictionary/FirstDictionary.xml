@@ -1,0 +1,1187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<migration urlid="http://www.microsoft.com/migration/1.0/migxmlext/<CustomFileName>">
+ 
+<!-- FirstDictionary -->
+
+<Word>
+<MeaningWord>
+word
+</MeaningWord>
+<MeaningWordTranscription>
+wə:d
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: слово, известие, приказание, замечание, речь, обещание, новость
+</TranslationWord>
+<Example>
+And I want to introduce a word that I think is very useful, which is stacking.
+</Example>
+<ExampleTranslation>
+А затем я введу понятие, которое мне кажется очень полезным — это термин "суммирование".
+</ExampleTranslation>
+</Word>
+
+<Word>
+<MeaningWord>
+dictionary
+</MeaningWord>
+<MeaningWordTranscription>
+ˈdikSHəˌnerē
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: словарь
+</TranslationWord>
+<Example>
+And it actually helps a lot more if you look in a very old dictionary, in this case the 1913 dictionary.
+</Example>
+<ExampleTranslation>
+Лучше поискать его в очень старом словаре, как, например, в этом издании 1913 года.
+</ExampleTranslation>
+</Word>
+
+<Word>
+<MeaningWord>
+app
+</MeaningWord>
+<MeaningWordTranscription>
+ap
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: приложение
+</TranslationWord>
+<Example>
+You can reorder the app icons by clicking and dragging the icons in the "Apps" section.
+</Example>
+<ExampleTranslation>
+Порядок значков приложений можно менять, перетаскивая их в разделе "Приложения".	
+</ExampleTranslation>
+</Word>
+
+<Word>
+<MeaningWord>
+creator
+</MeaningWord>
+<MeaningWordTranscription>
+krēˈātər
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: создатель, автор, творец, бог
+</TranslationWord>
+<Example>
+First, that artists and creators embrace the idea, choose that their work be made available more freely.
+</Example>
+<ExampleTranslation>
+Во-первых, чтобы художники и создатели приняли эту идею; делать выбор, чтобы их работы были более доступны.	
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+able
+</MeaningWord>
+<MeaningWordTranscription>
+ˈeɪbl
+</MeaningWordTranscription>
+<TranslationWord>
+прил.: способный
+глаг.: быть в состоянии
+</TranslationWord>
+<Example>
+This was essentially a political task requiring an "able architect".
+</Example>
+<ExampleTranslation>
+Это является задачей прежде всего политического характера, для решения которой требуется "способный архитектор".
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+acid
+</MeaningWord>
+<MeaningWordTranscription>
+ˈæsɪd
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: кислота
+прил.: кислотный, кислый
+глаг.:
+</TranslationWord>
+<Example>
+Oxalic acid is two carbon dioxide molecules joined together.
+</Example>
+<ExampleTranslation>
+Щавелевая кислота - это две молекулы диоксида углерода, объединённые вместе.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+angry
+</MeaningWord>
+<MeaningWordTranscription>
+ˈæŋgrɪ
+</MeaningWordTranscription>
+<TranslationWord>
+прил.: сердитый, злой, гневный
+</TranslationWord>
+<Example>
+Congestion makes people angry, just like any other delay.
+</Example>
+<ExampleTranslation>
+Заторы дорожного движения заставляют людей раздражаться, как, впрочем, и любые другие задержки.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+account
+</MeaningWord>
+<MeaningWordTranscription>
+əˈkaunt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: счет, учётная запись
+глаг.: считать
+</TranslationWord>
+<Example>
+An account of activities undertaken is given below.
+</Example>
+<ExampleTranslation>
+Ниже приводится информация о деятельности, осуществлявшейся в этой области.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+act
+</MeaningWord>
+<MeaningWordTranscription>
+ækt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: действие, законодательный акт
+глаг.: действовать, принимать меры
+</TranslationWord>
+<Example>
+No act of this nature exists.
+</Example>
+<ExampleTranslation>
+Какой-либо акт такого характера в данном случае отсутствует.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+addition
+</MeaningWord>
+<MeaningWordTranscription>
+əˈdɪʃən
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: дополнение, включение
+</TranslationWord>
+<Example>
+The addition of a NOTE 2 to 1.2.1 was not considered to be necessary.
+</Example>
+<ExampleTranslation>
+Включение ПРИМЕЧАНИЯ 2 в раздел 1.2.1 было сочтено нецелесообразным.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+adjust
+</MeaningWord>
+<MeaningWordTranscription>
+əˈdʒʌst
+</MeaningWordTranscription>
+<TranslationWord>
+глаг.: корректировать, регулировать, приспосабливать
+</TranslationWord>
+<Example>
+The Committee must adjust its policies accordingly.
+</Example>
+<ExampleTranslation>
+Комитет должен соответственно корректировать свою политику
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+advertisement
+</MeaningWord>
+<MeaningWordTranscription>
+ədˈvəːtɪsmənt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: реклама, объявление
+</TranslationWord>
+<Example>
+Shows the number of cookie visitors to whom the relevant advertisement has been displayed.
+</Example>
+<ExampleTranslation>
+Показывает число посетителей Cookie которым соответствующая реклама была показана.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+agreement
+</MeaningWord>
+<MeaningWordTranscription>
+əˈgriːmənt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: соглашение, контракт
+</TranslationWord>
+<Example>
+That agreement cannot be withdrawn or appealed.
+</Example>
+<ExampleTranslation>
+Такое соглашение не подлежит отмене, иначе говоря, на него нельзя подавать апелляцию.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+amusement
+</MeaningWord>
+<MeaningWordTranscription>
+əˈmjuːzmənt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: развлечение, забава
+</TranslationWord>
+<Example>
+That is going to be a fine amusement.
+</Example>
+<ExampleTranslation>
+Это будет отличное развлечение и весёлый праздник.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+approval
+</MeaningWord>
+<MeaningWordTranscription>
+əˈpruːvəl
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: одобрение, согласие
+</TranslationWord>
+<Example>
+Unless we don't need their approval.
+</Example>
+<ExampleTranslation>
+До тех пор, пока нам не нужно их согласие.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+argument
+</MeaningWord>
+<MeaningWordTranscription>
+ˈɑːgjumənt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.:спор, аргумент
+</TranslationWord>
+<Example>
+That really is not your best argument.
+</Example>
+<ExampleTranslation>
+Это, честно говоря, не лучший твой довод.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+art
+</MeaningWord>
+<MeaningWordTranscription>
+ɑːt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: исскуство, картины
+прил.:художественный
+</TranslationWord>
+<Example>
+I've never studied art or anything.
+</Example>
+<ExampleTranslation>
+Я никогда не изучал искусство или что-то в этом роде.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+attempt
+</MeaningWord>
+<MeaningWordTranscription>
+əˈtɛmpt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: попытка, покушение
+глаг.: пытаться, стремиться
+</TranslationWord>
+<Example>
+Your pitiful attempt at revolution has failed.
+</Example>
+<ExampleTranslation>
+Ваша жалкая попытка устроить переворот потерпела фиаско.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+attention
+</MeaningWord>
+<MeaningWordTranscription>
+əˈtɛnʃən
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: внимание, сведения
+</TranslationWord>
+<Example>
+This question could be given separate attention elsewhere.
+</Example>
+<ExampleTranslation>
+Этому вопросу можно было бы уделить отдельное внимание в другом месте.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+attraction
+</MeaningWord>
+<MeaningWordTranscription>
+əˈtrækʃən
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: достопримечательности, привлекательность
+</TranslationWord>
+<Example>
+The attraction of target audience is one of the main and difficult marketing challenges in the Internet.
+</Example>
+<ExampleTranslation>
+Привлечение целевой аудитории - основная и сложная маркетинговая задача в сети Интернет.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+authority
+</MeaningWord>
+<MeaningWordTranscription>
+ɔːˈθɔrɪtɪ
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: власть, полномочие, администрация
+</TranslationWord>
+<Example>
+Discussion followed as to whom was the competent authority.
+</Example>
+<ExampleTranslation>
+Был обсужден вопрос о том, кто выступает в роли компетентного органа.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+back
+</MeaningWord>
+<MeaningWordTranscription>
+bæk
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: спина, назад
+прил.: задний
+глаг.: отступать
+</TranslationWord>
+<Example>
+Thanks for having my back back there, man.
+</Example>
+<ExampleTranslation>
+Спасибо что прикрыл мне спину там, друг.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+balance
+</MeaningWord>
+<MeaningWordTranscription>
+ˈbæləns
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: баланс, остаток
+прил.: балансовый
+глаг.: уравновешивать
+</TranslationWord>
+<Example>
+I forgot the thermal balance would equalise.
+</Example>
+<ExampleTranslation>
+Я и забыл, что тепловой баланс стремится к выравниванию.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+base
+</MeaningWord>
+<MeaningWordTranscription>
+beɪs
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: фундамент, основа
+прил.: основной, низменный
+глаг.: основывать, положить в основу
+</TranslationWord>
+<Example>
+Captain, this must be their base.
+</Example>
+<ExampleTranslation>
+Капитан, это, должно быть, их база.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+behavior
+</MeaningWord>
+<MeaningWordTranscription>
+bɪˈheɪvjər
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: поведение
+</TranslationWord>
+<Example>
+This tab defines the spellchecker behavior.
+</Example>
+<ExampleTranslation>
+На этой вкладке настраивается поведение программы проверки правописания.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+belief
+</MeaningWord>
+<MeaningWordTranscription>
+bɪˈliːf
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: вера, убеждение
+</TranslationWord>
+<Example>
+One subject China should address is freedom of belief.
+</Example>
+<ExampleTranslation>
+Одним из вопросов, требующих скорейшего решения, является свобода вероисповедания.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+blow
+</MeaningWord>
+<MeaningWordTranscription>
+bləu
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: удар
+прил.:
+глаг.: дуть, уничтожить
+</TranslationWord>
+<Example>
+That means we have to blow it.
+</Example>
+<ExampleTranslation>
+Это означает, что нам нужно будет его взорвать.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+brass
+</MeaningWord>
+<MeaningWordTranscription>
+brɑːs
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.:медь, руководство, латунь
+прил.: латунный
+</TranslationWord>
+<Example>
+They had this old brass and copper.
+</Example>
+<ExampleTranslation>
+И у них была старая ненужная латунь и медь.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+burn
+</MeaningWord>
+<MeaningWordTranscription>
+bəːn
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: ожог
+глаг.: гореть
+</TranslationWord>
+<Example>
+We can burn the stuff they gave us.
+</Example>
+<ExampleTranslation>
+Ну, можно сжечь всё, что они нам подарили.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+burst
+</MeaningWord>
+<MeaningWordTranscription>
+bəːst
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: взрыв
+глаг.: взрывать
+</TranslationWord>
+<Example>
+And it does this burst of energy.
+</Example>
+<ExampleTranslation>
+И она порождает этот взрыв энергии.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+canvas
+</MeaningWord>
+<MeaningWordTranscription>
+ˈkænvəs
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: холст, парус
+</TranslationWord>
+<Example>
+A painter puts the colors he likes on a canvas.
+</Example>
+<ExampleTranslation>
+Художник покрывает холст красками, которые ему нравятся.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+care
+</MeaningWord>
+<MeaningWordTranscription>
+kɛər
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: забота, лечение
+прил.:
+глаг.:
+</TranslationWord>
+<Example>
+Secondary care consists principally of hospital care.
+</Example>
+<ExampleTranslation>
+Вторичная медицинская помощь состоит в основном из лечения в больнице.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+cause
+</MeaningWord>
+<MeaningWordTranscription>
+kɔːz
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: причина, дело
+глаг.: вызывать
+</TranslationWord>
+<Example>
+Alleviating world poverty is our common cause.
+</Example>
+<ExampleTranslation>
+Ликвидация нищеты на планете - это наше общее дело.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+chalk
+</MeaningWord>
+<MeaningWordTranscription>
+tʃɔːk
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.:мел
+глаг.:рисовать мелом
+</TranslationWord>
+<Example>
+She's lead, we're chalk.
+</Example>
+<ExampleTranslation>
+Она - графит карандаша, мы - мел.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+cloth
+</MeaningWord>
+<MeaningWordTranscription>
+klɔθ
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: ткать, тряпка, одежда
+</TranslationWord>
+<Example>
+The guy wears cloth that hasn't been invented yet.
+</Example>
+<ExampleTranslation>
+На нем была одежда, которую еще не изобрели.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+coal
+</MeaningWord>
+<MeaningWordTranscription>
+kəul
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.:уголь
+</TranslationWord>
+<Example>
+Most coal today is used to generate electricity.
+</Example>
+<ExampleTranslation>
+Сегодня уголь, главным образом, используется для производства электроэнергии.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+comparison
+</MeaningWord>
+<MeaningWordTranscription>
+kəmˈpærɪsn
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: сравнение, сопоставительный анализ
+глаг.: сравнивать
+</TranslationWord>
+<Example>
+They considered this an inappropriate comparison.
+</Example>
+<ExampleTranslation>
+Они выразили мнение о том, что такое сопоставление является неприемлемым.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+competition
+</MeaningWord>
+<MeaningWordTranscription>
+kɔmpɪˈtɪʃən
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: соревнование, соперничество
+прил.:
+глаг.:
+</TranslationWord>
+<Example>
+Supporting post-conflict countries requires cooperation, not competition.
+</Example>
+<ExampleTranslation>
+Чтобы поддерживать страны после завершения конфликтов, нужно сотрудничать, а не конкурировать друг с другом.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+curve
+</MeaningWord>
+<MeaningWordTranscription>
+kəːv
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: кривая
+прил.: кривой
+глаг.: изгибаться, избегать
+</TranslationWord>
+<Example>
+Our increase in employment income curve has definitely slowed.
+</Example>
+<ExampleTranslation>
+Наш рост занятости кривой дохода определенно замедлился.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+debt
+</MeaningWord>
+<MeaningWordTranscription>
+dɛt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: долг, должник
+</TranslationWord>
+<Example>
+The accruing debt is treated as internal debt.
+</Example>
+<ExampleTranslation>
+Нарастающая задолженность рассматривается как внутренний долг.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+decision
+</MeaningWord>
+<MeaningWordTranscription>
+dɪˈsɪʒən
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: решение, решимость
+</TranslationWord>
+<Example>
+The decision to vote means a decision for history.
+</Example>
+<ExampleTranslation>
+Решение вынести этот вопрос на голосование - это поистине историческое решение.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+degree
+</MeaningWord>
+<MeaningWordTranscription>
+dɪˈgriː
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: уровень, градус, степень
+прил.:
+глаг.:
+</TranslationWord>
+<Example>
+That and a degree from Oxford.
+</Example>
+<ExampleTranslation>
+Это, а также - степень в Оксфорде.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+desing
+</MeaningWord>
+<MeaningWordTranscription>
+
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: намереваться, дизайн
+</TranslationWord>
+<Example>
+The first desing is the first to be seen on the average.
+</Example>
+<ExampleTranslation>
+Просмотр полки с продукцией в среднем начинается именно с первого дизайна упаковки.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+desire
+</MeaningWord>
+<MeaningWordTranscription>
+dɪˈzaɪər
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: желание, стремление
+прил.:
+глаг.: желать
+</TranslationWord>
+<Example>
+Women have many secret ways of expressing desire.
+</Example>
+<ExampleTranslation>
+У женщин очень много способов, чтобы выразить свое желание.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+destruction
+</MeaningWord>
+<MeaningWordTranscription>
+dɪsˈtrʌkʃən
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: разрушение, ущерб
+</TranslationWord>
+<Example>
+However, despite the death and destruction, some grounds for optimism emerged.
+</Example>
+<ExampleTranslation>
+Вместе с тем, несмотря на гибель людей и разрушения, имеются определенные основания для оптимизма.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+disease
+</MeaningWord>
+<MeaningWordTranscription>
+dɪˈziːz
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: заболевание, недуг
+</TranslationWord>
+<Example>
+You can make this disease go away.
+</Example>
+<ExampleTranslation>
+Ты мог бы уже сегодня заставить эту болезнь уйти, если бы захотел.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+disgust
+</MeaningWord>
+<MeaningWordTranscription>
+dɪsˈgʌstɪŋ
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: отвращение
+</TranslationWord>
+<Example>
+Only one man was exempt from my disgust.
+</Example>
+<ExampleTranslation>
+Лишь один человек не был мне противен.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+doubt
+</MeaningWord>
+<MeaningWordTranscription>
+daut
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: сомнение
+глаг.: сомневаться, подвергать сомнению
+</TranslationWord>
+<Example>
+There are good reasons to doubt this.
+</Example>
+<ExampleTranslation>
+Существуют серьезные основания для того, чтобы сомневаться в этом.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+event
+</MeaningWord>
+<MeaningWordTranscription>
+ɪˈvɛnt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: случай, событие
+прил.:
+глаг.:
+</TranslationWord>
+<Example>
+An undesired event which results in harm.
+</Example>
+<ExampleTranslation>
+Нежелательное событие, которое приводит к нанесению ущерба.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+exchange
+</MeaningWord>
+<MeaningWordTranscription>
+ɪksˈtʃeɪndʒ
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: обмен, биржа, станция
+прил.: меновой
+глаг.: обменивать
+</TranslationWord>
+<Example>
+Victim and attackers immediately began to exchange shots.
+</Example>
+<ExampleTranslation>
+Сразу же после этого начался обмен выстрелами между жертвой и нападавшими.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+existence
+</MeaningWord>
+<MeaningWordTranscription>
+ɪgˈzɪstəns
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: существование, наличие, бытие
+</TranslationWord>
+<Example>
+Like all sick kids, your existence depends on it.
+</Example>
+<ExampleTranslation>
+Как и у всех больных детей, ваше существование на этом зациклено.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+expansion
+</MeaningWord>
+<MeaningWordTranscription>
+ɪksˈpænʃən
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: расширение, развитие
+</TranslationWord>
+<Example>
+An expansion would not change very much.
+</Example>
+<ExampleTranslation>
+И расширение вряд ли серьезно изменило бы здесь что-либо.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+expert
+</MeaningWord>
+<MeaningWordTranscription>
+ˈɛkspəːt
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: эксперт, специалист
+прил.: опытный
+</TranslationWord>
+<Example>
+The Sub-Committee noted that the expert from Argentina opposed this concept.
+</Example>
+<ExampleTranslation>
+Подкомитет принял к сведению, что эксперт из Аргентины выступил против этой концепции.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+wire
+</MeaningWord>
+<MeaningWordTranscription>
+ˈwaɪər
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: провод, проволока, прослушка
+</TranslationWord>
+<Example>
+Sandbags, barbed wire, etc.
+</Example>
+<ExampleTranslation>
+Мешки с песком, колючая проволока и т.д.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+whip
+</MeaningWord>
+<MeaningWordTranscription>
+wɪp
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: кнут, хлыст
+</TranslationWord>
+<Example>
+But I don't need another whip.
+</Example>
+<ExampleTranslation>
+Но хлыст у меня уже есть.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+whistle
+</MeaningWord>
+<MeaningWordTranscription>
+ˈwɪsl
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: свист
+прил.:
+глаг.: свистеть, насвистывать
+</TranslationWord>
+<Example>
+You also can't hear a dog whistle.
+</Example>
+<ExampleTranslation>
+Ты также не можешь услышать собачий свисток.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+wheel
+</MeaningWord>
+<MeaningWordTranscription>
+wiːl
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.: колесо
+прил.:
+глаг.: вертеть
+</TranslationWord>
+<Example>
+That means the wheel may be spinning back.
+</Example>
+<ExampleTranslation>
+Это значит, что колесо может крутиться в другую сторону.
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+
+</MeaningWord>
+<MeaningWordTranscription>
+
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.:
+прил.:
+глаг.:
+</TranslationWord>
+<Example>
+
+</Example>
+<ExampleTranslation>
+	
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+
+</MeaningWord>
+<MeaningWordTranscription>
+
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.:
+прил.:
+глаг.:
+</TranslationWord>
+<Example>
+
+</Example>
+<ExampleTranslation>
+	
+</ExampleTranslation>
+</Word>
+
+
+<Word>
+<MeaningWord>
+
+</MeaningWord>
+<MeaningWordTranscription>
+
+</MeaningWordTranscription>
+<TranslationWord>
+сущ.:
+прил.:
+глаг.:
+</TranslationWord>
+<Example>
+
+</Example>
+<ExampleTranslation>
+	
+</ExampleTranslation>
+</Word>
