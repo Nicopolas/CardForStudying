@@ -22,10 +22,9 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:gravity="center_vertical">
-
 
         <LinearLayout
             android:layout_width="37dp"
@@ -38,35 +37,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:textSize="10sp"
-                android:text="W" />
+                android:text="W"
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/go_to_test_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:textSize="10sp"
-                android:text="T" />
+                android:text="T"
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/go_to_phrase_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:textSize="10sp"
-                android:text="Ph" />
+                android:text="Ph"
+                android:textSize="10sp" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-
-        </LinearLayout>
-
     </FrameLayout>
 
     <LinearLayout
