@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.a1.cardforstudying.CardsForStuduing;
 import com.example.a1.cardforstudying.R;
+import com.example.a1.cardforstudying.TextToSpeechHelper;
 import com.example.a1.cardforstudying.Word;
 import com.example.a1.cardforstudying.WordLab;
 
@@ -25,6 +26,7 @@ public class CardsFragment extends BaseFragment {
     private TextView mWordTranscriptionView;
     private TextView mWordTranslationView;
     public Button mExampleButton;
+    public ImageButton mSpeechButton;
 
     public List<Word> mListWord;
     //public int index = 0;
@@ -66,6 +68,14 @@ public class CardsFragment extends BaseFragment {
             public void onClick(View view) {
                 makeToast(mListWord.get(index).getExample());//в разработке
                 makeToast(mListWord.get(index).getExampleTranslation());//в разработке
+            }
+        });
+
+        mSpeechButton = v.findViewById(R.id.speech_button);
+        mSpeechButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextToSpeechHelper.speakOut(getActivity(), mListWord.get(index).getMeaningWord());
             }
         });
 

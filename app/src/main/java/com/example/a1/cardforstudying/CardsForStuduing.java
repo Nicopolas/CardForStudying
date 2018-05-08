@@ -89,6 +89,7 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume() called");
+        TextToSpeechHelper.stopTalking();
     }
     @Override
     public void onPause() {
