@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static com.example.a1.cardforstudying.database.DbSchema.ExampleTable;
+import static com.example.a1.cardforstudying.database.DbSchema.PhraseTable;
 import static com.example.a1.cardforstudying.database.DbSchema.WordTable;
 /*        NULL. Пустое значение в таблице базы.
           INTEGER. Целочисленное значение, хранящееся в 1, 2, 3, 4, 6 или 8 байтах, в зависимости от величины самого значения.
@@ -27,13 +29,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(createWordTableQuery());
-        //sqLiteDatabase.execSQL(Exsample);
-        //sqLiteDatabase.execSQL(Phraze);
+        sqLiteDatabase.execSQL(createExampleTableQuery());
+        //sqLiteDatabase.execSQL(createPhraseTableQuery());
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+        if (oldVersion < newVersion) {
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + WordTable.NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ExampleTable.NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PhraseTable.NAME);
+            onCreate(sqLiteDatabase);
+        }
     }
 
     private String createWordTableQuery() {
@@ -41,6 +48,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + WordTable.Cols.WordID + " INTEGER PRIMARY KEY AUTOINCREMENT," + WordTable.Cols.MeaningWord + " TEXT,"
                 + WordTable.Cols.MeaningWordTranscription + " TEXT," + WordTable.Cols.TranslationWord + " TEXT,\"\n"
                 + WordTable.Cols.RatingWord + " INTEGER," + WordTable.Cols.InTest + " TEXT" + ");";
+    }
+
+    private String createExampleTableQuery() {
+        return "CREATE TABLE " + ExampleTable.NAME + " ("
+                + ExampleTable.Cols.ExampleID + " INTEGER PRIMARY KEY AUTOINCREMENT," + ExampleTable.Cols.ExampleMeaning + " TEXT,"
+                + ExampleTable.Cols.ExampleTranslation + " TEXT," + ExampleTable.Cols.WordIDFK + " INTEGER" + ");";
+    }
+
+    private String createPhraseTableQuery() {
+        return "CREATE TABLE " + PhraseTable.NAME;
     }
 
 }
