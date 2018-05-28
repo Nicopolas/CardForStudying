@@ -46,7 +46,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private String createWordTableQuery() {
         return "CREATE TABLE " + WordTable.NAME + " ("
                 + WordTable.Cols.WordID + " INTEGER PRIMARY KEY AUTOINCREMENT," + WordTable.Cols.MeaningWord + " TEXT,"
-                + WordTable.Cols.MeaningWordTranscription + " TEXT," + WordTable.Cols.TranslationWord + " TEXT,\"\n"
+                + WordTable.Cols.MeaningWordTranscription + " TEXT," + WordTable.Cols.TranslationWord + " TEXT,"
                 + WordTable.Cols.RatingWord + " INTEGER," + WordTable.Cols.InTest + " TEXT" + ");";
     }
 

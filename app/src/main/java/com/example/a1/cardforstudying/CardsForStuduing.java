@@ -103,8 +103,9 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
     }
     @Override
     public void onDestroy() {
-        super.onDestroy();
         Log.d(TAG, "onDestroy() called");
+        WordLab.close();
+        super.onDestroy();
     }
 
 

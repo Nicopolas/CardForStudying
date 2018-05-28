@@ -13,7 +13,7 @@ public class Word {
     private String mMeaningWordTranscription;
     private String mTranslationWord;
     private Map<String, String> mExample;
-    private UUID mWordId;
+    private int mWordId;
     private int mRatingWord;
     private boolean mInTest;
 
@@ -21,10 +21,9 @@ public class Word {
         mExample = new HashMap<>();
         mInTest = false;
         mRatingWord = 0;
-        mWordId = UUID.randomUUID();
     }
 
-    public Word(String mMeaningWord, String mMeaningWordTranscription, String mTranslationWord, String mInTest, String mRatingWord, String mWordId, Map<String, String> mExample) {
+    public Word(int mWordId, String mMeaningWord, String mMeaningWordTranscription, String mTranslationWord, String mInTest, String mRatingWord, Map<String, String> mExample) {
         this.mMeaningWord = mMeaningWord;
         this.mMeaningWordTranscription = mMeaningWordTranscription;
         this.mTranslationWord = mTranslationWord;
@@ -32,7 +31,7 @@ public class Word {
         this.mExample.putAll(mExample);
         this.mInTest = Boolean.valueOf(mInTest);
         this.mRatingWord = Integer.valueOf(mRatingWord);
-        this.mWordId = UUID.fromString(mWordId);
+        this.mWordId = mWordId;
     }
 
     public String getMeaningWord() {
@@ -78,8 +77,12 @@ public class Word {
         mExample.put(example, exampleTranslation);
     }
 
-    public UUID getWordId() {
+    public int getWordId() {
         return mWordId;
+    }
+
+    public void setWordId(int mWordId) {
+        this.mWordId = mWordId;
     }
 
     public int getRatingWord() {

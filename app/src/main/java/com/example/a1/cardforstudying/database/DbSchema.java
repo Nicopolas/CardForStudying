@@ -11,13 +11,21 @@ public class DbSchema {
         public static final String NAME = "word";
 
         public static final class Cols {
-
             public static final String WordID = "word_id";
             public static final String MeaningWord = "meaning_word";
             public static final String MeaningWordTranscription = "meaning_word_transcription";
             public static final String TranslationWord = "translation_word";
             public static final String RatingWord = "rating_word";
             public static final String InTest = "in_test";
+
+            public static final String[] wordAllColumn = {
+                    WordID,
+                    MeaningWord,
+                    MeaningWordTranscription,
+                    TranslationWord,
+                    RatingWord,
+                    InTest
+            };
         }
     }
 
@@ -29,6 +37,13 @@ public class DbSchema {
             public static final String WordIDFK = "word_id";
             public static final String ExampleMeaning = "example_meaning";
             public static final String ExampleTranslation = "example_translation";
+
+            public static final String[] exampleAllColumn = {
+                    ExampleID,
+                    WordIDFK,
+                    ExampleMeaning,
+                    ExampleTranslation
+            };
         }
     }
 
