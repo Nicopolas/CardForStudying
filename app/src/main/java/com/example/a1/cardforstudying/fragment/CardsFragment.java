@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardsFragment extends BaseFragment {
-    private static final String TAG = "CardsFragment";
+    private final String TAG = getClass().getSimpleName();
     private TextView mWordTextView;
     private TextView mWordTranscriptionView;
     private TextView mWordTranslationView;
@@ -35,7 +35,12 @@ public class CardsFragment extends BaseFragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
         View v = inflater.inflate(R.layout.cards_fragment, container, false);
+        initGUI(v);
+        showWord();
+        return v;
+    }
 
+    private void initGUI(View v) {
         mMenuBetton = v.findViewById(R.id.menu_button);
         mMenuBetton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,9 +142,13 @@ public class CardsFragment extends BaseFragment {
                 ((CardsForStuduing) getActivity()).startFragment(new PhraseFragment());
             }
         });
+    }
 
-        showWord();
-        return v;
+    @Override
+    public void onStop() {
+        Log.e(TAG, "onStop()");
+        ((CardsForStuduing) getActivity()).index = index;
+        super.onStop();
     }
 
     public void putDataInElements() {

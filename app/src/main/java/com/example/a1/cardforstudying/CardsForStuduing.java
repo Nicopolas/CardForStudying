@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 
 import com.example.a1.cardforstudying.fragment.CardsFragment;
 import com.example.a1.cardforstudying.fragment.EmptyDictionary;
+import com.example.a1.cardforstudying.fragment.LeftButtonFragment;
 import com.example.a1.cardforstudying.fragment.TestFragment;
 
 import static com.example.a1.cardforstudying.XMLHelper.createFirstDictionary;
@@ -37,7 +38,7 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
         createFirstDictionary(this);
 
         if (fragment == null) {
-            startFragment(new CardsFragment());
+            startFragment();
         }
     }
 
@@ -51,13 +52,24 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
     }
 
 
+    public void startFragment(){
+        Fragment fragment = checkWordLab(new CardsFragment());
+
+        fm.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit();
+        fm.beginTransaction()
+                .replace(R.id.left_btn_fragment_container, new LeftButtonFragment())
+                .commit();
+    }
+
     public void startFragment(Fragment nameFragment){
         nameFragment = checkWordLab(nameFragment);
 
         fragment = nameFragment;
         fm.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit();
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 
     public Fragment checkWordLab(Fragment nameFragment){
