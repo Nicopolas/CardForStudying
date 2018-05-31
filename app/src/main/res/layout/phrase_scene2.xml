@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/word_left_button"
+        android:elevation="16dp"
         android:text="W"
         android:textSize="42dp"
         android:textStyle="bold" />
@@ -16,14 +17,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/test_left_button"
+        android:elevation="16dp"
         android:text="T"
         android:textSize="42dp"
         android:textStyle="bold" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/myrect"
         android:id="@+id/phrase_left_button"
-        android:text="Ph"
+        android:text="Phrase  "
         android:textSize="42dp"
         android:textStyle="bold" />
 </LinearLayout>

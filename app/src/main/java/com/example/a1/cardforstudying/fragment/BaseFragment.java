@@ -29,13 +29,6 @@ public abstract class BaseFragment extends Fragment {
     protected ImageButton mNextButton;
     protected ImageButton mPreviousButton;
 
-    @Deprecated
-    protected Button mGTWord;
-    @Deprecated
-    protected Button mGTTest;
-    @Deprecated
-    protected Button mGTPhrase;
-
     protected List<Word> mDataList;
     protected int index = 0;
 

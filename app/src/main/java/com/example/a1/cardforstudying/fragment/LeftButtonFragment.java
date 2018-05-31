@@ -30,8 +30,10 @@ public class LeftButtonFragment extends Fragment{
     static boolean isOpen = false;
 
     ViewGroup sceneRoot;
+    Scene wordScene2;
+    Scene testScene2;
+    Scene phraseScene2;
     Scene scene1;
-    Scene scene2;
     View v;
 
     @Override
@@ -44,8 +46,10 @@ public class LeftButtonFragment extends Fragment{
         v = inflater.inflate(R.layout.left_button_fragment, container, false);
 
         sceneRoot = (ViewGroup) v.findViewById(R.id.scene_root);
+        wordScene2 = Scene.getSceneForLayout(sceneRoot, R.layout.word_scene2, getActivity());
+        testScene2 = Scene.getSceneForLayout(sceneRoot, R.layout.test_scene2, getActivity());
+        phraseScene2 = Scene.getSceneForLayout(sceneRoot, R.layout.phrase_scene2, getActivity());
         scene1 = Scene.getSceneForLayout(sceneRoot, R.layout.scene1, getActivity());
-        scene2 = Scene.getSceneForLayout(sceneRoot, R.layout.scene2, getActivity());
 
         initGUI();
         return v;
@@ -55,6 +59,20 @@ public class LeftButtonFragment extends Fragment{
         mTestLeftButton = v.findViewById(R.id.test_left_button);
         mWordLeftButton = v.findViewById(R.id.word_left_button);
         mPhraseLeftButton = v.findViewById(R.id.phrase_left_button);
+/*        switch (((CardsForStuduing) getActivity()).getActiveFragmentName()){
+            case "CardsFragment":
+                mWordLeftButton.setEnabled(false);
+                //mWordLeftButton.setClickable(false);
+                break;
+            case "PhraseFragment":
+                mPhraseLeftButton.setEnabled(false);
+                //mPhraseLeftButton.setClickable(false);
+                break;
+            case "TestFragment":
+                mTestLeftButton.setEnabled(false);
+                //mTestLeftButton.setClickable(false);
+                break;
+        }*/
         setListener();
     }
 
@@ -64,12 +82,14 @@ public class LeftButtonFragment extends Fragment{
             public boolean onTouch(View v, MotionEvent event) {
                 while (event.getAction() == MotionEvent.ACTION_DOWN) {
                     Log.e(TAG,"onTouch()" + event.getAction());
-                    ((CardsForStuduing) getActivity()).startFragment(new TestFragment());
-                    beginAutoTransition(scene1, 200);
+                    if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("TestFragment")) {
+                        ((CardsForStuduing) getActivity()).startFragment(new TestFragment());
+                    }
+                    beginAutoTransition(testScene2, 200);
                     return true;
                 }
                 Log.e(TAG,"onTouch()" + event.getAction());
-                beginAutoTransition(scene2, 200);
+                beginAutoTransition(scene1, 200);
                 return true;
             }
         });
@@ -79,12 +99,14 @@ public class LeftButtonFragment extends Fragment{
             public boolean onTouch(View v, MotionEvent event) {
                 while (event.getAction() == MotionEvent.ACTION_DOWN) {
                     Log.e(TAG,"onTouch()" + event.getAction());
-                    ((CardsForStuduing) getActivity()).startFragment(new CardsFragment());
-                    beginAutoTransition(scene1, 200);
+                    if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("CardsFragment")) {
+                        ((CardsForStuduing) getActivity()).startFragment(new CardsFragment());
+                    }
+                    beginAutoTransition(wordScene2, 200);
                     return true;
                 }
                 Log.e(TAG,"onTouch()" + event.getAction());
-                beginAutoTransition(scene2, 200);
+                beginAutoTransition(scene1, 200);
                 return true;
             }
         });
@@ -94,12 +116,14 @@ public class LeftButtonFragment extends Fragment{
             public boolean onTouch(View v, MotionEvent event) {
                 while (event.getAction() == MotionEvent.ACTION_DOWN) {
                     Log.e(TAG,"onTouch()" + event.getAction());
-                    ((CardsForStuduing) getActivity()).startFragment(new PhraseFragment());
-                    beginAutoTransition(scene1, 200);
+                    if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("PhraseFragment")) {
+                        ((CardsForStuduing) getActivity()).startFragment(new PhraseFragment());
+                    }
+                    beginAutoTransition(phraseScene2, 200);
                     return true;
                 }
                 Log.e(TAG,"onTouch()" + event.getAction());
-                beginAutoTransition(scene2, 200);
+                beginAutoTransition(scene1, 200);
                 return true;
             }
         });

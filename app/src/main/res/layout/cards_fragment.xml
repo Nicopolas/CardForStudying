@@ -31,37 +31,6 @@
             android:src="@drawable/ic_volume_mute_black_48dp"/>
 
         <LinearLayout
-            android:layout_width="37dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/go_to_word_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="W"
-                android:textSize="10sp" />
-
-            <Button
-                android:id="@+id/go_to_test_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="T"
-                android:textSize="10sp" />
-
-            <Button
-                android:id="@+id/go_to_phrase_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="Ph"
-                android:textSize="10sp" />
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"

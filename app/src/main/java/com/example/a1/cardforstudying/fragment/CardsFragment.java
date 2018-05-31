@@ -99,49 +99,6 @@ public class CardsFragment extends BaseFragment {
                 showWord(false);
             }
         });
-
-        mGTWord = v.findViewById(R.id.go_to_word_button);
-        if (this.getClass().getName().matches(".*CardsFragment")) {
-            mGTWord.setEnabled(false);
-            mGTWord.setClickable(false);
-        }
-        mGTWord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "Button click in " + TAG);
-                ((CardsForStuduing) getActivity()).index = index; //перенести в onDestroy!!!
-                ((CardsForStuduing) getActivity()).startFragment(new CardsFragment());
-            }
-        });
-
-        mGTTest = v.findViewById(R.id.go_to_test_button);
-        if (this.getClass().getName().matches(".*TestFragment")) {
-            mGTTest.setEnabled(false);
-            mGTTest.setClickable(false);
-        }
-        mGTTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "Button click in " + TAG);
-                ((CardsForStuduing) getActivity()).index = index; //перенести в onDestroy!!!
-                ((CardsForStuduing) getActivity()).startFragment(new TestFragment());
-            }
-        });
-
-        mGTPhrase = v.findViewById(R.id.go_to_phrase_button);
-        if (this.getClass().getName().matches(".*PhraseFragment")) {
-            mGTPhrase.setEnabled(false);
-            mGTPhrase.setClickable(false);
-        }
-        mGTPhrase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "Button click in " + TAG);
-                makeToast(R.string.err_inDeveloping);//в разработке
-                ((CardsForStuduing) getActivity()).index = index; //перенести в onDestroy!!!
-                ((CardsForStuduing) getActivity()).startFragment(new PhraseFragment());
-            }
-        });
     }
 
     @Override

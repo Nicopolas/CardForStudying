@@ -22,6 +22,7 @@ import java.util.Random;
 
 public class TestFragment extends BaseFragment {
     private static final String TAG = "TestFragment";
+    View v;
     private TextView mWordTextView;
     private TextView mWordTranscriptionView;
     private Button mFirstWordButton;
@@ -37,113 +38,7 @@ public class TestFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
         View v = inflater.inflate(R.layout.test_fragment, container, false);
-
-        mMenuBetton = v.findViewById(R.id.menu_button);
-        mMenuBetton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                makeToast(R.string.err_inDeveloping);//в разработке
-            }
-        });
-
-        mWordTextView = v.findViewById(R.id.word_text_view);
-        mWordTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
-
-        mWordTranscriptionView = v.findViewById(R.id.word_transcription_view);
-        mWordTranscriptionView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
-
-        mFirstWordButton = v.findViewById(R.id.first_word_button);
-        mFirstWordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(mFirstWordButton);
-            }
-        });
-
-        mSecondWordButton = v.findViewById(R.id.second_word_button);
-        mSecondWordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(mSecondWordButton);
-            }
-        });
-
-        mThirdWordButton = v.findViewById(R.id.third_word_button);
-        mThirdWordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(mThirdWordButton);
-            }
-        });
-
-        mFourthWordButton = v.findViewById(R.id.fourth_word_button);
-        mFourthWordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(mFourthWordButton);
-            }
-        });
-
-        mNextButton = v.findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
-
-        mGTWord = v.findViewById(R.id.go_to_word_button);
-        if (this.getClass().getName().matches(".*CardsFragment")) {
-            mGTWord.setEnabled(false);
-            mGTWord.setClickable(false);
-        }
-        mGTWord.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "Button click in " + this.getClass().getName().replace("com.example.a1.cardforstudying.fragment.", ""));
-                ((CardsForStuduing) getActivity()).index = index; //перенести в onDestroy!!!
-                ((CardsForStuduing) getActivity()).startFragment(new CardsFragment());
-            }
-        });
-
-        mGTTest = v.findViewById(R.id.go_to_test_button);
-        if (this.getClass().getName().matches(".*TestFragment")) {
-            mGTTest.setEnabled(false);
-            mGTTest.setClickable(false);
-        }
-        mGTTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "Button click in " + this.getClass().getName().replace("com.example.a1.cardforstudying.fragment.", ""));
-                ((CardsForStuduing) getActivity()).index = index; //перенести в onDestroy!!!
-                ((CardsForStuduing) getActivity()).startFragment(new TestFragment());
-            }
-        });
-
-        mGTPhrase = v.findViewById(R.id.go_to_phrase_button);
-        if (this.getClass().getName().matches(".*PhraseFragment")) {
-            mGTPhrase.setEnabled(false);
-            mGTPhrase.setClickable(false);
-        }
-        mGTPhrase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "Button click in " + this.getClass().getName().replace("com.example.a1.cardforstudying.fragment.", ""));
-                makeToast(R.string.err_inDeveloping);//в разработке
-                ((CardsForStuduing) getActivity()).index = index; //перенести в onDestroy!!!
-                ((CardsForStuduing) getActivity()).startFragment(new PhraseFragment());
-            }
-        });
+        initGUI();
 
         showWord();
         return v;
@@ -215,6 +110,7 @@ public class TestFragment extends BaseFragment {
 
     @Override
     public void onStop() {
+        ((CardsForStuduing) getActivity()).index = index;
         super.onStop();
         Log.d(TAG, "onStop() called");
     }
@@ -223,5 +119,78 @@ public class TestFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy() called");
+    }
+
+    private void initGUI() {
+        mMenuBetton = v.findViewById(R.id.menu_button);
+        mWordTextView = v.findViewById(R.id.word_text_view);
+        mWordTranscriptionView = v.findViewById(R.id.word_transcription_view);
+
+        mFirstWordButton = v.findViewById(R.id.first_word_button);
+        mSecondWordButton = v.findViewById(R.id.second_word_button);
+        mThirdWordButton = v.findViewById(R.id.third_word_button);
+        mFourthWordButton = v.findViewById(R.id.fourth_word_button);
+
+        mNextButton = v.findViewById(R.id.next_button);
+
+        setListener();
+    }
+
+    private void setListener() {
+        mMenuBetton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                makeToast(R.string.err_inDeveloping);//в разработке
+            }
+        });
+
+        mWordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWord(true);
+            }
+        });
+
+        mWordTranscriptionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWord(true);
+            }
+        });
+
+        mFirstWordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAnswer(mFirstWordButton);
+            }
+        });
+
+        mSecondWordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAnswer(mSecondWordButton);
+            }
+        });
+
+        mThirdWordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAnswer(mThirdWordButton);
+            }
+        });
+
+        mFourthWordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAnswer(mFourthWordButton);
+            }
+        });
+
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWord(true);
+            }
+        });
     }
 }

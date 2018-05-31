@@ -6,12 +6,14 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/word_left_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/word_left_button"
-        android:text="W"
+        android:background="@drawable/myrect"
+        android:text="Word  "
         android:textSize="42dp"
         android:textStyle="bold" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,11 +21,13 @@
         android:text="T"
         android:textSize="42dp"
         android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/phrase_left_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/phrase_left_button"
         android:text="Ph"
         android:textSize="42dp"
         android:textStyle="bold" />
 </LinearLayout>
+
