@@ -1,15 +1,16 @@
 package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.transition.ChangeBounds;
 import android.support.transition.Fade;
 import android.support.transition.Scene;
+import android.support.transition.Transition;
 import android.support.transition.TransitionManager;
 import android.support.transition.TransitionSet;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -22,7 +23,7 @@ import com.example.a1.cardforstudying.R;
  * Created by user on 29.05.2018.
  */
 
-public class LeftButtonFragment extends Fragment{
+public class LeftButtonFragment extends Fragment {
     String TAG = getClass().getSimpleName();
     TextView mTestLeftButton;
     TextView mWordLeftButton;
@@ -56,80 +57,45 @@ public class LeftButtonFragment extends Fragment{
     }
 
     private void initGUI() {
+        Log.e(TAG, "initGUI()");
         mTestLeftButton = v.findViewById(R.id.test_left_button);
         mWordLeftButton = v.findViewById(R.id.word_left_button);
         mPhraseLeftButton = v.findViewById(R.id.phrase_left_button);
-/*        switch (((CardsForStuduing) getActivity()).getActiveFragmentName()){
-            case "CardsFragment":
-                mWordLeftButton.setEnabled(false);
-                //mWordLeftButton.setClickable(false);
-                break;
-            case "PhraseFragment":
-                mPhraseLeftButton.setEnabled(false);
-                //mPhraseLeftButton.setClickable(false);
-                break;
-            case "TestFragment":
-                mTestLeftButton.setEnabled(false);
-                //mTestLeftButton.setClickable(false);
-                break;
-        }*/
         setListener();
     }
 
     private void setListener() {
-        mTestLeftButton.setOnTouchListener(new View.OnTouchListener() {
+        mTestLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                while (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.e(TAG,"onTouch()" + event.getAction());
-                    if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("TestFragment")) {
-                        ((CardsForStuduing) getActivity()).startFragment(new TestFragment());
-                    }
-                    beginAutoTransition(testScene2, 200);
-                    return true;
+            public void onClick(View view) {
+                if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("TestFragment")) {
+                    ((CardsForStuduing) getActivity()).startFragment(new TestFragment());
                 }
-                Log.e(TAG,"onTouch()" + event.getAction());
-                beginAutoTransition(scene1, 200);
-                return true;
+                beginAutoTransition(testScene2, 200);
             }
         });
-
-        mWordLeftButton.setOnTouchListener(new View.OnTouchListener() {
+        mWordLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                while (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.e(TAG,"onTouch()" + event.getAction());
-                    if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("CardsFragment")) {
-                        ((CardsForStuduing) getActivity()).startFragment(new CardsFragment());
-                    }
-                    beginAutoTransition(wordScene2, 200);
-                    return true;
+            public void onClick(View view) {
+                if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("CardsFragment")) {
+                    ((CardsForStuduing) getActivity()).startFragment(new CardsFragment());
                 }
-                Log.e(TAG,"onTouch()" + event.getAction());
-                beginAutoTransition(scene1, 200);
-                return true;
+                beginAutoTransition(wordScene2, 200);
             }
         });
-
-        mPhraseLeftButton.setOnTouchListener(new View.OnTouchListener() {
+        mPhraseLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                while (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.e(TAG,"onTouch()" + event.getAction());
-                    if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("PhraseFragment")) {
-                        ((CardsForStuduing) getActivity()).startFragment(new PhraseFragment());
-                    }
-                    beginAutoTransition(phraseScene2, 200);
-                    return true;
+            public void onClick(View view) {
+                if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("PhraseFragment")) {
+                    ((CardsForStuduing) getActivity()).startFragment(new PhraseFragment());
                 }
-                Log.e(TAG,"onTouch()" + event.getAction());
-                beginAutoTransition(scene1, 200);
-                return true;
+                beginAutoTransition(phraseScene2, 200);
             }
         });
     }
 
     private void beginAutoTransition(Scene scene, int durability) {
+        Log.e(TAG, "beginAutoTransition()");
         TransitionSet set = new TransitionSet();
         set.addTransition(new Fade());
         set.addTransition(new ChangeBounds());
@@ -139,7 +105,51 @@ public class LeftButtonFragment extends Fragment{
         set.setDuration(durability);
         // и изменим Interpolator
         set.setInterpolator(new AccelerateInterpolator());
+
+        set.addListener(new Transition.TransitionListener() {
+            @Override
+            public void onTransitionStart(@NonNull Transition transition) {
+                Log.e(TAG, "onTransitionStart()");
+            }
+
+            @Override
+            public void onTransitionEnd(@NonNull Transition transition) {
+                Log.e(TAG, "onTransitionEnd()");
+                beginAutoTransitionBack();
+            }
+
+            @Override
+            public void onTransitionCancel(@NonNull Transition transition) {
+                Log.e(TAG, "onTransitionCancel()");
+            }
+
+            @Override
+            public void onTransitionPause(@NonNull Transition transition) {
+                Log.e(TAG, "onTransitionPause()");
+            }
+
+            @Override
+            public void onTransitionResume(@NonNull Transition transition) {
+                Log.e(TAG, "onTransitionResume()");
+            }
+        });
+
         TransitionManager.go(scene, set);
+    }
+
+
+    private void beginAutoTransitionBack() {
+        Log.e(TAG, "beginAutoTransitionBack() ");
+        TransitionSet set = new TransitionSet();
+        set.addTransition(new Fade());
+        set.addTransition(new ChangeBounds());
+        // выполняться они будут одновременно
+        set.setOrdering(TransitionSet.ORDERING_TOGETHER);
+        // уставим свою длительность анимации
+        set.setDuration(300);
+        // и изменим Interpolator
+        set.setInterpolator(new AccelerateInterpolator());
+        TransitionManager.go(scene1, set);
         initGUI();
     }
 }

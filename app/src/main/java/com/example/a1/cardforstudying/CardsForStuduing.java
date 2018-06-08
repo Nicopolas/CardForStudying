@@ -1,13 +1,21 @@
 package com.example.a1.cardforstudying;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GestureDetectorCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.example.a1.cardforstudying.fragment.CardsFragment;
 import com.example.a1.cardforstudying.fragment.EmptyDictionary;
@@ -16,13 +24,14 @@ import com.example.a1.cardforstudying.fragment.TestFragment;
 
 import static com.example.a1.cardforstudying.XMLHelper.createFirstDictionary;
 
-public class CardsForStuduing extends AppCompatActivity implements GestureDetector.OnGestureListener {
+public class CardsForStuduing extends AppCompatActivity implements GestureDetector.OnGestureListener, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
 
     public FragmentManager fm = getSupportFragmentManager();
     public Fragment fragment = fm.findFragmentById(R.id.fragment_container);//создание фрагмента
 
     GestureDetectorCompat mDetector;
+    DrawerLayout drawer;
 
     public int index = 0;
 
@@ -40,6 +49,38 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
         if (fragment == null) {
             startFragment();
         }
+
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        // Добавляем слушатель нажатий на пункт списка
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_drawer_dictionaries:
+
+                //отркыть словари
+                makeToast("В разарботке");
+                break;
+            case R.id.nav_drawer_language:
+                //отркыть список слов в стесте
+                makeToast("В разарботке");
+                break;
+            case R.id.nav_about_developers:
+                makeToast("В разарботке");
+                break;
+        }
+
+        // закрываем NavigationView, параметр определяет анимацию закрытия
+        drawer.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
+
+    public DrawerLayout getDrawer(){
+        return drawer;
     }
 
     @Override
@@ -128,6 +169,16 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
         super.onDestroy();
     }
 
+    @Override
+    public void onBackPressed() {
+        //обработка нажатия в Navigation Drawer
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+            return;
+        }
+        super.onBackPressed();
+    }
+
 
     //из GestureDetector.OnGestureListener
     @Override
@@ -169,5 +220,20 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         Log.d(TAG, "onFling");
         return false;
+    }
+
+    private void makeToast(int string_id) {
+        Toast toast = Toast.makeText(this, string_id, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    private void makeToast(String string) {
+        Toast toast = Toast.makeText(this, string, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
