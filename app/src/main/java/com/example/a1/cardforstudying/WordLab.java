@@ -10,6 +10,7 @@ import com.example.a1.cardforstudying.database.DbSchema.WordTable;
 import com.example.a1.cardforstudying.database.SQLiteHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -66,13 +67,11 @@ public class WordLab {
 
     private WordLab(Context context) { //закрытый конструктор, вызывается только из get()
         open();
-        if (mWord == null) {
-            mWord = new ArrayList<>();
+        mWord = new ArrayList<>();
+        if (getAllWordFromDataBase().isEmpty()) {
             putTestWordsList();
-            return;
         }
-        mWord = getAllWordFromDataBase();
-
+        mWord.addAll(getAllWordFromDataBase());
     }
 
     public void open() throws SQLException {
@@ -83,11 +82,11 @@ public class WordLab {
         mSQLiteHelper.close();
     }
 
-    public List<Word> getWord() {
+    public List<Word> getWords() {
         return mWord;
     }
 
-    public Word getWord(int mWordId) {
+    public Word getWordByID(int mWordId) {
         for (Word word : mWord) {
             if (word.getWordId() == (mWordId)) {
                 return word;
@@ -96,41 +95,28 @@ public class WordLab {
         return null;
     }
 
-    public static String getRandomString(int length, String data) {
-        Random random = new Random();
-        StringBuilder str = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(data.length() - 1);
-            str.append(data.substring(index, index + 1));
-        }
-        return str.toString();
-    }
-
-    public static String getRandomString(int length, ArrayList<String> data) {
-        Random random = new Random();
-        StringBuilder str = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            int index = random.nextInt(data.size() - 1);
-            str.append(data.get(index));
-        }
-        return str.toString();
-    }
-
     private void saveWordInDateBase(Word word) {
         ContentValues editedWord = new ContentValues();
-        editedWord.put(WordTable.Cols.WordID, getLastIDWordFromDataBase() + 1);
+        editedWord.put(WordTable.Cols.WordID, getNextIDWordFromDataBase());
         editedWord.put(WordTable.Cols.MeaningWord, word.getMeaningWord());
         editedWord.put(WordTable.Cols.MeaningWordTranscription, word.getMeaningWordTranscription());
         editedWord.put(WordTable.Cols.TranslationWord, word.getTranslationWord());
         editedWord.put(WordTable.Cols.RatingWord, word.getRatingWord());
-        editedWord.put(WordTable.Cols.InTest, word.isInTest());
+        editedWord.put(WordTable.Cols.InTest, String.valueOf(word.isInTest()));
         mDataBase.insert(WordTable.NAME, null, editedWord);
     }
 
-    private int getLastIDWordFromDataBase() {
+    private int getNextIDWordFromDataBase() {
+        if (getAllWordFromDataBase().isEmpty()) {
+            return 0;
+        }
         List<Word> mWord = getAllWordFromDataBase();
-
-        return 0;
+        List<Integer> wordSort = new ArrayList<>();
+        for (Word word : mWord) {
+            wordSort.add(word.getWordId());
+        }
+        Collections.reverse(wordSort);
+        return wordSort.get(0) + 1;
     }
 
     private List<Word> getAllWordFromDataBase() {
@@ -160,7 +146,6 @@ public class WordLab {
 
     @Deprecated
     private void putTestWordsList() { //тестовые данные (незабыть удалить)
-
         for (int i = 0; i < 10; i++) {
             Word word = new Word();
             word.setMeaningWord(getRandomString(1, this.dataEng).toUpperCase() + getRandomString(5, this.dataEng).toLowerCase());
@@ -171,8 +156,29 @@ public class WordLab {
             word.setExample(getRandomString(1, this.dataEng).toUpperCase() + getRandomString(4, this.dataEng).toLowerCase() + " " + getRandomString(6, this.dataEng).toLowerCase() + " " + getRandomString(6, this.dataEng).toLowerCase()
                     , getRandomString(1, this.dataRu).toUpperCase() + getRandomString(4, this.dataRu).toLowerCase() + " " + getRandomString(6, this.dataRu).toLowerCase() + " " + getRandomString(6, this.dataRu).toLowerCase());
             word.setInTest(true);
-            mWord.add(word);
             saveWordInDateBase(word);
         }
+    }
+
+    @Deprecated
+    public static String getRandomString(int length, String data) {
+        Random random = new Random();
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(data.length() - 1);
+            str.append(data.substring(index, index + 1));
+        }
+        return str.toString();
+    }
+
+    @Deprecated
+    public static String getRandomString(int length, ArrayList<String> data) {
+        Random random = new Random();
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(data.size() - 1);
+            str.append(data.get(index));
+        }
+        return str.toString();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.a1.cardforstudying;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,9 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MenuItem;
@@ -34,6 +33,7 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
     DrawerLayout drawer;
 
     public int index = 0;
+    public int phraseIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
 
         mDetector = new GestureDetectorCompat(this, this);
 
+        //должна быть вызгрузка их XML
         createFirstDictionary(this);
 
         if (fragment == null) {
@@ -60,7 +61,7 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_drawer_dictionaries:
-
+                startActivity(new Intent(this, ListActivity.class));
                 //отркыть словари
                 makeToast("В разарботке");
                 break;
@@ -115,12 +116,12 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
 
     public Fragment checkWordLab(Fragment nameFragment) {
         int count = 0;
-        if (WordLab.get(this).getWord().isEmpty() && (nameFragment.toString().contains("CardsFragment") || nameFragment.toString().contains("TestFragment"))) {
+        if (WordLab.get(this).getWords().isEmpty() && (nameFragment.toString().contains("CardsFragment") || nameFragment.toString().contains("TestFragment"))) {
             EmptyDictionary.mMessage = R.string.empty_dictionary;
             return new EmptyDictionary();
         }
 
-        for (Word each : WordLab.get(this).getWord()) {
+        for (Word each : WordLab.get(this).getWords()) {
             if (each.isInTest()) {
                 count++;
             }
@@ -166,6 +167,7 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
     public void onDestroy() {
         Log.d(TAG, "onDestroy() called");
         WordLab.close();
+        PhraseLab.close();
         super.onDestroy();
     }
 

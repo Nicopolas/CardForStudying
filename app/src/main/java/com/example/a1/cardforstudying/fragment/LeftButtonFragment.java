@@ -109,28 +109,28 @@ public class LeftButtonFragment extends Fragment {
         set.addListener(new Transition.TransitionListener() {
             @Override
             public void onTransitionStart(@NonNull Transition transition) {
-                Log.e(TAG, "onTransitionStart()");
+                Log.w(TAG, "onTransitionStart()");
             }
 
             @Override
             public void onTransitionEnd(@NonNull Transition transition) {
-                Log.e(TAG, "onTransitionEnd()");
+                Log.w(TAG, "onTransitionEnd()");
                 beginAutoTransitionBack();
             }
 
             @Override
             public void onTransitionCancel(@NonNull Transition transition) {
-                Log.e(TAG, "onTransitionCancel()");
+                Log.w(TAG, "onTransitionCancel()");
             }
 
             @Override
             public void onTransitionPause(@NonNull Transition transition) {
-                Log.e(TAG, "onTransitionPause()");
+                Log.w(TAG, "onTransitionPause()");
             }
 
             @Override
             public void onTransitionResume(@NonNull Transition transition) {
-                Log.e(TAG, "onTransitionResume()");
+                Log.w(TAG, "onTransitionResume()");
             }
         });
 

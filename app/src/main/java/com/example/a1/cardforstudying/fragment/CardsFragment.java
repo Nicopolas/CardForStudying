@@ -27,7 +27,6 @@ public class CardsFragment extends BaseFragment {
     public ImageButton mSpeechButton;
 
     public List<Word> mListWord;
-    //public int index = 0;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

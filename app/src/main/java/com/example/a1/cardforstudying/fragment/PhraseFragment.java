@@ -6,38 +6,53 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.a1.cardforstudying.CardsForStuduing;
+import com.example.a1.cardforstudying.Phrase;
+import com.example.a1.cardforstudying.PhraseLab;
 import com.example.a1.cardforstudying.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PhraseFragment extends BaseFragment {
     private static final String TAG = "BaseFragment";
     View v;
+    List<Phrase> mListPhrase = new ArrayList<>();
+    TextView mPhraseMeaning;
+    TextView mPhraseTranslation;
+    int phraseIndex;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
         v = inflater.inflate(R.layout.phrase_fragment, container, false);
+        phraseIndex = ((CardsForStuduing) getActivity()).phraseIndex;
 
         initGUI();
-
         showPhrase();
         return v;
     }
 
-    public void showPhrase(){
-        putDataInElements();
+    @Override
+    public void putDataInElements(){
+        mPhraseMeaning.setText(mListPhrase.get(phraseIndex).getPhraseMeaning());
+        mPhraseTranslation.setText(mListPhrase.get(phraseIndex).getPhraseTranslation());
     }
 
     @Override
-    public void putDataInElements(){
-
+    public void onStop(){
+        ((CardsForStuduing) getActivity()).phraseIndex = phraseIndex;
+        super.onStop();
     }
 
     private void initGUI() {
         mMenuBetton = v.findViewById(R.id.menu_button);
         mNextButton = v.findViewById(R.id.next_button);
         mPreviousButton = v.findViewById(R.id.previous_button);
+        mPhraseMeaning = v.findViewById(R.id.phrase_meaning_view);
+        mPhraseTranslation = v.findViewById(R.id.phrase_translation_view);
 
         setListener();
     }
@@ -53,16 +68,51 @@ public class PhraseFragment extends BaseFragment {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWord(true);
+                showPhrase(true);
             }
         });
 
         mPreviousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showWord(false);
+                showPhrase(false);
+            }
+        });
+
+        mPhraseMeaning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPhrase(true);
+            }
+        });
+
+        mPhraseTranslation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPhrase(true);
             }
         });
     }
 
+    private void showPhrase(boolean nextPhrase) {
+        if (nextPhrase) {
+            phraseIndex = (phraseIndex + 1) % mListPhrase.size();
+        } else {
+            phraseIndex--;
+            if (phraseIndex == -1) {
+                phraseIndex = mListPhrase.size() - 1;
+            }
+        }
+        showPhrase();
+    }
+
+    private void showPhrase() {
+        mListPhrase = PhraseLab.get(getActivity()).getPhrases();
+        if (mListPhrase.isEmpty()) {
+            Log.e(TAG, getResources().getString(R.string.err_empty_phrase_dictionary));
+            makeToast(R.string.err_empty_phrase_dictionary);
+            return;
+        }
+        this.putDataInElements();
+    }
 }

@@ -11,8 +11,11 @@
         <string>\nсущ.: слово, текст, сообщение</string>
         <string>\nглаг.: выражать словами, формулировать</string>
     </string>
+    <string name="fictitious_meaning_phrase">London is the capital of Great Britain</string>
+    <string name="fictitious_transcription_phrase">Лондон - столица Великобритании</string>
     <string name="example">Пример</string>
     <string name="err_inDeveloping">В разарботке</string>
+    <string name="err_empty_phrase_dictionary">Не найдено ни одной фразы в словаре</string>
     <string name="err_mListWordIsEmpty">Не найдено ни одного слова в словаре</string>
     <string name="err_empty_dictionary">В активном словаре меньше четырех слов</string>
     <string name="empty_dictionary">В активном словаре нет слов</string>

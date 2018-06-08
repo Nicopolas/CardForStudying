@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -84,6 +83,6 @@ public abstract class BaseFragment extends Fragment {
 
     public void fillDataList(){
         mDataList = new ArrayList<>();
-        mDataList.addAll(WordLab.get(getActivity()).getWord());
+        mDataList.addAll(WordLab.get(getActivity()).getWords());
     }
 }
