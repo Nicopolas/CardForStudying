@@ -4,9 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static com.example.a1.cardforstudying.database.DbSchema.DictionaryTable;
 import static com.example.a1.cardforstudying.database.DbSchema.PhraseTable;
-import static com.example.a1.cardforstudying.database.DbSchema.WordTable;
 import static com.example.a1.cardforstudying.database.DbSchema.WordPhraseTable;
+import static com.example.a1.cardforstudying.database.DbSchema.WordTable;
 /*        NULL. Пустое значение в таблице базы.
           INTEGER. Целочисленное значение, хранящееся в 1, 2, 3, 4, 6 или 8 байтах, в зависимости от величины самого значения.
           REAL. Числовое значение с плавающей точкой. Хранится в формате 8-байтного числа IEEE с плавающей точкой.
@@ -31,6 +32,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createWordTableQuery());
         sqLiteDatabase.execSQL(createPhraseTableQuery());
         sqLiteDatabase.execSQL(createWordPhraseTableQuery());
+        sqLiteDatabase.execSQL(createDictionariesTableQuery());
     }
 
     @Override
@@ -39,6 +41,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + WordTable.NAME);
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + WordPhraseTable.NAME);
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PhraseTable.NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DictionaryTable.NAME);
             onCreate(sqLiteDatabase);
         }
     }
@@ -46,8 +49,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private String createWordTableQuery() {
         return "CREATE TABLE " + WordTable.NAME + " ("
                 + WordTable.Cols.WordID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + WordTable.Cols.MeaningWord + " TEXT, " + WordTable.Cols.MeaningWordTranscription + " TEXT, " + WordTable.Cols.TranslationWord + " TEXT, "
-                + WordTable.Cols.RatingWord + " INTEGER, " + WordTable.Cols.InTest + " TEXT" + ");";
+                + WordTable.Cols.MeaningWord + " TEXT, " + WordTable.Cols.MeaningWordTranscription + " TEXT, "
+                + WordTable.Cols.TranslationWord + " TEXT, " + WordTable.Cols.RatingWord + " INTEGER, "
+                + WordTable.Cols.InTest + " TEXT, " + WordTable.Cols.DictionaryID + " INTEGER" + ");";
     }
 
     private String createWordPhraseTableQuery() {
@@ -59,7 +63,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private String createPhraseTableQuery() {
         return "CREATE TABLE " + PhraseTable.NAME + " ("
                 + PhraseTable.Cols.PhraseID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + PhraseTable.Cols.PhraseMeaning + " TEXT, " + PhraseTable.Cols.PhraseTranslation + " TEXT" + ");";
+                + PhraseTable.Cols.PhraseMeaning + " TEXT, " + PhraseTable.Cols.PhraseTranslation + " TEXT, "
+                + PhraseTable.Cols.DictionaryID + " INTEGER" + ");";
+    }
+
+    private String createDictionariesTableQuery() {
+        return "CREATE TABLE " + DictionaryTable.NAME + " ("
+                + DictionaryTable.Cols.DictionaryID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + DictionaryTable.Cols.DictionaryName + " TEXT" + ");";
     }
 
 }

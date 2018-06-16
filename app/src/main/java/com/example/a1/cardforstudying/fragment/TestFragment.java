@@ -1,21 +1,17 @@
 package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.a1.cardforstudying.CardsForStuduing;
+import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.R;
 import com.example.a1.cardforstudying.Word;
-import com.example.a1.cardforstudying.WordLab;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +27,6 @@ public class TestFragment extends BaseFragment {
     private Button mThirdWordButton;
     private Button mFourthWordButton;
 
-    public List<Word> mListWord;
-    //public int index = 0; //проблема с наследованием от BaseFragment (изменяется индекс родительского класса)
     public int mRightButtonIndex = 0;
 
     @Override
@@ -46,9 +40,8 @@ public class TestFragment extends BaseFragment {
     }
 
     public void putDataInElements() {
-        mListWord = mDataList; //переделать (добавлть слова в тест, только есть есть признак mInTest) (не приравнивать массивы)
-        mWordTextView.setText(mListWord.get(index).getMeaningWord());
-        mWordTranscriptionView.setText(mListWord.get(index).getMeaningWordTranscription());
+        mWordTextView.setText(mDataList.get(index).getMeaningWord());
+        mWordTranscriptionView.setText(mDataList.get(index).getMeaningWordTranscription());
 
         setWordInButton();
     }
@@ -62,10 +55,10 @@ public class TestFragment extends BaseFragment {
         }};
         mRightButtonIndex = new Random().nextInt(4);
 
-        mListButton.get(mRightButtonIndex).setText(mListWord.get(index).getRandomTranslationWord());
+        mListButton.get(mRightButtonIndex).setText(mDataList.get(index).getRandomTranslationWord());
 
         List<Word> mCopyListWord = new ArrayList();
-        mCopyListWord.addAll(mListWord);
+        mCopyListWord.addAll(mDataList);
 
         mCopyListWord.remove(index);
         mListButton.remove(mListButton);//спорно
@@ -111,7 +104,7 @@ public class TestFragment extends BaseFragment {
 
     @Override
     public void onStop() {
-        ((CardsForStuduing) getActivity()).index = index;
+        ((CardsForStudying) getActivity()).index = index;
         super.onStop();
         Log.d(TAG, "onStop() called");
     }
@@ -141,7 +134,7 @@ public class TestFragment extends BaseFragment {
         mMenuBetton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((CardsForStuduing) getActivity()).getDrawer().openDrawer(GravityCompat.START);
+                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START);
             }
         });
 

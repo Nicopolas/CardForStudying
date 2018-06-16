@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.a1.cardforstudying.CardsForStuduing;
+import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.Phrase;
 import com.example.a1.cardforstudying.PhraseLab;
 import com.example.a1.cardforstudying.R;
@@ -28,7 +28,7 @@ public class PhraseFragment extends BaseFragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
         v = inflater.inflate(R.layout.phrase_fragment, container, false);
-        phraseIndex = ((CardsForStuduing) getActivity()).phraseIndex;
+        phraseIndex = ((CardsForStudying) getActivity()).phraseIndex;
 
         initGUI();
         showPhrase();
@@ -42,8 +42,14 @@ public class PhraseFragment extends BaseFragment {
     }
 
     @Override
+    public void onStart(){
+        showPhrase();
+        super.onStart();
+    }
+
+    @Override
     public void onStop(){
-        ((CardsForStuduing) getActivity()).phraseIndex = phraseIndex;
+        ((CardsForStudying) getActivity()).phraseIndex = phraseIndex;
         super.onStop();
     }
 
@@ -61,7 +67,7 @@ public class PhraseFragment extends BaseFragment {
         mMenuBetton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((CardsForStuduing) getActivity()).getDrawer().openDrawer(GravityCompat.START);
+                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START);
             }
         });
 
@@ -110,7 +116,6 @@ public class PhraseFragment extends BaseFragment {
         mListPhrase = PhraseLab.get(getActivity()).getPhrases();
         if (mListPhrase.isEmpty()) {
             Log.e(TAG, getResources().getString(R.string.err_empty_phrase_dictionary));
-            makeToast(R.string.err_empty_phrase_dictionary);
             return;
         }
         this.putDataInElements();

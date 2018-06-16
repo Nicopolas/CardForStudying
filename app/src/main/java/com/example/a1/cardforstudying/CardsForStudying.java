@@ -1,6 +1,7 @@
 package com.example.a1.cardforstudying;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,11 +20,12 @@ import android.widget.Toast;
 import com.example.a1.cardforstudying.fragment.CardsFragment;
 import com.example.a1.cardforstudying.fragment.EmptyDictionary;
 import com.example.a1.cardforstudying.fragment.LeftButtonFragment;
+import com.example.a1.cardforstudying.fragment.PhraseFragment;
 import com.example.a1.cardforstudying.fragment.TestFragment;
 
 import static com.example.a1.cardforstudying.XMLHelper.createFirstDictionary;
 
-public class CardsForStuduing extends AppCompatActivity implements GestureDetector.OnGestureListener, NavigationView.OnNavigationItemSelectedListener {
+public class CardsForStudying extends AppCompatActivity implements GestureDetector.OnGestureListener, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
 
     public FragmentManager fm = getSupportFragmentManager();
@@ -43,9 +45,7 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
         setContentView(R.layout.activity_cards_for_studuing);
 
         mDetector = new GestureDetectorCompat(this, this);
-
-        //должна быть вызгрузка их XML
-        createFirstDictionary(this);
+        firstStart();
 
         if (fragment == null) {
             startFragment();
@@ -62,8 +62,6 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
         switch (item.getItemId()) {
             case R.id.nav_drawer_dictionaries:
                 startActivity(new Intent(this, ListActivity.class));
-                //отркыть словари
-                makeToast("В разарботке");
                 break;
             case R.id.nav_drawer_language:
                 //отркыть список слов в стесте
@@ -95,10 +93,10 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
 
 
     public void startFragment() {
-        fragment = checkWordLab(new CardsFragment());
+        fragment = new CardsFragment();
 
         fm.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+                .replace(R.id.fragment_container, checkDataLab(fragment))
                 .commit();
         fm.beginTransaction()
                 .replace(R.id.left_btn_fragment_container, new LeftButtonFragment())
@@ -106,18 +104,22 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
     }
 
     public void startFragment(Fragment nameFragment) {
-        nameFragment = checkWordLab(nameFragment);
-
         fragment = nameFragment;
+
         fm.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+                .replace(R.id.fragment_container, checkDataLab(fragment))
                 .commit();
     }
 
-    public Fragment checkWordLab(Fragment nameFragment) {
+    public Fragment checkDataLab(Fragment nameFragment) {
         int count = 0;
         if (WordLab.get(this).getWords().isEmpty() && (nameFragment.toString().contains("CardsFragment") || nameFragment.toString().contains("TestFragment"))) {
             EmptyDictionary.mMessage = R.string.empty_dictionary;
+            return new EmptyDictionary();
+        }
+
+        if(PhraseLab.get(this).getPhrases().isEmpty() && nameFragment.toString().contains("PhraseFragment")){
+            EmptyDictionary.mMessage = R.string.err_empty_phrase_dictionary;
             return new EmptyDictionary();
         }
 
@@ -131,6 +133,7 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
             EmptyDictionary.mMessage = R.string.fewer_than_four_on_dictionary;
             return new EmptyDictionary();
         }
+
         return nameFragment;
     }
 
@@ -146,9 +149,26 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
 
     @Override
     public void onResume() {
-        super.onResume();
         Log.d(TAG, "onResume() called");
+
+        if (fragment != null){
+            switch (getActiveFragmentName()){
+                case "CardsFragment":
+                    startFragment(new CardsFragment());
+                    break;
+                case "PhraseFragment":
+                    startFragment(new PhraseFragment());
+                    break;
+                case "TestFragment":
+                    startFragment(new TestFragment());
+                    break;
+                default:
+                    startFragment();
+                    break;
+            }
+        }
         TextToSpeechHelper.stopTalking();
+        super.onResume();
     }
 
     @Override
@@ -159,15 +179,16 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
 
     @Override
     public void onStop() {
-        super.onStop();
         Log.d(TAG, "onStop() called");
+        super.onStop();
     }
 
     @Override
     public void onDestroy() {
         Log.d(TAG, "onDestroy() called");
-        WordLab.close();
-        PhraseLab.close();
+        WordLab.get(this).close();
+        PhraseLab.get(this).close();
+        DictionaryLab.get(this).close();
         super.onDestroy();
     }
 
@@ -236,6 +257,17 @@ public class CardsForStuduing extends AppCompatActivity implements GestureDetect
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+    }
 
+    private void firstStart(){
+        SharedPreferences sPref = getSharedPreferences(getString(R.string.first_start_file_name), MODE_PRIVATE);
+        boolean firstStart = Boolean.valueOf(sPref.getString(getString(R.string.first_start_file_name), "false"));
+        if (firstStart){
+            return;
+        }
+        createFirstDictionary(this);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(getString(R.string.first_start_file_name), "true");
+        ed.commit();
     }
 }

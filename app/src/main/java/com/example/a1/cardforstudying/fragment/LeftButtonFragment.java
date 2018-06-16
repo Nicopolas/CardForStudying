@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.TextView;
 
-import com.example.a1.cardforstudying.CardsForStuduing;
+import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.R;
 
 /**
@@ -68,8 +68,8 @@ public class LeftButtonFragment extends Fragment {
         mTestLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("TestFragment")) {
-                    ((CardsForStuduing) getActivity()).startFragment(new TestFragment());
+                if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("TestFragment")) {
+                    ((CardsForStudying) getActivity()).startFragment(new TestFragment());
                 }
                 beginAutoTransition(testScene2, 200);
             }
@@ -77,8 +77,8 @@ public class LeftButtonFragment extends Fragment {
         mWordLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("CardsFragment")) {
-                    ((CardsForStuduing) getActivity()).startFragment(new CardsFragment());
+                if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("CardsFragment")) {
+                    ((CardsForStudying) getActivity()).startFragment(new CardsFragment());
                 }
                 beginAutoTransition(wordScene2, 200);
             }
@@ -86,8 +86,8 @@ public class LeftButtonFragment extends Fragment {
         mPhraseLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!((CardsForStuduing) getActivity()).getActiveFragmentName().equals("PhraseFragment")) {
-                    ((CardsForStuduing) getActivity()).startFragment(new PhraseFragment());
+                if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("PhraseFragment")) {
+                    ((CardsForStudying) getActivity()).startFragment(new PhraseFragment());
                 }
                 beginAutoTransition(phraseScene2, 200);
             }

@@ -5,9 +5,10 @@ package com.example.a1.cardforstudying;
  */
 
 public class Phrase {
-    public int PhraseID;
-    public String PhraseMeaning;
-    public String PhraseTranslation;
+    private int PhraseID;
+    private String PhraseMeaning;
+    private String PhraseTranslation;
+    private int mDictionaryID;
 
     public int getPhraseID() {
         return PhraseID;
@@ -31,5 +32,13 @@ public class Phrase {
 
     public void setPhraseTranslation(String phraseTranslation) {
         PhraseTranslation = phraseTranslation;
+    }
+
+    public int getDictionaryID() {
+        return mDictionaryID;
+    }
+
+    public void setDictionaryID(int dictionaryID) {
+        mDictionaryID = dictionaryID;
     }
 }

@@ -2,7 +2,6 @@ package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.a1.cardforstudying.CardsForStuduing;
+import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.R;
 import com.example.a1.cardforstudying.TextToSpeechHelper;
-import com.example.a1.cardforstudying.Word;
-
-import java.util.List;
 
 public class CardsFragment extends BaseFragment {
     private final String TAG = getClass().getSimpleName();
@@ -25,8 +21,6 @@ public class CardsFragment extends BaseFragment {
     private TextView mWordTranslationView;
     public Button mExampleButton;
     public ImageButton mSpeechButton;
-
-    public List<Word> mListWord;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +36,7 @@ public class CardsFragment extends BaseFragment {
         mMenuBetton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((CardsForStuduing) getActivity()).getDrawer().openDrawer(GravityCompat.START);
+                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START);
             }
         });
 
@@ -68,8 +62,8 @@ public class CardsFragment extends BaseFragment {
         mExampleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                makeToast(mListWord.get(index).getExample());//в разработке
-                makeToast(mListWord.get(index).getExampleTranslation());//в разработке
+                makeToast(mDataList.get(index).getExample());//в разработке
+                makeToast(mDataList.get(index).getExampleTranslation());//в разработке
             }
         });
 
@@ -77,7 +71,7 @@ public class CardsFragment extends BaseFragment {
         mSpeechButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextToSpeechHelper.speakOut(getActivity(), mListWord.get(index).getMeaningWord());
+                TextToSpeechHelper.speakOut(getActivity(), mDataList.get(index).getMeaningWord());
             }
         });
 
@@ -100,16 +94,15 @@ public class CardsFragment extends BaseFragment {
 
     @Override
     public void onStop() {
-        Log.e(TAG, "onStop()");
-        ((CardsForStuduing) getActivity()).index = index;
+        Log.d(TAG, "onStop()");
+        ((CardsForStudying) getActivity()).index = index;
         super.onStop();
     }
 
     public void putDataInElements() {
-        mListWord = mDataList;//переделать не приравнивать массивы
-        mWordTextView.setText(mListWord.get(index).getMeaningWord());
-        mWordTranscriptionView.setText(mListWord.get(index).getMeaningWordTranscription());
-        mWordTranslationView.setText(mListWord.get(index).getTranslationWord().replace("сущ.:", "\nсущ.:").replace("глаг.:", "\nглаг.:").replace("прил.:", "\nприл.:"));
+        mWordTextView.setText(mDataList.get(index).getMeaningWord());
+        mWordTranscriptionView.setText(mDataList.get(index).getMeaningWordTranscription());
+        mWordTranslationView.setText(mDataList.get(index).getTranslationWord().replace("сущ.:", "\nсущ.:").replace("глаг.:", "\nглаг.:").replace("прил.:", "\nприл.:"));
     }
 
 }

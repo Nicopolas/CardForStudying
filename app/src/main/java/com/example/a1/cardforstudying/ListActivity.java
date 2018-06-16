@@ -1,12 +1,17 @@
 package com.example.a1.cardforstudying;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.widget.Toast;
+
+import com.example.a1.cardforstudying.fragment.DictionariesFragment;
+import com.example.a1.cardforstudying.fragment.TestFragment;
 
 /**
  * Created by 1 on 08.06.2018.
@@ -24,7 +29,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         if (fragment == null) {
-            startFragment(new DialogFragment());
+            startFragment(new DictionariesFragment());
         }
 
     }
@@ -36,4 +41,25 @@ public class ListActivity extends AppCompatActivity {
                 .commit();
     }
 
+    //Добавление меню в action bar в активность
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar_nemu, menu);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    private void makeToast(int string_id) {
+        Toast toast = Toast.makeText(this, string_id, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    private void makeToast(String string) {
+        Toast toast = Toast.makeText(this, string, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }

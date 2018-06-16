@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.a1.cardforstudying.CardsForStuduing;
+import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.R;
 import com.example.a1.cardforstudying.Word;
 import com.example.a1.cardforstudying.WordLab;
@@ -22,7 +22,9 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
+//переделать довести до ума или избавиться
 public abstract class BaseFragment extends Fragment {
+    public final String TAG = getClass().getSimpleName();
 
     protected ImageButton mMenuBetton;
     protected ImageButton mNextButton;
@@ -36,8 +38,7 @@ public abstract class BaseFragment extends Fragment {
         Log.d(TAG, "onCreate called");
         super.onCreate(savedInstanceState);
 
-        index = ((CardsForStuduing) getActivity()).index;
-        fillDataList();
+        index = ((CardsForStudying) getActivity()).index;
     }
 
 
@@ -46,6 +47,13 @@ public abstract class BaseFragment extends Fragment {
         View v = inflater.inflate(R.layout.phrase_fragment, container, false);
 
         return v;
+    }
+
+    @Override
+    public void onStart(){
+        Log.d(TAG, "onStart() called");
+        showWord();
+        super.onStart();
     }
 
 
@@ -62,9 +70,10 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void showWord() {
+        fillDataList();
         if (mDataList.isEmpty()) {
             Log.e(TAG, getResources().getString(R.string.err_mListWordIsEmpty));
-            makeToast(R.string.err_mListWordIsEmpty);
+            return;
         }
         this.putDataInElements();
     }

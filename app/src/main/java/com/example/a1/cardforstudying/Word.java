@@ -16,6 +16,7 @@ public class Word {
     private int mWordId;
     private int mRatingWord;
     private boolean mInTest;
+    private int mDictionaryID;
 
     public Word() { //конструкторы нечего не возврящают (даже void)
         mExample = new HashMap<>();
@@ -99,6 +100,14 @@ public class Word {
 
     public void setInTest(boolean mInTest) {
         this.mInTest = mInTest;
+    }
+
+    public int getDictionaryID() {
+        return mDictionaryID;
+    }
+
+    public void setDictionaryID(int dictionaryID) {
+        mDictionaryID = dictionaryID;
     }
 
     public String getRandomTranslationWord() {//вынести устойчивые выражения

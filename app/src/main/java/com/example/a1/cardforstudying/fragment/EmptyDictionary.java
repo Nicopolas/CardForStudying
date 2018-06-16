@@ -1,20 +1,17 @@
 package com.example.a1.cardforstudying.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.a1.cardforstudying.CardsForStudying;
+import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
-import com.example.a1.cardforstudying.Word;
-import com.example.a1.cardforstudying.WordLab;
-
-import java.util.List;
 
 public class EmptyDictionary extends BaseFragment {
     private static final String TAG = "EmptyDictionary";
@@ -31,7 +28,7 @@ public class EmptyDictionary extends BaseFragment {
         mMenuBetton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                makeToast(R.string.err_inDeveloping);//в разработке
+                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START);
             }
         });
 
@@ -40,8 +37,7 @@ public class EmptyDictionary extends BaseFragment {
         mEmptyDictionary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //добавить мепеход в меню словарей
-                makeToast(R.string.err_inDeveloping);//в разработке
+                startActivity(new Intent(getActivity(), ListActivity.class));
             }
         });
 
@@ -49,5 +45,5 @@ public class EmptyDictionary extends BaseFragment {
     }
 
     @Override
-    public void putDataInElements(){};
+    public void putDataInElements(){}
 }

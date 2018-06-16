@@ -30,4 +30,12 @@
     <string name="drawer_words_in_test">Words in test</string>
     <string name="drawer_about_developers">About Developer</string>
     <string name="drawer_language">Application language</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_clear">Clear</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_open">Open</string>
+    <string name="set_active">Set Active</string>
+    <string name="first_start_file_name">firstStart</string>
+    <string name="dictionary_fragment_title">Dictionaries</string>
 </resources>
