@@ -20,11 +20,9 @@ import com.example.a1.cardforstudying.WordLab;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
 //переделать довести до ума или избавиться
 public abstract class BaseFragment extends Fragment {
-    public final String TAG = getClass().getSimpleName();
+    private final String TAG = getClass().getSimpleName();
 
     protected ImageButton mMenuBetton;
     protected ImageButton mNextButton;

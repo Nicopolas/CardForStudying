@@ -2,16 +2,13 @@ package com.example.a1.cardforstudying;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.Toast;
 
 import com.example.a1.cardforstudying.fragment.DictionariesFragment;
-import com.example.a1.cardforstudying.fragment.TestFragment;
 
 /**
  * Created by 1 on 08.06.2018.
@@ -41,15 +38,28 @@ public class ListActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public String getActiveFragmentName() {
+        return fragment.getClass().getSimpleName();
+    }
+
     //Добавление меню в action bar в активность
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_bar_nemu, menu);
+        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
         return true;
     }
 
     @Override
     public void onBackPressed() {
+        if (fragment != null) {
+            switch (getActiveFragmentName()) {
+                case "WordsListFragment":
+                    startFragment(new DictionariesFragment());
+                    return;
+                default:
+                    super.onBackPressed();
+            }
+        }
         super.onBackPressed();
     }
 

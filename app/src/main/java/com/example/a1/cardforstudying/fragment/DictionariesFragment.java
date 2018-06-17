@@ -1,7 +1,6 @@
 package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.a1.cardforstudying.Dictionary;
 import com.example.a1.cardforstudying.DictionaryLab;
+import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
 
 import java.util.List;
@@ -50,7 +50,8 @@ public class DictionariesFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    private void initGUI(){
+    private void initGUI() {
+        ((ListActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dictionary_fragment_title));
         dictionaryList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         adapter = new DictionaryAdapter(DictionaryLab.get(getActivity()).getDictionaries());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -59,22 +60,21 @@ public class DictionariesFragment extends Fragment {
     }
 
     //вывод PoPup меню
-    private void showPopup(final DictionaryHolder holder, final View v, final int index) {
+    private void showPopup(final DictionaryHolder holder, final View v, final int dictionaryID) {
         PopupMenu popupMenu = new PopupMenu(getActivity(), v);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_open:
-                        makeToast("открытие словаря" + index);
-                        //открытие словаря
+                        openDictionary(dictionaryID);
                         return true;
                     case R.id.menu_delete:
-                        DictionaryLab.get(getActivity()).removeDictionaryByID(DictionaryLab.get(getActivity()).getDictionaries().get(index).getDictionaryID(), getActivity());
+                        DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID, getActivity());
                         initGUI();
                         return true;
-                    case  R.id.set_active:
-                        DictionaryLab.get(getActivity()).setActiveDictionaryByID(DictionaryLab.get(getActivity()).getDictionaries().get(index).getDictionaryID());
+                    case R.id.set_active:
+                        DictionaryLab.get(getActivity()).setActiveDictionaryByID(dictionaryID);
                         holder.dictionaryImageView.setImageResource(R.drawable.baseline_done_black_48);
                         initGUI();
                         return true;
@@ -123,8 +123,8 @@ public class DictionariesFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final DictionaryHolder holder, int position) {
-            Dictionary dictionary = dictionaries.get(holder.getAdapterPosition());
-            if (DictionaryLab.get(getActivity()).getActiveDictionary() != null && dictionary.getDictionaryID() == DictionaryLab.get(getActivity()).getActiveDictionary().getDictionaryID()){
+            final Dictionary dictionary = dictionaries.get(holder.getAdapterPosition());
+            if (DictionaryLab.get(getActivity()).getActiveDictionary() != null && dictionary.getDictionaryID() == DictionaryLab.get(getActivity()).getActiveDictionary().getDictionaryID()) {
                 holder.dictionaryImageView.setImageResource(R.drawable.baseline_done_black_48);
             }
 
@@ -134,14 +134,13 @@ public class DictionariesFragment extends Fragment {
             holder.listItemCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    makeToast("открытие словаря");
-                    //открытие словаря
+                    openDictionary(dictionary.getDictionaryID());
                 }
             });
             holder.popupMenuImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showPopup(holder, view, holder.getAdapterPosition());
+                    showPopup(holder, view, dictionary.getDictionaryID());
                 }
             });
         }
@@ -170,14 +169,19 @@ public class DictionariesFragment extends Fragment {
         }
     }
 
-    private void addDictionary(){
+    private void addDictionary() {
         DictionaryLab.get(getActivity()).putNewDictionary("No Name");
         initGUI();
         makeToast("В разработке");
     }
 
+    private void openDictionary(int dictionaryID) {
+        WordsListFragment wordsListFragment = new WordsListFragment();
+        wordsListFragment.dictionaryID = dictionaryID;
+        ((ListActivity) getActivity()).startFragment(wordsListFragment);
+    }
 
-//методы для дебага
+    //методы для дебага
     private void makeToast(int string_id) {
         Toast toast = Toast.makeText(getActivity(), string_id, Toast.LENGTH_SHORT);
         toast.show();

@@ -24,8 +24,7 @@
 
         <activity
             android:name=".ListActivity"
-            android:theme="@style/AppTheme"
-            android:label="@string/dictionary_fragment_title"/>
+            android:theme="@style/AppTheme"/>
 
         <!-- To Do List, не забыть удалить -->
         <activity

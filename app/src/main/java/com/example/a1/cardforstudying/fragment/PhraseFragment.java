@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhraseFragment extends BaseFragment {
-    private static final String TAG = "BaseFragment";
+    private final String TAG = getClass().getSimpleName();
     View v;
     List<Phrase> mListPhrase = new ArrayList<>();
     TextView mPhraseMeaning;

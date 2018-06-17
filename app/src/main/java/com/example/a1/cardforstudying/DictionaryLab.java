@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 public class DictionaryLab {
-    public final String TAG = getClass().getSimpleName();
+    private final String TAG = getClass().getSimpleName();
     private static SQLiteHelper mSQLiteHelper;
     private SQLiteDatabase mDataBase;
     private static DictionaryLab sDictionaryLab;

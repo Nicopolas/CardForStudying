@@ -20,7 +20,7 @@ public class WordLab {
     private static WordLab sWordLab; //обьект синглтона
     private static DictionaryLab sDictionaryLab;
     private SQLiteDatabase mDataBase;
-    public final String TAG = getClass().getSimpleName();
+    private final String TAG = getClass().getSimpleName();
 
     private List<Word> mWord = null;
 
@@ -63,6 +63,13 @@ public class WordLab {
 
     public void putFirstDictionary(List<Word> words) {
         saveWordInDateBase(words);
+    }
+
+    public void removeWord(Word word) {
+        mDataBase.delete(WordTable.NAME,
+                WordTable.Cols.WordID + " = ?",
+                new String[]{String.valueOf(word.getWordId())});
+        refreshWords();
     }
 
     public void removeWordsByDictionaryID(int id) {
@@ -108,6 +115,23 @@ public class WordLab {
         }
         Collections.reverse(wordSort);
         return wordSort.get(0) + 1;
+    }
+
+    public List<Word> getAllWordByDictionaryID(int id) {
+        String dictionaryID = String.valueOf(id);
+        List<Word> mWord = new ArrayList<Word>();
+        Cursor cursor = mDataBase.query(WordTable.NAME,
+                WordTable.Cols.wordAllColumn,
+                DbSchema.WordTable.Cols.DictionaryID + " = ?",
+                new String[]{dictionaryID},
+                null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Word word = cursorToWord(cursor);
+            mWord.add(word);
+            cursor.moveToNext();
+        }
+        return mWord;
     }
 
     private List<Word> getAllWordFromActiveDictionary() {

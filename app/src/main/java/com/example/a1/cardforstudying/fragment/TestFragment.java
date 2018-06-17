@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 public class TestFragment extends BaseFragment {
-    private static final String TAG = "TestFragment";
+    private final String TAG = getClass().getSimpleName();
     View v;
     private TextView mWordTextView;
     private TextView mWordTranscriptionView;

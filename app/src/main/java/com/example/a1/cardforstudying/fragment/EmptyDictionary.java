@@ -14,7 +14,7 @@ import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
 
 public class EmptyDictionary extends BaseFragment {
-    private static final String TAG = "EmptyDictionary";
+    private final String TAG = getClass().getSimpleName();
     public static int mMessage;
     private TextView mEmptyDictionary;
 

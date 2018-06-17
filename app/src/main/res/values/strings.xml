@@ -20,6 +20,11 @@
     <string name="err_empty_dictionary">В активном словаре меньше четырех слов</string>
     <string name="empty_dictionary">В активном словаре нет слов</string>
     <string name="fewer_than_four_on_dictionary">Для построения теста \nдолжно быть отмечено больше четырех слов</string>
+    <string name="dictionary_name">Dictionary name</string>
+    <string name="meaning_word">Meaning word</string>
+    <string name="transcription_word">Transcription word</string>
+    <string name="translation_word">Translation word</string>
+    <string name="add_word_in_the_test">Add word in the test</string>
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -30,6 +35,8 @@
     <string name="drawer_words_in_test">Words in test</string>
     <string name="drawer_about_developers">About Developer</string>
     <string name="drawer_language">Application language</string>
+    <string name="menu_save">Save</string>
+    <string name="menu_cancel">Cancel</string>
     <string name="menu_add">Add</string>
     <string name="menu_clear">Clear</string>
     <string name="menu_delete">Delete</string>
@@ -38,4 +45,6 @@
     <string name="set_active">Set Active</string>
     <string name="first_start_file_name">firstStart</string>
     <string name="dictionary_fragment_title">Dictionaries</string>
+    <string name="word_fragment_title">Words</string>
+    <string name="add_new_word_title">Add new word</string>
 </resources>
