@@ -22,6 +22,10 @@ import com.example.a1.cardforstudying.fragment.EmptyDictionary;
 import com.example.a1.cardforstudying.fragment.LeftButtonFragment;
 import com.example.a1.cardforstudying.fragment.PhraseFragment;
 import com.example.a1.cardforstudying.fragment.TestFragment;
+import com.example.a1.cardforstudying.model.DictionaryLab;
+import com.example.a1.cardforstudying.model.PhraseLab;
+import com.example.a1.cardforstudying.model.Word;
+import com.example.a1.cardforstudying.model.WordLab;
 
 import static com.example.a1.cardforstudying.XMLHelper.createFirstDictionary;
 

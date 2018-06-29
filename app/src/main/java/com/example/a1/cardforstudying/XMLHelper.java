@@ -3,6 +3,13 @@ package com.example.a1.cardforstudying;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.a1.cardforstudying.model.Dictionary;
+import com.example.a1.cardforstudying.model.DictionaryLab;
+import com.example.a1.cardforstudying.model.Phrase;
+import com.example.a1.cardforstudying.model.PhraseLab;
+import com.example.a1.cardforstudying.model.Word;
+import com.example.a1.cardforstudying.model.WordLab;
+
 import org.xmlpull.v1.XmlPullParser;
 
 import java.util.ArrayList;

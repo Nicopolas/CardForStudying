@@ -1,4 +1,4 @@
-package com.example.a1.cardforstudying;
+package com.example.a1.cardforstudying.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;

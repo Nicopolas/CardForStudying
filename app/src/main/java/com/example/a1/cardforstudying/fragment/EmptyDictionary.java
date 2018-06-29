@@ -25,21 +25,11 @@ public class EmptyDictionary extends BaseFragment {
         View v = inflater.inflate(R.layout.empty_dictionary, container, false);
 
         mMenuBetton = v.findViewById(R.id.menu_button);
-        mMenuBetton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START);
-            }
-        });
+        mMenuBetton.setOnClickListener(view -> ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START));
 
         mEmptyDictionary = v.findViewById(R.id.empty_dictionary);
         mEmptyDictionary.setText(mMessage);
-        mEmptyDictionary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ListActivity.class));
-            }
-        });
+        mEmptyDictionary.setOnClickListener(view -> startActivity(new Intent(getActivity(), ListActivity.class)));
 
         return v;
     }

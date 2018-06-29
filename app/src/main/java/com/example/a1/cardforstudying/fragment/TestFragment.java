@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.R;
-import com.example.a1.cardforstudying.Word;
+import com.example.a1.cardforstudying.model.Word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,60 +131,21 @@ public class TestFragment extends BaseFragment {
     }
 
     private void setListener() {
-        mMenuBetton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START);
-            }
-        });
+        mMenuBetton.setOnClickListener(view ->
+                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START));
 
-        mWordTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
+        mWordTextView.setOnClickListener(view -> showWord(true));
 
-        mWordTranscriptionView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
+        mWordTranscriptionView.setOnClickListener(view -> showWord(true));
 
-        mFirstWordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(mFirstWordButton);
-            }
-        });
+        mFirstWordButton.setOnClickListener(view -> checkAnswer(mFirstWordButton));
 
-        mSecondWordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(mSecondWordButton);
-            }
-        });
+        mSecondWordButton.setOnClickListener(view -> checkAnswer(mSecondWordButton));
 
-        mThirdWordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(mThirdWordButton);
-            }
-        });
+        mThirdWordButton.setOnClickListener(view -> checkAnswer(mThirdWordButton));
 
-        mFourthWordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkAnswer(mFourthWordButton);
-            }
-        });
+        mFourthWordButton.setOnClickListener(view -> checkAnswer(mFourthWordButton));
 
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
+        mNextButton.setOnClickListener(view -> showWord(true));
     }
 }

@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.R;
-import com.example.a1.cardforstudying.Word;
-import com.example.a1.cardforstudying.WordLab;
+import com.example.a1.cardforstudying.model.Word;
+import com.example.a1.cardforstudying.model.WordLab;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -65,32 +65,23 @@ public class LeftButtonFragment extends Fragment {
     }
 
     private void setListener() {
-        mTestLeftButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("TestFragment")) {
-                    ((CardsForStudying) getActivity()).startFragment(new TestFragment());
-                }
-                beginAutoTransition(testScene2, 200);
+        mTestLeftButton.setOnClickListener(view -> {
+            if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("TestFragment")) {
+                ((CardsForStudying) getActivity()).startFragment(new TestFragment());
             }
+            beginAutoTransition(testScene2, 200);
         });
-        mWordLeftButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("CardsFragment")) {
-                    ((CardsForStudying) getActivity()).startFragment(new CardsFragment());
-                }
-                beginAutoTransition(wordScene2, 200);
+        mWordLeftButton.setOnClickListener(view -> {
+            if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("CardsFragment")) {
+                ((CardsForStudying) getActivity()).startFragment(new CardsFragment());
             }
+            beginAutoTransition(wordScene2, 200);
         });
-        mPhraseLeftButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("PhraseFragment")) {
-                    ((CardsForStudying) getActivity()).startFragment(new PhraseFragment());
-                }
-                beginAutoTransition(phraseScene2, 200);
+        mPhraseLeftButton.setOnClickListener(view -> {
+            if (!((CardsForStudying) getActivity()).getActiveFragmentName().equals("PhraseFragment")) {
+                ((CardsForStudying) getActivity()).startFragment(new PhraseFragment());
             }
+            beginAutoTransition(phraseScene2, 200);
         });
     }
 

@@ -17,8 +17,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a1.cardforstudying.Dictionary;
-import com.example.a1.cardforstudying.DictionaryLab;
+import com.example.a1.cardforstudying.model.Dictionary;
+import com.example.a1.cardforstudying.model.DictionaryLab;
 import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
 
@@ -62,25 +62,22 @@ public class DictionariesFragment extends Fragment {
     //вывод PoPup меню
     private void showPopup(final DictionaryHolder holder, final View v, final int dictionaryID) {
         PopupMenu popupMenu = new PopupMenu(getActivity(), v);
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.menu_open:
-                        openDictionary(dictionaryID);
-                        return true;
-                    case R.id.menu_delete:
-                        DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID, getActivity());
-                        initGUI();
-                        return true;
-                    case R.id.set_active:
-                        DictionaryLab.get(getActivity()).setActiveDictionaryByID(dictionaryID);
-                        holder.dictionaryImageView.setImageResource(R.drawable.baseline_done_black_48);
-                        initGUI();
-                        return true;
-                    default:
-                        return false;
-                }
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.menu_open:
+                    openDictionary(dictionaryID);
+                    return true;
+                case R.id.menu_delete:
+                    DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID, getActivity());
+                    initGUI();
+                    return true;
+                case R.id.set_active:
+                    DictionaryLab.get(getActivity()).setActiveDictionaryByID(dictionaryID);
+                    holder.dictionaryImageView.setImageResource(R.drawable.baseline_done_black_48);
+                    initGUI();
+                    return true;
+                default:
+                    return false;
             }
         });
         popupMenu.inflate(R.menu.popup_menu);
@@ -131,18 +128,8 @@ public class DictionariesFragment extends Fragment {
             //добавить background активному словарю
             //holder.listItemCardView.setBackground(R.id.);
             holder.dictionaryTextView.setText(dictionary.getDictionaryName());
-            holder.listItemCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openDictionary(dictionary.getDictionaryID());
-                }
-            });
-            holder.popupMenuImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showPopup(holder, view, dictionary.getDictionaryID());
-                }
-            });
+            holder.listItemCardView.setOnClickListener(view -> openDictionary(dictionary.getDictionaryID()));
+            holder.popupMenuImageView.setOnClickListener(view -> showPopup(holder, view, dictionary.getDictionaryID()));
         }
 
         @Override

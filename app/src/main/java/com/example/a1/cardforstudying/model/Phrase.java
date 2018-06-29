@@ -1,4 +1,4 @@
-package com.example.a1.cardforstudying;
+package com.example.a1.cardforstudying.model;
 
 /**
  * Created by 1 on 08.06.2018.

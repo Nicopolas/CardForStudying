@@ -33,63 +33,33 @@ public class CardsFragment extends BaseFragment {
 
     private void initGUI(View v) {
         mMenuBetton = v.findViewById(R.id.menu_button);
-        mMenuBetton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START);
-            }
-        });
+        mMenuBetton.setOnClickListener(view ->
+                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START));
 
         mWordTextView = v.findViewById(R.id.word_text_view);
-        mWordTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
+        mWordTextView.setOnClickListener(view -> showWord(true));
 
         mWordTranscriptionView = v.findViewById(R.id.word_transcription_view);
-        mWordTranscriptionView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
+        mWordTranscriptionView.setOnClickListener(view -> showWord(true));
 
         mWordTranslationView = v.findViewById(R.id.word_translation_view);
+        mWordTranslationView.setOnClickListener(view -> showWord(true));
 
         mExampleButton = v.findViewById(R.id.example_button);
-        mExampleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                makeToast(mDataList.get(index).getExample());//в разработке
-                makeToast(mDataList.get(index).getExampleTranslation());//в разработке
-            }
+        mExampleButton.setOnClickListener(view -> {
+            makeToast(mDataList.get(index).getExample());//в разработке
+            makeToast(mDataList.get(index).getExampleTranslation());//в разработке
         });
 
         mSpeechButton = v.findViewById(R.id.speech_button);
-        mSpeechButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextToSpeechHelper.speakOut(getActivity(), mDataList.get(index).getMeaningWord());
-            }
-        });
+        mSpeechButton.setOnClickListener(view ->
+                TextToSpeechHelper.speakOut(getActivity(), mDataList.get(index).getMeaningWord()));
 
         mNextButton = v.findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(true);
-            }
-        });
+        mNextButton.setOnClickListener(view -> showWord(true));
 
         mPreviousButton = v.findViewById(R.id.previous_button);
-        mPreviousButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showWord(false);
-            }
-        });
+        mPreviousButton.setOnClickListener(view -> showWord(false));
     }
 
     @Override

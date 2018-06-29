@@ -1,4 +1,4 @@
-package com.example.a1.cardforstudying;
+package com.example.a1.cardforstudying.model;
 
 import android.content.ContentValues;
 import android.content.Context;

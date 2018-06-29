@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.a1.cardforstudying.CardsForStudying;
-import com.example.a1.cardforstudying.Phrase;
-import com.example.a1.cardforstudying.PhraseLab;
+import com.example.a1.cardforstudying.model.Phrase;
+import com.example.a1.cardforstudying.model.PhraseLab;
 import com.example.a1.cardforstudying.R;
 
 import java.util.ArrayList;
@@ -64,40 +64,16 @@ public class PhraseFragment extends BaseFragment {
     }
 
     private void setListener() {
-        mMenuBetton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START);
-            }
-        });
+        mMenuBetton.setOnClickListener(view ->
+                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START));
 
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPhrase(true);
-            }
-        });
+        mNextButton.setOnClickListener(view -> showPhrase(true));
 
-        mPreviousButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPhrase(false);
-            }
-        });
+        mPreviousButton.setOnClickListener(view -> showPhrase(false));
 
-        mPhraseMeaning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPhrase(true);
-            }
-        });
+        mPhraseMeaning.setOnClickListener(view -> showPhrase(true));
 
-        mPhraseTranslation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPhrase(true);
-            }
-        });
+        mPhraseTranslation.setOnClickListener(view -> showPhrase(true));
     }
 
     private void showPhrase(boolean nextPhrase) {

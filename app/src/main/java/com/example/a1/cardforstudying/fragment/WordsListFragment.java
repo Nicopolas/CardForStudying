@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
-import com.example.a1.cardforstudying.Word;
-import com.example.a1.cardforstudying.WordLab;
+import com.example.a1.cardforstudying.model.Word;
+import com.example.a1.cardforstudying.model.WordLab;
 
 import java.util.List;
 
@@ -102,19 +102,11 @@ public class WordsListFragment extends Fragment {
             //добавить background активному словарю
             //holder.listItemCardView.setBackground(R.id.);
             holder.wordTextView.setText(word.getMeaningWord());
-            holder.listItemCardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    makeToast("открытие словаря");
-                    //открытие словаря
-                }
+            holder.listItemCardView.setOnClickListener(view -> {
+                makeToast("открытие словаря");
+                //открытие словаря
             });
-            holder.deleteMenuImageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    deleteWord(word);
-                }
-            });
+            holder.deleteMenuImageView.setOnClickListener(view -> deleteWord(word));
         }
 
         @Override
