@@ -43,7 +43,6 @@ public class WordLab {
     }
 
     public void close() {
-        saveWordInDateBase(mWord);
         mSQLiteHelper.close();
     }
 
@@ -105,10 +104,10 @@ public class WordLab {
     }
 
     private int getNextIDWordFromDataBase() {
-        if (getAllWordFromActiveDictionary().isEmpty()) {
+        if (getAllWordFromDataBase().isEmpty()) {
             return 0;
         }
-        List<Word> mWord = getAllWordFromActiveDictionary();
+        List<Word> mWord = getAllWordFromDataBase();
         List<Integer> wordSort = new ArrayList<>();
         for (Word word : mWord) {
             wordSort.add(word.getWordId());

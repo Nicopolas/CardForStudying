@@ -43,7 +43,6 @@ public class PhraseLab {
     }
 
     public void close() {
-        savePhraseInDateBase(mPhrase);
         mSQLiteHelper.close();
     }
 
@@ -119,10 +118,10 @@ public class PhraseLab {
     }
 
     private int getNextIDPhraseFromDataBase() {
-        if (getAllPhraseFromActiveDictionary().isEmpty()) {
+        if (getAllPhraseFromDataBase().isEmpty()) {
             return 0;
         }
-        List<Phrase> mPhrase = getAllPhraseFromActiveDictionary();
+        List<Phrase> mPhrase = getAllPhraseFromDataBase();
         List<Integer> phraseSort = new ArrayList<>();
         for (Phrase phrase : mPhrase) {
             phraseSort.add(phrase.getPhraseID());

@@ -43,7 +43,6 @@ public class DictionaryLab {
     }
 
     public void close() {
-        saveDictionaryInDateBase(mDictionaries);
         mSQLiteHelper.close();
     }
 

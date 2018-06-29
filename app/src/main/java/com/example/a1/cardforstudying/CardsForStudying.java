@@ -261,13 +261,13 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
 
     private void firstStart(){
         SharedPreferences sPref = getSharedPreferences(getString(R.string.first_start_file_name), MODE_PRIVATE);
-        boolean firstStart = Boolean.valueOf(sPref.getString(getString(R.string.first_start_file_name), "false"));
-        if (firstStart){
+        boolean firstStart = Boolean.valueOf(sPref.getString(getString(R.string.first_start_file_name), "true"));
+        if (!firstStart){
             return;
         }
         createFirstDictionary(this);
         SharedPreferences.Editor ed = sPref.edit();
-        ed.putString(getString(R.string.first_start_file_name), "true");
+        ed.putString(getString(R.string.first_start_file_name), "false");
         ed.commit();
     }
 }
