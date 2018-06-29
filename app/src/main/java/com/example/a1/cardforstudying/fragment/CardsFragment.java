@@ -70,9 +70,13 @@ public class CardsFragment extends BaseFragment {
     }
 
     public void putDataInElements() {
-        mWordTextView.setText(mDataList.get(index).getMeaningWord());
+        mWordTextView.setText(upFirsLetter(mDataList.get(index).getMeaningWord()));
         mWordTranscriptionView.setText(mDataList.get(index).getMeaningWordTranscription());
         mWordTranslationView.setText(mDataList.get(index).getTranslationWord().replace("сущ.:", "\nсущ.:").replace("глаг.:", "\nглаг.:").replace("прил.:", "\nприл.:"));
+    }
+
+    private String upFirsLetter(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
 }
