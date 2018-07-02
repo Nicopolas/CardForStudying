@@ -1,11 +1,13 @@
 package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.view.GravityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.a1.cardforstudying.CardsForStudying;
@@ -15,13 +17,16 @@ import com.example.a1.cardforstudying.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class PhraseFragment extends BaseFragment {
+public class PhraseFragment extends BaseFragment implements TextToSpeech.OnInitListener {
     private final String TAG = getClass().getSimpleName();
+    private static TextToSpeech tts;
     View v;
     List<Phrase> mListPhrase = new ArrayList<>();
     TextView mPhraseMeaning;
     TextView mPhraseTranslation;
+    public ImageButton mSpeechButton;
     int phraseIndex;
 
     @Override
@@ -50,6 +55,7 @@ public class PhraseFragment extends BaseFragment {
     @Override
     public void onStop(){
         ((CardsForStudying) getActivity()).phraseIndex = phraseIndex;
+        stopTalking();
         super.onStop();
     }
 
@@ -59,6 +65,7 @@ public class PhraseFragment extends BaseFragment {
         mPreviousButton = v.findViewById(R.id.previous_button);
         mPhraseMeaning = v.findViewById(R.id.phrase_meaning_view);
         mPhraseTranslation = v.findViewById(R.id.phrase_translation_view);
+        mSpeechButton = v.findViewById(R.id.speech_button);
 
         setListener();
     }
@@ -74,6 +81,8 @@ public class PhraseFragment extends BaseFragment {
         mPhraseMeaning.setOnClickListener(view -> showPhrase(true));
 
         mPhraseTranslation.setOnClickListener(view -> showPhrase(true));
+
+        mSpeechButton.setOnClickListener(view -> tts = new TextToSpeech(getActivity(), this));
     }
 
     private void showPhrase(boolean nextPhrase) {
@@ -95,5 +104,35 @@ public class PhraseFragment extends BaseFragment {
             return;
         }
         this.putDataInElements();
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+
+            int result = tts.setLanguage(Locale.US);
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            } else {
+                mSpeechButton.setEnabled(true);
+                speakOut();
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+    }
+
+    public void speakOut() {
+        tts.speak(mListPhrase.get(phraseIndex).getPhraseMeaning(), TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    public static void stopTalking() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
     }
 }

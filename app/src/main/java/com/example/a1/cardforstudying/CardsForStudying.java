@@ -171,7 +171,6 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
                     break;
             }
         }
-        TextToSpeechHelper.stopTalking();
         super.onResume();
     }
 
