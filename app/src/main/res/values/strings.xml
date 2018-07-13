@@ -47,4 +47,5 @@
     <string name="dictionary_fragment_title">Dictionaries</string>
     <string name="word_fragment_title">Words</string>
     <string name="add_new_word_title">Add new word</string>
+    <string name="name_new_dictionaries">set name new dictionaries</string>
 </resources>

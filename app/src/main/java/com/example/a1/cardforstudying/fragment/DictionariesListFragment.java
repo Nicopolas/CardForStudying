@@ -1,6 +1,7 @@
 package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by 1 on 08.06.2018.
  */
 
-public class DictionariesFragment extends Fragment {
+public class DictionariesListFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
     View view;
     RecyclerView dictionaryList;
@@ -157,9 +158,9 @@ public class DictionariesFragment extends Fragment {
     }
 
     private void addDictionary() {
-        DictionaryLab.get(getActivity()).putNewDictionary("No Name");
+        NewDictionariesDialog newDictionariesDialog = new NewDictionariesDialog();
+        newDictionariesDialog.show(getActivity().getSupportFragmentManager(), "NewDictionariesDialog");
         initGUI();
-        makeToast("В разработке");
     }
 
     private void openDictionary(int dictionaryID) {

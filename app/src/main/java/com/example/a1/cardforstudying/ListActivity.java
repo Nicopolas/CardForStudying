@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.Toast;
 
-import com.example.a1.cardforstudying.fragment.DictionariesFragment;
+import com.example.a1.cardforstudying.fragment.DictionariesListFragment;
 
 /**
  * Created by 1 on 08.06.2018.
@@ -26,7 +26,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         if (fragment == null) {
-            startFragment(new DictionariesFragment());
+            startFragment(new DictionariesListFragment());
         }
 
     }
@@ -54,7 +54,7 @@ public class ListActivity extends AppCompatActivity {
         if (fragment != null) {
             switch (getActiveFragmentName()) {
                 case "WordsListFragment":
-                    startFragment(new DictionariesFragment());
+                    startFragment(new DictionariesListFragment());
                     return;
                 default:
                     super.onBackPressed();
