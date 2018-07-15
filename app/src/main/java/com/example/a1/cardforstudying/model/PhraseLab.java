@@ -57,6 +57,13 @@ public class PhraseLab {
         refreshPhrases();
     }
 
+    public void removePhrase(Phrase phrase) {
+        mDataBase.delete(DbSchema.PhraseTable.NAME,
+                DbSchema.PhraseTable.Cols.PhraseID + " = ?",
+                new String[]{String.valueOf(phrase.getPhraseID())});
+        refreshPhrases();
+    }
+
     private void refreshPhrases(){
         mPhrase = new ArrayList<>();
         mPhrase.addAll(getAllPhraseFromActiveDictionary());
@@ -65,6 +72,23 @@ public class PhraseLab {
     private PhraseLab(Context context) { //закрытый конструктор, вызывается только из get()
         open();
         refreshPhrases();
+    }
+
+    public List<Phrase> getAllWordByDictionaryID(int id) {
+        String dictionaryID = String.valueOf(id);
+        List<Phrase> mPhrase = new ArrayList<Phrase>();
+        Cursor cursor = mDataBase.query(DbSchema.PhraseTable.NAME,
+                DbSchema.PhraseTable.Cols.phraseAllColumn,
+                DbSchema.PhraseTable.Cols.DictionaryID + " = ?",
+                new String[]{dictionaryID},
+                null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Phrase phrase = cursorToPhrase(cursor);
+            mPhrase.add(phrase);
+            cursor.moveToNext();
+        }
+        return mPhrase;
     }
 
     private List<Phrase> getAllPhraseFromActiveDictionary(){
