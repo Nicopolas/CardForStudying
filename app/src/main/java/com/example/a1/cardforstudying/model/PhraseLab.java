@@ -38,6 +38,15 @@ public class PhraseLab {
         return mPhrase;
     }
 
+    public Phrase getPhraseByID(int phraseID) {
+        for (Phrase phrase : getAllPhraseFromDataBase()) {
+            if (phrase.getPhraseID() == (phraseID)) {
+                return phrase;
+            }
+        }
+        return null;
+    }
+
     public void open() throws SQLException {
         mDataBase = mSQLiteHelper.getWritableDatabase();
     }
@@ -50,7 +59,7 @@ public class PhraseLab {
         savePhraseInDateBase(phrases);
     }
 
-    public void removePhrasesByDictionaryID(int id){
+    public void removePhrasesByDictionaryID(int id) {
         mDataBase.delete(DbSchema.PhraseTable.NAME,
                 DbSchema.PhraseTable.Cols.DictionaryID + " = ?",
                 new String[]{String.valueOf(id)});
@@ -64,7 +73,27 @@ public class PhraseLab {
         refreshPhrases();
     }
 
-    private void refreshPhrases(){
+    public void savePhraseInDateBase(Phrase phrase) {
+        if (getPhraseByID(phrase.getPhraseID()) != null) {
+            removePhrase(phrase);
+        }
+
+        ContentValues editedPhrase = new ContentValues();
+        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseID, getNextIDPhraseFromDataBase());
+        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseMeaning, phrase.getPhraseMeaning());
+        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseTranslation, phrase.getPhraseTranslation());
+        editedPhrase.put(DbSchema.PhraseTable.Cols.DictionaryID, phrase.getDictionaryID());
+        mDataBase.insert(DbSchema.PhraseTable.NAME, null, editedPhrase);
+        refreshPhrases();
+    }
+
+    public void savePhraseInDateBase(List<Phrase> phrases) {
+        for (Phrase phrase : phrases) {
+            savePhraseInDateBase(phrase);
+        }
+    }
+
+    private void refreshPhrases() {
         mPhrase = new ArrayList<>();
         mPhrase.addAll(getAllPhraseFromActiveDictionary());
     }
@@ -91,8 +120,8 @@ public class PhraseLab {
         return mPhrase;
     }
 
-    private List<Phrase> getAllPhraseFromActiveDictionary(){
-        if (sDictionaryLab.getActiveDictionary() == null){
+    private List<Phrase> getAllPhraseFromActiveDictionary() {
+        if (sDictionaryLab.getActiveDictionary() == null) {
             return new ArrayList<Phrase>();
         }
         String activeDictionaryID = String.valueOf(sDictionaryLab.getActiveDictionary().getDictionaryID());
@@ -123,22 +152,6 @@ public class PhraseLab {
             cursor.moveToNext();
         }
         return mPhrase;
-    }
-
-    private void savePhraseInDateBase(Phrase phrase) {
-        ContentValues editedPhrase = new ContentValues();
-        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseID, getNextIDPhraseFromDataBase());
-        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseMeaning, phrase.getPhraseMeaning());
-        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseTranslation, phrase.getPhraseTranslation());
-        editedPhrase.put(DbSchema.PhraseTable.Cols.DictionaryID, phrase.getDictionaryID());
-        mDataBase.insert(DbSchema.PhraseTable.NAME, null, editedPhrase);
-        refreshPhrases();
-    }
-
-    private void savePhraseInDateBase(List<Phrase> phrases) {
-        for (Phrase phrase : phrases) {
-            savePhraseInDateBase(phrase);
-        }
     }
 
     private int getNextIDPhraseFromDataBase() {

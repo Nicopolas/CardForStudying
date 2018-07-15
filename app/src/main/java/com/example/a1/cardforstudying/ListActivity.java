@@ -12,8 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.example.a1.cardforstudying.fragment.DictionariesListFragment;
-import com.example.a1.cardforstudying.fragment.PhraseFragment;
+import com.example.a1.cardforstudying.fragment.PhraseEditFragment;
 import com.example.a1.cardforstudying.fragment.PhraseListFragment;
+import com.example.a1.cardforstudying.fragment.WordEditFragment;
 import com.example.a1.cardforstudying.fragment.WordsListFragment;
 
 import java.util.Locale;
@@ -32,6 +33,8 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
     private Fragment fragment = fm.findFragmentById(R.id.fragment_container);
     private ActionBar actionBar;
 
+    public int dictionaryID = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +47,26 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
     }
 
     public void startFragment(Fragment nameFragment) {
-        if (nameFragment.getClass().getSimpleName().equals("WordsListFragment")) {
-            initTab();
+        if (nameFragment.getClass().getSimpleName().equals("WordsListFragment") || nameFragment.getClass().getSimpleName().equals("PhraseListFragment")) {
+            initTabs();
             return;
+        } else {
+            removeTabs();
         }
-
         fragment = nameFragment;
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
+    }
+
+    public void startWordEditFragmentWithParameter(Fragment nameFragment, int dictionaryID, int elementID) {
+        fragment = nameFragment;
+        Bundle bundleWord = new Bundle();
+        bundleWord.putString(fragment.getClass().getSimpleName() + "_dictionaryID", String.valueOf(dictionaryID));
+        bundleWord.putString(fragment.getClass().getSimpleName() + "_elementID", String.valueOf(elementID));
+        fragment.setArguments(bundleWord);
+
+        startFragment(fragment);
     }
 
     public Fragment getActiveFragment() {
@@ -67,14 +81,21 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
     public void onBackPressed() {
         if (fragment != null) {
             switch (getActiveFragmentName()) {
+                case "PhraseListFragment":
                 case "WordsListFragment":
-                    while (actionBar.getTabCount() != 0) {
-                        actionBar.removeTab(actionBar.getTabAt(0));
-                    }
-                    actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_STANDARD);
-                    setContentView(R.layout.activity_list);
                     startFragment(new DictionariesListFragment());
                     return;
+                case "WordEditFragment":
+                    dictionaryID = ((WordEditFragment) fragment).getDictionaryID();
+                    WordsListFragment wordsListFragment = new WordsListFragment();
+                    wordsListFragment.dictionaryID = dictionaryID;
+                    startFragment(wordsListFragment);
+                    return;
+                case "PhraseEditFragment":
+                    dictionaryID = ((PhraseEditFragment) fragment).getDictionaryID();
+                    PhraseListFragment phraseListFragment = new PhraseListFragment();
+                    phraseListFragment.dictionaryID = dictionaryID;
+                    startFragment(phraseListFragment);
                 default:
                     super.onBackPressed();
             }
@@ -82,7 +103,18 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
         super.onBackPressed();
     }
 
-    private void initTab() {
+    private void removeTabs() {
+        if (actionBar.getNavigationMode() != 0) {
+            while (actionBar.getTabCount() != 0) {
+                actionBar.removeTab(actionBar.getTabAt(0));
+            }
+            actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_STANDARD);
+            setContentView(R.layout.activity_list);
+            startFragment(new DictionariesListFragment());
+        }
+    }
+
+    private void initTabs() {
         setContentView(R.layout.tabs_view_pager);
         actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -115,12 +147,12 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        switch (tab.getPosition()) {// не работает
+/*        switch (tab.getPosition()) {// не работает
             case 0:
                 getSupportActionBar().setTitle(getString(R.string.word_fragment_title));
             case 1:
                 getSupportActionBar().setTitle(getString(R.string.phrase_fragment_title));
-        }
+        }*/
         mViewPager.setCurrentItem(tab.getPosition());
     }
 
@@ -146,13 +178,13 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
                 case 0:
                     fragment = new WordsListFragment();
                     Bundle bundleWord = new Bundle();
-                    //args.putInt(WordsListFragment.ARG_SECTION_NUMBER, position + 1); //сюда dictionaryID
+                    bundleWord.putInt(fragment.getClass().getSimpleName(), dictionaryID); //сюда dictionaryID
                     fragment.setArguments(bundleWord);
                     return fragment;
                 case 1:
                     fragment = new PhraseListFragment();
                     Bundle bundlePhrase = new Bundle();
-                    //args.putInt(WordsListFragment.ARG_SECTION_NUMBER, position + 1); //сюда dictionaryID
+                    bundlePhrase.putInt(fragment.getClass().getSimpleName(), dictionaryID);
                     fragment.setArguments(bundlePhrase);
                     return fragment;
             }

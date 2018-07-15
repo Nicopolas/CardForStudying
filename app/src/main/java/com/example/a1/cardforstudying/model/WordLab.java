@@ -52,7 +52,7 @@ public class WordLab {
     }
 
     public Word getWordByID(int mWordId) {
-        for (Word word : mWord) {
+        for (Word word : getAllWordFromDataBase()) {
             if (word.getWordId() == (mWordId)) {
                 return word;
             }
@@ -78,13 +78,11 @@ public class WordLab {
         refreshWords();
     }
 
-    private void refreshWords() {
-        mWord = new ArrayList<>();
-        mWord.addAll(getAllWordFromActiveDictionary());
-    }
+    public void saveWordInDateBase(Word word) {
+        if (getWordByID(word.getWordId()) != null) {
+            removeWord(word);
+        }
 
-
-    private void saveWordInDateBase(Word word) {
         ContentValues editedWord = new ContentValues();
         editedWord.put(WordTable.Cols.WordID, getNextIDWordFromDataBase());
         editedWord.put(WordTable.Cols.MeaningWord, word.getMeaningWord());
@@ -95,6 +93,11 @@ public class WordLab {
         editedWord.put(WordTable.Cols.DictionaryID, word.getDictionaryID());
         mDataBase.insert(WordTable.NAME, null, editedWord);
         refreshWords();
+    }
+
+    private void refreshWords() {
+        mWord = new ArrayList<>();
+        mWord.addAll(getAllWordFromActiveDictionary());
     }
 
     private void saveWordInDateBase(List<Word> words) {

@@ -74,7 +74,7 @@ public class Word {
     }
 
     public void setExample(String example, String exampleTranslation) {
-        exampleTranslation = exampleTranslation.isEmpty() ? "" : exampleTranslation;
+        exampleTranslation = exampleTranslation == null ? "" : exampleTranslation;
         mExample.put(example, exampleTranslation);
     }
 

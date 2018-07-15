@@ -47,6 +47,13 @@
     <string name="dictionary_fragment_title">Dictionaries</string>
     <string name="word_fragment_title">Words</string>
     <string name="add_new_word_title">Add new word</string>
+    <string name="set_meaning_word">Write here your word</string>
+    <string name="set_word_transcription">Write here transcription if it exists</string>
+    <string name="set_translation_word">Write here translation word</string>
+    <string name="set_example">Write here sentence with this word</string>
+    <string name="in_test">Add word in the test</string>
     <string name="name_new_dictionaries">set name new dictionaries</string>
     <string name="phrase_fragment_title">Phrase</string>
+    <string name="set_phrase_meaning">Write here your phrase</string>
+    <string name="set_phrase_translation">Write here transcription if it exists</string>
 </resources>

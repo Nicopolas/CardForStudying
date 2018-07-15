@@ -14,12 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
 import com.example.a1.cardforstudying.model.Phrase;
 import com.example.a1.cardforstudying.model.PhraseLab;
-import com.example.a1.cardforstudying.model.Word;
-import com.example.a1.cardforstudying.model.WordLab;
 
 import java.util.List;
 
@@ -53,7 +50,7 @@ public class PhraseListFragment extends Fragment {
     private void initGUI() {
         //((ListActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.phrase_fragment_title));
         phraseList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
-        adapter = new PhraseAdapter(PhraseLab.get(getActivity()).getAllWordByDictionaryID(dictionaryID));
+        adapter = new PhraseAdapter(PhraseLab.get(getActivity()).getAllWordByDictionaryID(getArguments().getInt(getClass().getSimpleName())));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         phraseList.setAdapter(adapter);
         phraseList.setLayoutManager(linearLayoutManager);
@@ -65,7 +62,7 @@ public class PhraseListFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_add:
                 addPhrase();
-                makeToast("Открывается страница создания Word");
+                makeToast("Открывается страница создания Phrase");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -91,12 +88,9 @@ public class PhraseListFragment extends Fragment {
         public void onBindViewHolder(final PhraseHolder holder, int position) {
             final Phrase phrase = phrases.get(holder.getAdapterPosition());
 
-            //добавить background активному словарю
-            //holder.listItemCardView.setBackground(R.id.);
             holder.phraseTextView.setText(phrase.getPhraseMeaning());
             holder.listItemCardView.setOnClickListener(view -> {
-                makeToast("дкталки фразы");
-                //открытие словаря
+                makeToast("Открывается страница создания Phrase");
             });
             holder.deleteMenuImageView.setOnClickListener(view -> deletePhrase(phrase));
         }
@@ -129,6 +123,7 @@ public class PhraseListFragment extends Fragment {
 
     private void deletePhrase(Phrase phrase) {
         PhraseLab.get(getActivity()).removePhrase(phrase);
+        initGUI();
     }
 
     private void makeToast(String string) {

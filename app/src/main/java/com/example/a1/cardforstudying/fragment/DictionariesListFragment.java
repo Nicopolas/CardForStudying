@@ -1,7 +1,6 @@
 package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,10 +17,10 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a1.cardforstudying.model.Dictionary;
-import com.example.a1.cardforstudying.model.DictionaryLab;
 import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
+import com.example.a1.cardforstudying.model.Dictionary;
+import com.example.a1.cardforstudying.model.DictionaryLab;
 
 import java.util.List;
 
@@ -156,7 +155,7 @@ public class DictionariesListFragment extends Fragment {
         }
     }
 
-    private void deleteDictionary(int dictionaryID){
+    private void deleteDictionary(int dictionaryID) {
         DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID, getActivity());
         initGUI();
     }
@@ -168,11 +167,11 @@ public class DictionariesListFragment extends Fragment {
     }
 
     private void openDictionary(int dictionaryID) {
-      WordsListFragment wordsListFragment = new WordsListFragment();
-        wordsListFragment.dictionaryID = dictionaryID;//спорно
+        WordsListFragment wordsListFragment = new WordsListFragment();
+        ((ListActivity) getActivity()).dictionaryID = dictionaryID;//спорно
         ((ListActivity) getActivity()).startFragment(wordsListFragment);
 
-/*        TabsFragment tabsFragment = new TabsFragment();
+/*      TabsFragment tabsFragment = new TabsFragment();
         ((ListActivity) getActivity()).startFragment(tabsFragment);*/
     }
 

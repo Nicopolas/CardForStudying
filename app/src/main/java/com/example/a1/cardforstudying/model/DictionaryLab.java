@@ -50,7 +50,7 @@ public class DictionaryLab {
         saveDictionaryInDateBase(dictionary);
     }
 
-    public void putNewDictionary(String name){
+    public void putNewDictionary(String name) {
         saveDictionaryInDateBase(new Dictionary(name));
     }
 
@@ -64,8 +64,17 @@ public class DictionaryLab {
         Log.d(TAG, "Не найден словарь с id \"" + id + "\" в DictionaryLab");
     }
 
-    public Dictionary getActiveDictionary(){
+    public Dictionary getActiveDictionary() {
         return mActiveDictionary;
+    }
+
+    public Dictionary getDictionaryByID(int id) {
+        for (Dictionary dictionary : mDictionaries) {
+            if (dictionary.getDictionaryID() == id) {
+                return dictionary;
+            }
+        }
+        return null;
     }
 
     public void removeDictionaryByID(int id, Context context) {
@@ -110,7 +119,7 @@ public class DictionaryLab {
         }
     }
 
-    private void refreshDictionaries(){
+    private void refreshDictionaries() {
         mDictionaries = new ArrayList<>();
         mDictionaries.addAll(getAllDictionaryFromDataBase());
     }

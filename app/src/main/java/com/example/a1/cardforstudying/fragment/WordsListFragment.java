@@ -7,8 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
+import com.example.a1.cardforstudying.model.DictionaryLab;
 import com.example.a1.cardforstudying.model.Word;
 import com.example.a1.cardforstudying.model.WordLab;
 
@@ -51,7 +50,8 @@ public class WordsListFragment extends Fragment {
     }
 
     private void initGUI() {
-        //((ListActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.word_fragment_title));
+        dictionaryID = getArguments().getInt(getClass().getSimpleName());
+        ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
         wordsList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         adapter = new WordAdapter(WordLab.get(getActivity()).getAllWordByDictionaryID(dictionaryID));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -91,12 +91,9 @@ public class WordsListFragment extends Fragment {
         public void onBindViewHolder(final WordHolder holder, int position) {
             final Word word = words.get(holder.getAdapterPosition());
 
-            //добавить background активному словарю
-            //holder.listItemCardView.setBackground(R.id.);
             holder.wordTextView.setText(word.getMeaningWord());
             holder.listItemCardView.setOnClickListener(view -> {
-                makeToast("открытие словаря");
-                //открытие словаря
+                editWord(word);
             });
             holder.deleteMenuImageView.setOnClickListener(view -> deleteWord(word));
         }
@@ -123,12 +120,18 @@ public class WordsListFragment extends Fragment {
         }
     }
 
+    private void editWord(Word word){
+        ((ListActivity) getActivity()).dictionaryID = dictionaryID;//спорно
+        ((ListActivity) getActivity()).startWordEditFragmentWithParameter(new WordEditFragment(), dictionaryID, word.getWordId());
+    }
+
     private void addWord() {
 
     }
 
     private void deleteWord(Word word) {
         WordLab.get(getActivity()).removeWord(word);
+        initGUI();
     }
 
     private void makeToast(String string) {
