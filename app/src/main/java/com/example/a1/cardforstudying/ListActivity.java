@@ -18,7 +18,7 @@ public class ListActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
 
     public FragmentManager fm = getSupportFragmentManager();
-    Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+    private Fragment fragment = fm.findFragmentById(R.id.fragment_container);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class ListActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public Fragment getActiveFragment() {return fragment; }
     public String getActiveFragmentName() {
         return fragment.getClass().getSimpleName();
     }

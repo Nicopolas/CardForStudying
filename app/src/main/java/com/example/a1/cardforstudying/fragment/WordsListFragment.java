@@ -1,7 +1,7 @@
 package com.example.a1.cardforstudying.fragment;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,7 +51,7 @@ public class WordsListFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    private void initGUI(){
+    private void initGUI() {
         ((ListActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.word_fragment_title));
         wordsList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         adapter = new WordAdapter(WordLab.get(getActivity()).getAllWordByDictionaryID(dictionaryID));
@@ -131,11 +131,11 @@ public class WordsListFragment extends Fragment {
         }
     }
 
-    private void addWord(){
+    private void addWord() {
 
     }
 
-    private void deleteWord(Word word){
+    private void deleteWord(Word word) {
         WordLab.get(getActivity()).removeWord(word);
     }
 

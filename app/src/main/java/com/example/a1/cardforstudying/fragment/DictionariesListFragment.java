@@ -51,7 +51,7 @@ public class DictionariesListFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    private void initGUI() {
+    public void initGUI() {
         ((ListActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.dictionary_fragment_title));
         dictionaryList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         adapter = new DictionaryAdapter(DictionaryLab.get(getActivity()).getDictionaries());
@@ -69,8 +69,7 @@ public class DictionariesListFragment extends Fragment {
                     openDictionary(dictionaryID);
                     return true;
                 case R.id.menu_delete:
-                    DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID, getActivity());
-                    initGUI();
+                    deleteDictionary(dictionaryID);
                     return true;
                 case R.id.set_active:
                     DictionaryLab.get(getActivity()).setActiveDictionaryByID(dictionaryID);
@@ -155,6 +154,11 @@ public class DictionariesListFragment extends Fragment {
             popupMenuImageView = (ImageView) itemView.findViewById(R.id.dictionary_list_item_popup_menu);
             dictionaryImageView = (ImageView) itemView.findViewById(R.id.dictionary_list_item_image_view);
         }
+    }
+
+    private void deleteDictionary(int dictionaryID){
+        DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID, getActivity());
+        initGUI();
     }
 
     private void addDictionary() {
