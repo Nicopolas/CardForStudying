@@ -120,13 +120,12 @@ public class WordsListFragment extends Fragment {
         }
     }
 
-    private void editWord(Word word){
+    private void editWord(Word word) {
         ((ListActivity) getActivity()).dictionaryID = dictionaryID;//спорно
         ((ListActivity) getActivity()).startWordEditFragmentWithParameter(new WordEditFragment(), dictionaryID, word.getWordId());
     }
 
     private void addWord() {
-
     }
 
     private void deleteWord(Word word) {

@@ -53,6 +53,7 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
         } else {
             removeTabs();
         }
+
         fragment = nameFragment;
         fm.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -87,15 +88,13 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
                     return;
                 case "WordEditFragment":
                     dictionaryID = ((WordEditFragment) fragment).getDictionaryID();
-                    WordsListFragment wordsListFragment = new WordsListFragment();
-                    wordsListFragment.dictionaryID = dictionaryID;
-                    startFragment(wordsListFragment);
+                    fm.beginTransaction().remove(fragment).commit();
+                    initTabs();
                     return;
                 case "PhraseEditFragment":
                     dictionaryID = ((PhraseEditFragment) fragment).getDictionaryID();
-                    PhraseListFragment phraseListFragment = new PhraseListFragment();
-                    phraseListFragment.dictionaryID = dictionaryID;
-                    startFragment(phraseListFragment);
+                    fm.beginTransaction().remove(fragment).commit();
+                    initTabs();
                 default:
                     super.onBackPressed();
             }
@@ -117,6 +116,14 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
     private void initTabs() {
         setContentView(R.layout.tabs_view_pager);
         actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
+/*        for (int i = 0; i < getSupportFragmentManager().getFragments().size(); i++){ // не работает
+            if(fm.getFragments().get(i).getClass().getSimpleName().equals("PhraseListFragment") ||
+                    fm.getFragments().get(i).getClass().getSimpleName().equals("WordsListFragment")){
+                fm.beginTransaction().remove(fm.getFragments().get(i)).commit();
+            }
+        }*/
+        // старые фрагменты не удаляются из за этого  getItem(int position) не отрабатывает
+        getSupportFragmentManager().getFragments();
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -163,7 +170,6 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
