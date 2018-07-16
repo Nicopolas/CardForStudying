@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,20 +67,6 @@ public class WordsListFragment extends Fragment {
         wordsList.setLayoutManager(linearLayoutManager);
     }
 
-    // обработка нажатий в action bar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_add:
-                addWord();
-                makeToast("Открывается страница создания Word");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
     class WordAdapter extends RecyclerView.Adapter<WordHolder> {
         List<Word> words;
 
@@ -130,7 +118,7 @@ public class WordsListFragment extends Fragment {
         ((ListActivity) getActivity()).startFragmentWithParameter(new WordEditFragment(), dictionaryID, word.getWordId());
     }
 
-    private void addWord() {
+    public void addWord() {
         ((ListActivity) getActivity()).startFragmentWithParameter(new WordEditFragment(), dictionaryID);
     }
 

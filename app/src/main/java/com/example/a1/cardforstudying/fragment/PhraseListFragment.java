@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,19 +67,6 @@ public class PhraseListFragment extends Fragment {
         phraseList.setLayoutManager(linearLayoutManager);
     }
 
-    // обработка нажатий в action bar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_add:
-                addPhrase();
-                makeToast("Открывается страница создания Phrase");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 
     class PhraseAdapter extends RecyclerView.Adapter<PhraseHolder> {
         List<Phrase> phrases;
@@ -130,7 +119,7 @@ public class PhraseListFragment extends Fragment {
         ((ListActivity) getActivity()).startFragmentWithParameter(new PhraseEditFragment(), dictionaryID, phrase.getPhraseID());
     }
 
-    private void addPhrase() {
+    public void addPhrase() {
         ((ListActivity) getActivity()).startFragmentWithParameter(new PhraseEditFragment(), dictionaryID);
     }
 

@@ -9,6 +9,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,7 +25,9 @@ import com.example.a1.cardforstudying.R;
 public class TabsFragment extends Fragment { // не работает
     private final String TAG = getClass().getSimpleName();
     View view;
-    ViewPager mViewPager;
+    WordsListFragment wordsListFragment;
+    PhraseListFragment phraseListFragment;
+    int position;
     int dictionaryID;
 
     @Override
@@ -30,17 +35,16 @@ public class TabsFragment extends Fragment { // не работает
         Log.d(TAG, "onCreateView called");
         view = inflater.inflate(R.layout.tabs_view_pager, container, false);
 
-        String _dictionaryID = getArguments().getString( "_dictionaryID");
-        if (_dictionaryID == null){
+        String _dictionaryID = getArguments().getString("_dictionaryID");
+        if (_dictionaryID == null) {
             Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
             //сюда вывод универсального врагмента с ошибкой
         }
         dictionaryID = Integer.valueOf(_dictionaryID);
 
-        //final ActionBar actionBar = ((ListActivity) getActivity()).getSupportActionBar();
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.word_fragment_title)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.phrase_fragment_title)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
@@ -51,6 +55,7 @@ public class TabsFragment extends Fragment { // не работает
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                position = tab.getPosition();
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -65,6 +70,41 @@ public class TabsFragment extends Fragment { // не работает
             }
         });
         return view;
+    }
+
+    //не работает
+    //Добавление меню в action bar в фрагмент
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.action_bar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        return;
+    }
+
+    // обработка нажатий в action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_add:
+                addElement();
+                ((ListActivity) getActivity()).makeToast("сюда метод для дабовления эллемента");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void addElement() {
+        switch (position) {
+            case 0:
+                wordsListFragment.addWord();
+                break;
+            case 1:
+                phraseListFragment.addPhrase();
+                break;
+            default:
+                break;
+        }
     }
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
@@ -84,12 +124,14 @@ public class TabsFragment extends Fragment { // не работает
                     Bundle bundleWord = new Bundle();
                     bundleWord.putString("_dictionaryID", String.valueOf(dictionaryID));
                     tab1.setArguments(bundleWord);
+                    wordsListFragment = tab1;
                     return tab1;
                 case 1:
                     PhraseListFragment tab2 = new PhraseListFragment();
                     Bundle bundlePhrase = new Bundle();
                     bundlePhrase.putString("_dictionaryID", String.valueOf(dictionaryID));
                     tab2.setArguments(bundlePhrase);
+                    phraseListFragment = tab2;
                     return tab2;
                 default:
                     return null;

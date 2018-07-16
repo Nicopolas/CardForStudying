@@ -96,12 +96,12 @@ public class ListActivity extends AppCompatActivity {
         return true;
     }
 
-    private void makeToast(int string_id) {
+    public void makeToast(int string_id) {
         Toast toast = Toast.makeText(this, string_id, Toast.LENGTH_SHORT);
         toast.show();
     }
 
-    private void makeToast(String string) {
+    public void makeToast(String string) {
         Toast toast = Toast.makeText(this, string, Toast.LENGTH_SHORT);
         toast.show();
     }
