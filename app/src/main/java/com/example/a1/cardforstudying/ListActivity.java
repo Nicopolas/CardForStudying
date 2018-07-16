@@ -2,13 +2,14 @@ package com.example.a1.cardforstudying;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.example.a1.cardforstudying.fragment.DictionariesListFragment;
@@ -17,16 +18,13 @@ import com.example.a1.cardforstudying.fragment.PhraseListFragment;
 import com.example.a1.cardforstudying.fragment.WordEditFragment;
 import com.example.a1.cardforstudying.fragment.WordsListFragment;
 
-import java.util.Locale;
-
 /**
  * Created by 1 on 08.06.2018.
  */
 
-public class ListActivity extends AppCompatActivity implements ActionBar.TabListener {
+public class ListActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
 
-    SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
 
     public FragmentManager fm = getSupportFragmentManager();
@@ -113,33 +111,39 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
         }
     }
 
-    private void initTabs() {
-        setContentView(R.layout.tabs_view_pager);
-        actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
-/*        for (int i = 0; i < getSupportFragmentManager().getFragments().size(); i++){ // не работает
-            if(fm.getFragments().get(i).getClass().getSimpleName().equals("PhraseListFragment") ||
-                    fm.getFragments().get(i).getClass().getSimpleName().equals("WordsListFragment")){
-                fm.beginTransaction().remove(fm.getFragments().get(i)).commit();
-            }
-        }*/
-        // старые фрагменты не удаляются из за этого  getItem(int position) не отрабатывает
-        getSupportFragmentManager().getFragments();
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
+        return true;
+    }
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+    private void initTabs() {
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
-        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setTabListener(this));
-        }
     }
 
     private void makeToast(int string_id) {
@@ -152,66 +156,32 @@ public class ListActivity extends AppCompatActivity implements ActionBar.TabList
         toast.show();
     }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-/*        switch (tab.getPosition()) {// не работает
-            case 0:
-                getSupportActionBar().setTitle(getString(R.string.word_fragment_title));
-            case 1:
-                getSupportActionBar().setTitle(getString(R.string.phrase_fragment_title));
-        }*/
-        mViewPager.setCurrentItem(tab.getPosition());
-    }
+    public class PagerAdapter extends FragmentStatePagerAdapter {
+        int mNumOfTabs;
 
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-    }
-
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public PagerAdapter(FragmentManager fm, int NumOfTabs) {
             super(fm);
+            this.mNumOfTabs = NumOfTabs;
         }
 
         @Override
         public Fragment getItem(int position) {
+
             switch (position) {
                 case 0:
-                    fragment = new WordsListFragment();
-                    Bundle bundleWord = new Bundle();
-                    bundleWord.putInt(fragment.getClass().getSimpleName(), dictionaryID); //сюда dictionaryID
-                    fragment.setArguments(bundleWord);
-                    return fragment;
+                    WordsListFragment tab1 = new WordsListFragment();
+                    return tab1;
                 case 1:
-                    fragment = new PhraseListFragment();
-                    Bundle bundlePhrase = new Bundle();
-                    bundlePhrase.putInt(fragment.getClass().getSimpleName(), dictionaryID);
-                    fragment.setArguments(bundlePhrase);
-                    return fragment;
+                    PhraseListFragment tab2 = new PhraseListFragment();
+                    return tab2;
+                default:
+                    return null;
             }
-            return null; //спорно
         }
 
         @Override
         public int getCount() {
-            return 2;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.word_fragment_title).toUpperCase(l);
-                case 1:
-                    return getString(R.string.phrase_fragment_title).toUpperCase(l);
-            }
-            return null;
+            return mNumOfTabs;
         }
     }
 }
