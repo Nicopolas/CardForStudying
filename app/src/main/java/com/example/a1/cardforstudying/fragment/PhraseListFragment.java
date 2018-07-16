@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
 import com.example.a1.cardforstudying.model.Phrase;
 import com.example.a1.cardforstudying.model.PhraseLab;
@@ -49,6 +50,14 @@ public class PhraseListFragment extends Fragment {
 
     private void initGUI() {
         //((ListActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.phrase_fragment_title));
+
+        String _dictionaryID = getArguments().getString("_dictionaryID");
+        if (_dictionaryID == null){
+            Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
+            //сюда вывод универсального врагмента с ошибкой
+        }
+        dictionaryID = Integer.valueOf(_dictionaryID);
+
         phraseList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         adapter = new PhraseAdapter(PhraseLab.get(getActivity()).getAllWordByDictionaryID(getArguments().getInt(getClass().getSimpleName())));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -90,7 +99,7 @@ public class PhraseListFragment extends Fragment {
 
             holder.phraseTextView.setText(phrase.getPhraseMeaning());
             holder.listItemCardView.setOnClickListener(view -> {
-                makeToast("Открывается страница создания Phrase");
+                editPhrase(phrase);
             });
             holder.deleteMenuImageView.setOnClickListener(view -> deletePhrase(phrase));
         }
@@ -117,8 +126,12 @@ public class PhraseListFragment extends Fragment {
         }
     }
 
-    private void addPhrase() {
+    private void editPhrase(Phrase phrase) {
+        ((ListActivity) getActivity()).startFragmentWithParameter(new PhraseEditFragment(), dictionaryID, phrase.getPhraseID());
+    }
 
+    private void addPhrase() {
+        ((ListActivity) getActivity()).startFragmentWithParameter(new PhraseEditFragment(), dictionaryID);
     }
 
     private void deletePhrase(Phrase phrase) {

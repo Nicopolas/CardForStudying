@@ -50,7 +50,13 @@ public class WordsListFragment extends Fragment {
     }
 
     private void initGUI() {
-        dictionaryID = getArguments().getInt(getClass().getSimpleName());
+        String _dictionaryID = getArguments().getString("_dictionaryID");
+        if (_dictionaryID == null){
+            Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
+            //сюда вывод универсального врагмента с ошибкой
+        }
+        dictionaryID = Integer.valueOf(_dictionaryID);
+
         ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
         wordsList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         adapter = new WordAdapter(WordLab.get(getActivity()).getAllWordByDictionaryID(dictionaryID));
@@ -121,11 +127,11 @@ public class WordsListFragment extends Fragment {
     }
 
     private void editWord(Word word) {
-        ((ListActivity) getActivity()).dictionaryID = dictionaryID;//спорно
-        ((ListActivity) getActivity()).startWordEditFragmentWithParameter(new WordEditFragment(), dictionaryID, word.getWordId());
+        ((ListActivity) getActivity()).startFragmentWithParameter(new WordEditFragment(), dictionaryID, word.getWordId());
     }
 
     private void addWord() {
+        ((ListActivity) getActivity()).startFragmentWithParameter(new WordEditFragment(), dictionaryID);
     }
 
     private void deleteWord(Word word) {

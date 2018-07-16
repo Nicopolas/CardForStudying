@@ -167,12 +167,7 @@ public class DictionariesListFragment extends Fragment {
     }
 
     private void openDictionary(int dictionaryID) {
-        WordsListFragment wordsListFragment = new WordsListFragment();
-        ((ListActivity) getActivity()).dictionaryID = dictionaryID;//спорно
-        ((ListActivity) getActivity()).startFragment(wordsListFragment);
-
-/*      TabsFragment tabsFragment = new TabsFragment();
-        ((ListActivity) getActivity()).startFragment(tabsFragment);*/
+        ((ListActivity) getActivity()).startFragmentWithParameter(new TabsFragment(), dictionaryID);
     }
 
     //методы для дебага

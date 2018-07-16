@@ -23,13 +23,21 @@ public class TabsFragment extends Fragment { // не работает
     private final String TAG = getClass().getSimpleName();
     View view;
     ViewPager mViewPager;
+    int dictionaryID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
         view = inflater.inflate(R.layout.tabs_view_pager, container, false);
 
-        final ActionBar actionBar = ((ListActivity) getActivity()).getSupportActionBar();
+        String _dictionaryID = getArguments().getString( "_dictionaryID");
+        if (_dictionaryID == null){
+            Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
+            //сюда вывод универсального врагмента с ошибкой
+        }
+        dictionaryID = Integer.valueOf(_dictionaryID);
+
+        //final ActionBar actionBar = ((ListActivity) getActivity()).getSupportActionBar();
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
@@ -73,9 +81,15 @@ public class TabsFragment extends Fragment { // не работает
             switch (position) {
                 case 0:
                     WordsListFragment tab1 = new WordsListFragment();
+                    Bundle bundleWord = new Bundle();
+                    bundleWord.putString("_dictionaryID", String.valueOf(dictionaryID));
+                    tab1.setArguments(bundleWord);
                     return tab1;
                 case 1:
                     PhraseListFragment tab2 = new PhraseListFragment();
+                    Bundle bundlePhrase = new Bundle();
+                    bundlePhrase.putString("_dictionaryID", String.valueOf(dictionaryID));
+                    tab2.setArguments(bundlePhrase);
                     return tab2;
                 default:
                     return null;

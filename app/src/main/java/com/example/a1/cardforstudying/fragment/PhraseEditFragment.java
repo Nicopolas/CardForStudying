@@ -56,20 +56,21 @@ public class PhraseEditFragment extends Fragment {
     }
 
     private void setDataFromWordLab() {
-        String __dictionaryID = getArguments().getString(getClass().getSimpleName() + "_dictionaryID");
-        //сюда проверку на __dictionaryID==null
-        dictionaryID = Integer.valueOf(__dictionaryID);
+        String _dictionaryID = getArguments().getString("_dictionaryID");
+        if (_dictionaryID == null) {
+            Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
+            //сюда вывод универсального врагмента с ошибкой
+        }
+        dictionaryID = Integer.valueOf(_dictionaryID);
         ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
 
-        String _elementID = getArguments().getString(getClass().getSimpleName() + "_elementID");
+        String _elementID = getArguments().getString("_elementID");
         if (_elementID == null) {
             return;
         }
-
         elementID = Integer.valueOf(_elementID);
-        dictionaryID = Integer.valueOf(__dictionaryID);
-        phrase = PhraseLab.get(getActivity()).getPhraseByID(elementID);
 
+        phrase = PhraseLab.get(getActivity()).getPhraseByID(elementID);
         mPhraseMeaning.setText(phrase.getPhraseMeaning());
         mPhraseTranslation.setText(phrase.getPhraseMeaning());
     }
