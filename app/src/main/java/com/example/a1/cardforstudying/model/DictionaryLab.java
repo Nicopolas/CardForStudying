@@ -19,6 +19,7 @@ import java.util.List;
  */
 
 public class DictionaryLab {
+    private static Context context;
     private final String TAG = getClass().getSimpleName();
     private static SQLiteHelper mSQLiteHelper;
     private SQLiteDatabase mDataBase;
@@ -26,7 +27,8 @@ public class DictionaryLab {
     private List<Dictionary> mDictionaries = null;
     private Dictionary mActiveDictionary = null;
 
-    public static DictionaryLab get(Context context) {
+    public static DictionaryLab get(Context receivedContext) {
+        context = receivedContext;
         if (sDictionaryLab == null) {
             mSQLiteHelper = new SQLiteHelper(context);
             sDictionaryLab = new DictionaryLab(context);
@@ -50,8 +52,8 @@ public class DictionaryLab {
         saveDictionaryInDateBase(dictionary);
     }
 
-    public void putNewDictionary(String name) {
-        saveDictionaryInDateBase(new Dictionary(name));
+    public int putNewDictionary(String name) {
+        return createDictionaryInDateBase(new Dictionary(name));
     }
 
     public void setActiveDictionaryByID(int id) {
@@ -77,7 +79,7 @@ public class DictionaryLab {
         return null;
     }
 
-    public void removeDictionaryByID(int id, Context context) {
+    public void removeDictionaryByID(int id) {
         mDataBase.delete(DbSchema.DictionaryTable.NAME,
                 DbSchema.DictionaryTable.Cols.DictionaryID + " = ?",
                 new String[]{String.valueOf(id)});
@@ -106,11 +108,20 @@ public class DictionaryLab {
     }
 
     private void saveDictionaryInDateBase(Dictionary dictionary) {
+        if (getDictionaryByID(dictionary.getDictionaryID()) != null) {
+            removeDictionaryByID(dictionary.getDictionaryID());
+        }
+        createDictionaryInDateBase(dictionary);
+    }
+
+    private int createDictionaryInDateBase(Dictionary dictionary) {
+        int dictionaryID = getNextIDDictionaryFromDataBase();
         ContentValues editedPhrase = new ContentValues();
         editedPhrase.put(DbSchema.DictionaryTable.Cols.DictionaryID, getNextIDDictionaryFromDataBase());
         editedPhrase.put(DbSchema.DictionaryTable.Cols.DictionaryName, dictionary.getDictionaryName());
         mDataBase.insert(DbSchema.DictionaryTable.NAME, null, editedPhrase);
         refreshDictionaries();
+        return dictionaryID;
     }
 
     private void saveDictionaryInDateBase(List<Dictionary> dictionaries) {

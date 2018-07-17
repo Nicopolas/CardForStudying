@@ -45,6 +45,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void startFragmentWithParameter(Fragment nameFragment, int dictionaryID, int elementID) {
+        this.dictionaryID = dictionaryID;
         fragment = nameFragment;
         Bundle bundleWord = new Bundle();
         bundleWord.putString("_dictionaryID", String.valueOf(dictionaryID));
@@ -55,6 +56,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void startFragmentWithParameter(Fragment nameFragment, int dictionaryID) {
+        this.dictionaryID = dictionaryID;
         fragment = nameFragment;
         Bundle bundleWord = new Bundle();
         bundleWord.putString("_dictionaryID", String.valueOf(dictionaryID));

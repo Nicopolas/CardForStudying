@@ -122,7 +122,6 @@ public class TabsFragment extends Fragment { // не работает
 
         @Override
         public Fragment getItem(int position) {
-
             switch (position) {
                 case 0:
                     WordsListFragment tab1 = new WordsListFragment();

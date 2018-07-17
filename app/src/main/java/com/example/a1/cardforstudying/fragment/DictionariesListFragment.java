@@ -162,7 +162,7 @@ public class DictionariesListFragment extends Fragment {
     }
 
     private void deleteDictionary(int dictionaryID) {
-        DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID, getActivity());
+        DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID);
         initGUI();
     }
 
@@ -173,7 +173,6 @@ public class DictionariesListFragment extends Fragment {
     }
 
     private void openDictionary(int dictionaryID) {
-        ((ListActivity) getActivity()).dictionaryID = dictionaryID;
         ((ListActivity) getActivity()).startFragmentWithParameter(new TabsFragment(), dictionaryID);
     }
 

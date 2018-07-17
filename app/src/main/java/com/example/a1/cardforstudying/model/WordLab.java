@@ -61,7 +61,9 @@ public class WordLab {
     }
 
     public void putFirstDictionary(List<Word> words) {
-        saveWordInDateBase(words);
+        for (Word word : words) {
+            createNewWordInDataBase(word);
+        }
     }
 
     public void removeWord(Word word) {
@@ -82,7 +84,10 @@ public class WordLab {
         if (getWordByID(word.getWordId()) != null) {
             removeWord(word);
         }
+        createNewWordInDataBase(word);
+    }
 
+    public void createNewWordInDataBase(Word word) {
         ContentValues editedWord = new ContentValues();
         editedWord.put(WordTable.Cols.WordID, getNextIDWordFromDataBase());
         editedWord.put(WordTable.Cols.MeaningWord, word.getMeaningWord());

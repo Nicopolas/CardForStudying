@@ -56,7 +56,9 @@ public class PhraseLab {
     }
 
     public void putFirstDictionary(List<Phrase> phrases) {
-        savePhraseInDateBase(phrases);
+        for (Phrase phrase : phrases) {
+            createNewPhraseInDateBase(phrase);
+        }
     }
 
     public void removePhrasesByDictionaryID(int id) {
@@ -77,7 +79,10 @@ public class PhraseLab {
         if (getPhraseByID(phrase.getPhraseID()) != null) {
             removePhrase(phrase);
         }
+        createNewPhraseInDateBase(phrase);
+    }
 
+    public void createNewPhraseInDateBase(Phrase phrase) {
         ContentValues editedPhrase = new ContentValues();
         editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseID, getNextIDPhraseFromDataBase());
         editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseMeaning, phrase.getPhraseMeaning());
