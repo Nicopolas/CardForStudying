@@ -78,17 +78,14 @@ public class WordEditFragment extends Fragment {
     }
 
     private void setListener() {
-        mInTest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (fieldIsEmpty(mMeaningWord)) {
-                    ((ListActivity) getActivity()).makeToast("You can not save a word without entering its value");
-                    mInTest.setChecked(false);
-                }
-                if (fieldIsEmpty(mTranslationWord)) {
-                    ((ListActivity) getActivity()).makeToast("You can not save a word without entering its meaningful translation");
-                    mInTest.setChecked(false);
-                }
+        mInTest.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (fieldIsEmpty(mMeaningWord)) {
+                ((ListActivity) getActivity()).makeToast("You can not save a word without entering its value");
+                mInTest.setChecked(false);
+            }
+            if (fieldIsEmpty(mTranslationWord)) {
+                ((ListActivity) getActivity()).makeToast("You can not save a word without entering its meaningful translation");
+                mInTest.setChecked(false);
             }
         });
     }
