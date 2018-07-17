@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.a1.cardforstudying.fragment.DictionariesListFragment;
@@ -95,6 +96,28 @@ public class ListActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.action_bar_menu, menu);
         return true;
     }
+
+    // обработка нажатий в action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_add:
+                switch (getActiveFragmentName()) {
+                    case "DictionariesListFragment":
+                        ((DictionariesListFragment) fragment).addDictionary();
+                        break;
+                    case "TabsFragment":
+                        ((TabsFragment) fragment).addElement();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     public void makeToast(int string_id) {
         Toast toast = Toast.makeText(this, string_id, Toast.LENGTH_SHORT);

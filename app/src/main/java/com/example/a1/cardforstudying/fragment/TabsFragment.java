@@ -76,7 +76,6 @@ public class TabsFragment extends Fragment { // не работает
     //Добавление меню в action bar в фрагмент
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.action_bar_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
         return;
     }
@@ -94,7 +93,7 @@ public class TabsFragment extends Fragment { // не работает
         }
     }
 
-    private void addElement() {
+    public void addElement() {
         switch (position) {
             case 0:
                 wordsListFragment.addWord();

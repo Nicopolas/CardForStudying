@@ -83,6 +83,7 @@ public class DictionariesListFragment extends Fragment {
         popupMenu.show();
     }
 
+/*
     //Добавление меню в action bar в фрагмент
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -101,6 +102,7 @@ public class DictionariesListFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+*/
 
     class DictionaryAdapter extends RecyclerView.Adapter<DictionaryHolder> {
         List<Dictionary> dictionaries;
@@ -160,7 +162,7 @@ public class DictionariesListFragment extends Fragment {
         initGUI();
     }
 
-    private void addDictionary() {
+    public void addDictionary() {
         NewDictionariesDialog newDictionariesDialog = new NewDictionariesDialog();
         newDictionariesDialog.show(getActivity().getSupportFragmentManager(), "NewDictionariesDialog");
         initGUI();
