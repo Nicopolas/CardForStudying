@@ -7,9 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -53,7 +50,7 @@ public class WordsListFragment extends Fragment {
 
     private void initGUI() {
         String _dictionaryID = getArguments().getString("_dictionaryID");
-        if (_dictionaryID == null){
+        if (_dictionaryID == null) {
             Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
             //сюда вывод универсального врагмента с ошибкой
         }
@@ -131,25 +128,4 @@ public class WordsListFragment extends Fragment {
         Toast toast = Toast.makeText(getActivity(), string, Toast.LENGTH_SHORT);
         toast.show();
     }
-
-/*    //не работает
-    //Добавление меню в action bar в фрагмент
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        return;
-    }
-
-    // обработка нажатий в action bar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_add:
-                addWord();
-                ((ListActivity) getActivity()).makeToast("сюда метод для дабовления эллемента");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
 }

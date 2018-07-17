@@ -83,26 +83,6 @@ public class DictionariesListFragment extends Fragment {
         popupMenu.show();
     }
 
-/*
-    //Добавление меню в action bar в фрагмент
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        return;
-    }
-
-    // обработка нажатий в action bar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_add:
-                addDictionary();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-*/
 
     class DictionaryAdapter extends RecyclerView.Adapter<DictionaryHolder> {
         List<Dictionary> dictionaries;

@@ -72,27 +72,6 @@ public class TabsFragment extends Fragment { // не работает
         return view;
     }
 
-    //не работает
-    //Добавление меню в action bar в фрагмент
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        return;
-    }
-
-    // обработка нажатий в action bar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_add:
-                addElement();
-                ((ListActivity) getActivity()).makeToast("сюда метод для дабовления эллемента");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     public void addElement() {
         switch (position) {
             case 0:
