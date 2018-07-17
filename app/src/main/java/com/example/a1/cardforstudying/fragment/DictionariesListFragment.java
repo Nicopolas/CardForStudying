@@ -38,7 +38,9 @@ public class DictionariesListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
         view = inflater.inflate(R.layout.list_fragment, container, false);
+
         setHasOptionsMenu(true);
+        ((ListActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initGUI();
 
         return view;
@@ -137,6 +139,28 @@ public class DictionariesListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.action_bar_menu, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
+        return;
+    }
+
+    // обработка нажатий в action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_add:
+                addDictionary();
+                return true;
+            case android.R.id.home:
+                back();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void deleteDictionary(int dictionaryID) {
         DictionaryLab.get(getActivity()).removeDictionaryByID(dictionaryID, getActivity());
         initGUI();
@@ -149,7 +173,12 @@ public class DictionariesListFragment extends Fragment {
     }
 
     private void openDictionary(int dictionaryID) {
+        ((ListActivity) getActivity()).dictionaryID = dictionaryID;
         ((ListActivity) getActivity()).startFragmentWithParameter(new TabsFragment(), dictionaryID);
+    }
+
+    private void back() {
+        getActivity().onBackPressed();
     }
 
     //методы для дебага

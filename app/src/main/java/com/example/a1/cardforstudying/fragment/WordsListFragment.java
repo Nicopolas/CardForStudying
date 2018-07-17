@@ -56,7 +56,6 @@ public class WordsListFragment extends Fragment {
         }
         dictionaryID = Integer.valueOf(_dictionaryID);
 
-        ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
         wordsList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
         adapter = new WordAdapter(WordLab.get(getActivity()).getAllWordByDictionaryID(dictionaryID));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);

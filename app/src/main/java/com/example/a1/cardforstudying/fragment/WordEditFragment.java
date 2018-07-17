@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.a1.cardforstudying.ListActivity;
@@ -27,8 +30,6 @@ public class WordEditFragment extends Fragment {
     private EditText mTranslationWord;
     private EditText mExample;
     private CheckBox mInTest;
-    private Button mCancel;
-    private Button mSave;
 
     private View view;
     private Word word = new Word();
@@ -41,18 +42,55 @@ public class WordEditFragment extends Fragment {
         Log.d(TAG, "onCreateView called");
         view = inflater.inflate(R.layout.word_edit_fragment, container, false);
 
+        //добавление кнопки back
+        ((ListActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setHasOptionsMenu(true);
         initGUI();
+        setListener();
 
         return view;
     }
 
-    public void setWord(Word word) {
-        this.word = word;
-    }
-
     public int getDictionaryID() {
         return dictionaryID;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.add_element_menu, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
+        return;
+    }
+
+    // обработка нажатий в action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_save:
+                saveWord();
+                return true;
+            case android.R.id.home:
+                back();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void setListener() {
+        mInTest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (fieldIsEmpty(mMeaningWord)) {
+                    ((ListActivity) getActivity()).makeToast("You can not save a word without entering its value");
+                    mInTest.setChecked(false);
+                }
+                if (fieldIsEmpty(mTranslationWord)) {
+                    ((ListActivity) getActivity()).makeToast("You can not save a word without entering its meaningful translation");
+                    mInTest.setChecked(false);
+                }
+            }
+        });
     }
 
     private void initGUI() {
@@ -61,26 +99,22 @@ public class WordEditFragment extends Fragment {
         mTranslationWord = view.findViewById(R.id.set_translation_word);
         mExample = view.findViewById(R.id.set_example);
         mInTest = view.findViewById(R.id.in_test);
-        mCancel = view.findViewById(R.id.cancel);
-        mSave = view.findViewById(R.id.save);
-
 
         setDataFromWordLab();
-        setListeners();
     }
 
     private void setDataFromWordLab() {
-        ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
-
         String _dictionaryID = getArguments().getString("_dictionaryID");
         if (_dictionaryID == null) {
             Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
+            back();
             //сюда вывод универсального врагмента с ошибкой
         }
         dictionaryID = Integer.valueOf(_dictionaryID);
 
         String _elementID = getArguments().getString("_elementID");
         if (_elementID == null) {
+            ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
             return;
         }
         elementID = Integer.valueOf(_elementID);
@@ -91,11 +125,7 @@ public class WordEditFragment extends Fragment {
         mTranslationWord.setText(word.getTranslationWord());
         mExample.setText(word.getExample());
         mInTest.setChecked(word.isInTest());
-    }
-
-    private void setListeners() {
-        mCancel.setOnClickListener(view -> cancel());
-        mSave.setOnClickListener(view -> saveWord());
+        ((ListActivity) getActivity()).getSupportActionBar().setTitle(word.getMeaningWord());
     }
 
     private void saveWord() {
@@ -108,8 +138,11 @@ public class WordEditFragment extends Fragment {
         WordLab.get(getActivity()).saveWordInDateBase(word);
     }
 
-    private void cancel() {
-        ((ListActivity) getActivity()).onBackPressed();
+    private boolean fieldIsEmpty(EditText editText) {
+        return editText.getText().toString().isEmpty();
     }
 
+    private void back() {
+        getActivity().onBackPressed();
+    }
 }

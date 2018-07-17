@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
+import com.example.a1.cardforstudying.model.DictionaryLab;
 import com.example.a1.cardforstudying.model.Phrase;
 import com.example.a1.cardforstudying.model.PhraseLab;
 
@@ -48,8 +49,6 @@ public class PhraseListFragment extends Fragment {
     }
 
     private void initGUI() {
-        //((ListActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.phrase_fragment_title));
-
         String _dictionaryID = getArguments().getString("_dictionaryID");
         if (_dictionaryID == null) {
             Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
@@ -58,7 +57,7 @@ public class PhraseListFragment extends Fragment {
         dictionaryID = Integer.valueOf(_dictionaryID);
 
         phraseList = (RecyclerView) view.findViewById(R.id.list_recycler_view);
-        adapter = new PhraseAdapter(PhraseLab.get(getActivity()).getAllWordByDictionaryID(getArguments().getInt(getClass().getSimpleName())));
+        adapter = new PhraseAdapter(PhraseLab.get(getActivity()).getAllWordByDictionaryID(dictionaryID));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         phraseList.setAdapter(adapter);
         phraseList.setLayoutManager(linearLayoutManager);

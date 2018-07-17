@@ -93,31 +93,8 @@ public class ListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
         return true;
     }
-
-    // обработка нажатий в action bar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_add:
-                switch (getActiveFragmentName()) {
-                    case "DictionariesListFragment":
-                        ((DictionariesListFragment) fragment).addDictionary();
-                        break;
-                    case "TabsFragment":
-                        ((TabsFragment) fragment).addElement();
-                        break;
-                    default:
-                        break;
-                }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 
     public void makeToast(int string_id) {
         Toast toast = Toast.makeText(this, string_id, Toast.LENGTH_SHORT);

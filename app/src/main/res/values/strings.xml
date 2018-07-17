@@ -42,6 +42,7 @@
     <string name="menu_delete">Delete</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_open">Open</string>
+    <string name="menu_back">Back</string>
     <string name="set_active">Set Active</string>
     <string name="first_start_file_name">firstStart</string>
     <string name="dictionary_fragment_title">Dictionaries</string>

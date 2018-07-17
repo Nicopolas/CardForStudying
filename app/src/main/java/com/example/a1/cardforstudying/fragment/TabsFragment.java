@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
+import com.example.a1.cardforstudying.model.DictionaryLab;
 
 /**
  * Created by 1 on 15.07.2018.
@@ -35,12 +35,17 @@ public class TabsFragment extends Fragment { // не работает
         Log.d(TAG, "onCreateView called");
         view = inflater.inflate(R.layout.tabs_view_pager, container, false);
 
+        setHasOptionsMenu(true);
+        ((ListActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         String _dictionaryID = getArguments().getString("_dictionaryID");
         if (_dictionaryID == null) {
             Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
+            back();
             //сюда вывод универсального врагмента с ошибкой
         }
         dictionaryID = Integer.valueOf(_dictionaryID);
+        ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.word_fragment_title)));
@@ -70,6 +75,28 @@ public class TabsFragment extends Fragment { // не работает
             }
         });
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.action_bar_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        return;
+    }
+
+    // обработка нажатий в action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_add:
+                addElement();
+                return true;
+            case android.R.id.home:
+                back();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void addElement() {
@@ -120,6 +147,10 @@ public class TabsFragment extends Fragment { // не работает
         public int getCount() {
             return mNumOfTabs;
         }
+    }
+
+    private void back() {
+        getActivity().onBackPressed();
     }
 }
 

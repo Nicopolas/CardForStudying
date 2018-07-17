@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.example.a1.cardforstudying.ListActivity;
@@ -23,18 +26,19 @@ public class PhraseEditFragment extends Fragment {
     final String TAG = getClass().getSimpleName();
     private EditText mPhraseMeaning;
     private EditText mPhraseTranslation;
-    private Button mCancel;
-    private Button mSave;
 
     private View view;
     private Phrase phrase = new Phrase();
     private int dictionaryID;
     private int elementID;
 
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
         view = inflater.inflate(R.layout.phrase_edit_fragment, container, false);
 
+        //добавление кнопки back
+        ((ListActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setHasOptionsMenu(true);
         initGUI();
 
@@ -45,27 +49,47 @@ public class PhraseEditFragment extends Fragment {
         return dictionaryID;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.add_element_menu, menu);
+        //super.onCreateOptionsMenu(menu, inflater);
+        return;
+    }
+
+    // обработка нажатий в action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_save:
+                savePhrase();
+                return true;
+            case android.R.id.home:
+                back();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void initGUI() {
         mPhraseMeaning = view.findViewById(R.id.set_phrase_meaning);
         mPhraseTranslation = view.findViewById(R.id.set_phrase_translation);
-        mCancel = view.findViewById(R.id.cancel);
-        mSave = view.findViewById(R.id.save);
 
         setDataFromWordLab();
-        setListeners();
     }
 
     private void setDataFromWordLab() {
         String _dictionaryID = getArguments().getString("_dictionaryID");
         if (_dictionaryID == null) {
             Log.e(TAG, "Не получен dictionaryID с предыдущего обьекта");
+            back();
             //сюда вывод универсального врагмента с ошибкой
         }
         dictionaryID = Integer.valueOf(_dictionaryID);
-        ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
 
         String _elementID = getArguments().getString("_elementID");
         if (_elementID == null) {
+            ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
             return;
         }
         elementID = Integer.valueOf(_elementID);
@@ -73,11 +97,7 @@ public class PhraseEditFragment extends Fragment {
         phrase = PhraseLab.get(getActivity()).getPhraseByID(elementID);
         mPhraseMeaning.setText(phrase.getPhraseMeaning());
         mPhraseTranslation.setText(phrase.getPhraseMeaning());
-    }
-
-    private void setListeners() {
-        mCancel.setOnClickListener(view -> cancel());
-        mSave.setOnClickListener(view -> savePhrase());
+        ((ListActivity) getActivity()).getSupportActionBar().setTitle(phrase.getPhraseMeaning());
     }
 
     private void savePhrase() {
@@ -87,7 +107,11 @@ public class PhraseEditFragment extends Fragment {
         PhraseLab.get(getActivity()).savePhraseInDateBase(phrase);
     }
 
-    private void cancel() {
-        ((ListActivity) getActivity()).onBackPressed();
+    private boolean fieldIsEmpty(EditText editText) {
+        return editText.getText().toString().isEmpty();
+    }
+
+    private void back() {
+        getActivity().onBackPressed();
     }
 }
