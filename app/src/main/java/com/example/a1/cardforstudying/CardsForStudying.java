@@ -115,6 +115,16 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
                 .commit();
     }
 
+    public void startFragmentWithParameter(Fragment nameFragment, int dictionaryID, int elementID) {
+        fragment = nameFragment;
+        Bundle bundleWord = new Bundle();
+        bundleWord.putString("_dictionaryID", String.valueOf(dictionaryID));
+        bundleWord.putString("_elementID", String.valueOf(elementID));
+        fragment.setArguments(bundleWord);
+
+        startFragment(fragment);
+    }
+
     public Fragment checkDataLab(Fragment nameFragment) {
         int count = 0;
         if (WordLab.get(this).getWords().isEmpty() && (nameFragment.toString().contains("CardsFragment") || nameFragment.toString().contains("TestFragment"))) {

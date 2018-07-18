@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.a1.cardforstudying.CardsForStudying;
+import com.example.a1.cardforstudying.model.DictionaryLab;
 import com.example.a1.cardforstudying.model.Phrase;
 import com.example.a1.cardforstudying.model.PhraseLab;
 import com.example.a1.cardforstudying.R;
@@ -22,12 +23,13 @@ import java.util.Locale;
 public class PhraseFragment extends BaseFragment implements TextToSpeech.OnInitListener {
     private final String TAG = getClass().getSimpleName();
     private static TextToSpeech tts;
-    View v;
-    List<Phrase> mListPhrase = new ArrayList<>();
-    TextView mPhraseMeaning;
-    TextView mPhraseTranslation;
-    public ImageButton mSpeechButton;
-    int phraseIndex;
+    private View v;
+    private List<Phrase> mListPhrase = new ArrayList<>();
+    private TextView mPhraseMeaning;
+    private TextView mPhraseTranslation;
+    private ImageButton mSpeechButton;
+    private ImageButton mEditPhraseButton;
+    private int phraseIndex;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class PhraseFragment extends BaseFragment implements TextToSpeech.OnInitL
         phraseIndex = ((CardsForStudying) getActivity()).phraseIndex;
 
         initGUI();
+        setListener();
         showPhrase();
         return v;
     }
@@ -66,8 +69,7 @@ public class PhraseFragment extends BaseFragment implements TextToSpeech.OnInitL
         mPhraseMeaning = v.findViewById(R.id.phrase_meaning_view);
         mPhraseTranslation = v.findViewById(R.id.phrase_translation_view);
         mSpeechButton = v.findViewById(R.id.speech_button);
-
-        setListener();
+        mEditPhraseButton = v.findViewById(R.id.edit_word_button);
     }
 
     private void setListener() {
@@ -83,6 +85,10 @@ public class PhraseFragment extends BaseFragment implements TextToSpeech.OnInitL
         mPhraseTranslation.setOnClickListener(view -> showPhrase(true));
 
         mSpeechButton.setOnClickListener(view -> tts = new TextToSpeech(getActivity(), this));
+
+        mEditPhraseButton.setOnClickListener(view -> ((CardsForStudying) getActivity()).startFragmentWithParameter(new PhraseEditFragment(),
+                DictionaryLab.get(getActivity()).getActiveDictionary().getDictionaryID(),
+                mListPhrase.get(index).getPhraseID()));
     }
 
     private void showPhrase(boolean nextPhrase) {
