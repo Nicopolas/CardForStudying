@@ -133,6 +133,7 @@ public class WordEditFragment extends Fragment {
         word.setInTest(mInTest.isChecked());
         word.setDictionaryID(dictionaryID);
         WordLab.get(getActivity()).createNewWordInDataBase(word);
+        back();
     }
 
     private boolean fieldIsEmpty(EditText editText) {

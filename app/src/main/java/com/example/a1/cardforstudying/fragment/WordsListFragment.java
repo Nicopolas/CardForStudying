@@ -36,7 +36,7 @@ public class WordsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
-        view = inflater.inflate(R.layout.list_fragment, container, false);
+        view = inflater.inflate(R.layout.list_fragment_for_tabbed_pages, container, false);
         initGUI();
 
         return view;

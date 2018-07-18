@@ -96,7 +96,7 @@ public class PhraseEditFragment extends Fragment {
 
         phrase = PhraseLab.get(getActivity()).getPhraseByID(elementID);
         mPhraseMeaning.setText(phrase.getPhraseMeaning());
-        mPhraseTranslation.setText(phrase.getPhraseMeaning());
+        mPhraseTranslation.setText(phrase.getPhraseTranslation());
         ((ListActivity) getActivity()).getSupportActionBar().setTitle(phrase.getPhraseMeaning());
     }
 
@@ -105,6 +105,7 @@ public class PhraseEditFragment extends Fragment {
         phrase.setPhraseTranslation(mPhraseTranslation.getText().toString());
         phrase.setDictionaryID(dictionaryID);
         PhraseLab.get(getActivity()).createNewPhraseInDateBase(phrase);
+        back();
     }
 
     private boolean fieldIsEmpty(EditText editText) {
