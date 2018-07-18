@@ -25,6 +25,7 @@ import com.example.a1.cardforstudying.model.DictionaryLab;
 public class TabsFragment extends Fragment { // не работает
     private final String TAG = getClass().getSimpleName();
     View view;
+    TabLayout tabLayout;
     WordsListFragment wordsListFragment;
     PhraseListFragment phraseListFragment;
     int position;
@@ -47,33 +48,8 @@ public class TabsFragment extends Fragment { // не работает
         dictionaryID = Integer.valueOf(_dictionaryID);
         ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
 
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.word_fragment_title)));
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.phrase_fragment_title)));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        initTabs();
 
-        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
-                (getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                position = tab.getPosition();
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
         return view;
     }
 
@@ -146,6 +122,40 @@ public class TabsFragment extends Fragment { // не работает
         public int getCount() {
             return mNumOfTabs;
         }
+    }
+
+    private void initTabs() {
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.word_fragment_title)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.phrase_fragment_title)));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        initPagerAdapter();
+    }
+
+    private void initPagerAdapter() {
+        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                position = tab.getPosition();
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     private void back() {
