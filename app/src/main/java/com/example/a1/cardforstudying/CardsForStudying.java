@@ -272,6 +272,14 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
 
+    private void uploadingData() {
+
+    }
+
+    private void saveData() {
+
+    }
+
     private void firstStart(){
         SharedPreferences sPref = getSharedPreferences(getString(R.string.first_start_file_name), MODE_PRIVATE);
         boolean firstStart = Boolean.valueOf(sPref.getString(getString(R.string.first_start_file_name), "true"));
