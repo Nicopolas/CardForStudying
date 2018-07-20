@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:paddingBottom="16dp"
-    android:orientation="vertical">
+    android:paddingTop="16dp">
 
     <!-- сменить на action bar (а может и нет) -->
     <LinearLayout
@@ -24,126 +24,106 @@
             android:src="@drawable/services" />
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/speech_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingRight="16dp"
+            android:src="@drawable/ic_volume_mute_black_48dp" />
+
+        <ImageButton
+            android:id="@+id/in_test_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:src="@drawable/baseline_done_black_48" />
+
+        <ImageButton
+            android:id="@+id/edit_word_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:src="@drawable/outline_edit_black_48" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical">
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:gravity="top|center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/word_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="40sp"
+                android:textStyle="normal|bold"
+                tools:text="@string/fictitious_meaning_word" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
-            <ImageButton
-                android:id="@+id/speech_button"
+            android:gravity="top|center">
+
+            <TextView
+                android:id="@+id/word_transcription_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="16dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_volume_mute_black_48dp"/>
-            <ImageButton
-                android:id="@+id/in_test_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:paddingRight="16dp"
-                android:background="@color/white"
-                android:src="@drawable/baseline_done_black_48"/>
-            <ImageButton
-                android:id="@+id/edit_word_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:paddingRight="16dp"
-                android:background="@color/white"
-                android:src="@drawable/outline_edit_black_48"/>
+                android:textSize="18sp"
+                tools:text="@string/fictitious_meaning_word_transcription" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:gravity="top|center"
+            android:paddingLeft="40dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="82dp"
-                android:gravity="top|center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/word_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="serif"
-                    android:gravity="center"
-                    android:paddingBottom="0dp"
-                    android:paddingEnd="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingStart="20dp"
-                    android:paddingTop="20dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="40sp"
-                    android:textStyle="normal|bold"
-                    tools:text="@string/fictitious_meaning_word" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|center">
-
-                <TextView
-                    android:id="@+id/word_transcription_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:paddingBottom="20dp"
-                    android:paddingEnd="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingStart="20dp"
-                    android:textSize="18sp"
-                    tools:text="@string/fictitious_meaning_word_transcription" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|center"
-                android:paddingLeft="20dp">
-
-                <TextView
-                    android:id="@+id/word_translation_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:paddingBottom="20dp"
-                    android:paddingEnd="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingStart="20dp"
-                    android:textSize="24sp"
-                    tools:text="@string/fictitious_word_translation_view" />
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom|center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/example_button"
+            <TextView
+                android:id="@+id/word_translation_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="serif"
-                android:text="@string/example"
-                android:textSize="20sp" />
+                android:textSize="24sp"
+                tools:text="@string/fictitious_word_translation_view" />
         </LinearLayout>
+    </LinearLayout>
 
-    </FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/example_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:fontFamily="serif"
+            android:text="@string/example"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -178,4 +158,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</FrameLayout>

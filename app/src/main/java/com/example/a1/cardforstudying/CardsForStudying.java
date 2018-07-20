@@ -82,7 +82,7 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
         return true;
     }
 
-    public DrawerLayout getDrawer(){
+    public DrawerLayout getDrawer() {
         return drawer;
     }
 
@@ -132,7 +132,7 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
             return new EmptyDictionary();
         }
 
-        if(PhraseLab.get(this).getPhrases().isEmpty() && nameFragment.toString().contains("PhraseFragment")){
+        if (PhraseLab.get(this).getPhrases().isEmpty() && nameFragment.toString().contains("PhraseFragment")) {
             EmptyDictionary.mMessage = R.string.err_empty_phrase_dictionary;
             return new EmptyDictionary();
         }
@@ -165,8 +165,8 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
     public void onResume() {
         Log.d(TAG, "onResume() called");
 
-        if (fragment != null){
-            switch (getActiveFragmentName()){
+        if (fragment != null) {
+            switch (getActiveFragmentName()) {
                 case "CardsFragment":
                     startFragment(new CardsFragment());
                     break;
@@ -280,10 +280,10 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
 
     }
 
-    private void firstStart(){
+    private void firstStart() {
         SharedPreferences sPref = getSharedPreferences(getString(R.string.first_start_file_name), MODE_PRIVATE);
         boolean firstStart = Boolean.valueOf(sPref.getString(getString(R.string.first_start_file_name), "true"));
-        if (!firstStart){
+        if (!firstStart) {
             return;
         }
         createFirstDictionary(this);

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:paddingBottom="16dp"
-    android:orientation="vertical">
+    android:paddingTop="16dp">
 
 
     <LinearLayout
@@ -25,84 +24,77 @@
             android:src="@drawable/services" />
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/speech_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="right">
-            <ImageButton
-                android:id="@+id/speech_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingRight="16dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_volume_mute_black_48dp"/>
-            <ImageButton
-                android:id="@+id/edit_word_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:paddingRight="16dp"
-                android:background="@color/white"
-                android:src="@drawable/outline_edit_black_48"/>
-        </LinearLayout>
+            android:background="@color/white"
+            android:paddingRight="16dp"
+            android:src="@drawable/ic_volume_mute_black_48dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/edit_word_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:src="@drawable/outline_edit_black_48" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:gravity="center">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top|center"
-                android:paddingLeft="20dp">
+                android:orientation="vertical"
+                android:paddingTop="16dp">
 
                 <TextView
                     android:id="@+id/phrase_meaning_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
+                    android:gravity="center"
                     android:paddingBottom="20dp"
                     android:paddingEnd="20dp"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:paddingStart="20dp"
-                    android:textSize="32sp"
                     android:textColor="@android:color/black"
+                    android:textSize="32sp"
                     tools:text="@string/fictitious_meaning_phrase" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|center"
-                android:paddingLeft="20dp"
-                android:paddingTop="20dp">
 
                 <TextView
                     android:id="@+id/phrase_translation_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
+                    android:gravity="center"
                     android:paddingBottom="20dp"
                     android:paddingEnd="20dp"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:paddingStart="20dp"
+                    android:paddingTop="20dp"
                     android:textSize="24sp"
                     tools:text="@string/fictitious_transcription_phrase" />
             </LinearLayout>
-
-        </LinearLayout>
-
-    </FrameLayout>
+        </ScrollView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -137,4 +129,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</FrameLayout>
