@@ -25,7 +25,6 @@ public class DictionaryLab {
     private SQLiteDatabase mDataBase;
     private static DictionaryLab sDictionaryLab;
     private List<Dictionary> mDictionaries = null;
-    private Dictionary mActiveDictionary = null;
 
     public static DictionaryLab get(Context receivedContext) {
         context = receivedContext;
@@ -49,6 +48,7 @@ public class DictionaryLab {
     }
 
     public void putFirstDictionary(Dictionary dictionary) {
+        dictionary.setActiveDictionary(true);
         saveDictionaryInDateBase(dictionary);
     }
 
@@ -59,7 +59,9 @@ public class DictionaryLab {
     public void setActiveDictionaryByID(int id) {
         for (Dictionary dictionary : mDictionaries) {
             if (dictionary.getDictionaryID() == id) {
-                mActiveDictionary = dictionary;
+                setOllDictionaryPassive();
+                dictionary.setActiveDictionary(true);
+                saveDictionaryInDateBase(dictionary);
                 return;
             }
         }
@@ -67,7 +69,13 @@ public class DictionaryLab {
     }
 
     public Dictionary getActiveDictionary() {
-        return mActiveDictionary;
+        refreshDictionaries();
+        for (Dictionary dictionary : mDictionaries) {
+            if (dictionary.isActiveDictionary() == true) {
+                return dictionary;
+            }
+        }
+        return null;
     }
 
     public Dictionary getDictionaryByID(int id) {
@@ -86,6 +94,13 @@ public class DictionaryLab {
         refreshDictionaries();
         WordLab.get(context).removeWordsByDictionaryID(id);
         PhraseLab.get(context).removePhrasesByDictionaryID(id);
+    }
+
+    private void setOllDictionaryPassive() {
+        for (Dictionary dictionary : getAllDictionaryFromDataBase()){
+            dictionary.setActiveDictionary(false);
+            recreationDictionaryInDataBase(dictionary);
+        }
     }
 
     private DictionaryLab(Context context) { //закрытый конструктор, вызывается только из get()
@@ -109,17 +124,19 @@ public class DictionaryLab {
 
     private void saveDictionaryInDateBase(Dictionary dictionary) {
         if (getDictionaryByID(dictionary.getDictionaryID()) != null) {
-            removeDictionaryByID(dictionary.getDictionaryID());
+            recreationDictionaryInDataBase(dictionary);
+            return;
         }
         createDictionaryInDateBase(dictionary);
     }
 
     private int createDictionaryInDateBase(Dictionary dictionary) {
         int dictionaryID = getNextIDDictionaryFromDataBase();
-        ContentValues editedPhrase = new ContentValues();
-        editedPhrase.put(DbSchema.DictionaryTable.Cols.DictionaryID, getNextIDDictionaryFromDataBase());
-        editedPhrase.put(DbSchema.DictionaryTable.Cols.DictionaryName, dictionary.getDictionaryName());
-        mDataBase.insert(DbSchema.DictionaryTable.NAME, null, editedPhrase);
+        ContentValues editedDictionary = new ContentValues();
+        editedDictionary.put(DbSchema.DictionaryTable.Cols.DictionaryID, dictionaryID);
+        editedDictionary.put(DbSchema.DictionaryTable.Cols.DictionaryName, dictionary.getDictionaryName());
+        editedDictionary.put(DbSchema.DictionaryTable.Cols.IsActiveDictionary, String.valueOf(dictionary.isActiveDictionary()));
+        mDataBase.insert(DbSchema.DictionaryTable.NAME, null, editedDictionary);
         refreshDictionaries();
         return dictionaryID;
     }
@@ -128,6 +145,19 @@ public class DictionaryLab {
         for (Dictionary dictionary : dictionaries) {
             saveDictionaryInDateBase(dictionary);
         }
+    }
+
+    private void recreationDictionaryInDataBase(Dictionary dictionary) {
+        mDataBase.delete(DbSchema.DictionaryTable.NAME,
+                DbSchema.DictionaryTable.Cols.DictionaryID + " = ?",
+                new String[]{String.valueOf(dictionary.getDictionaryID())});
+
+        ContentValues editedDictionary = new ContentValues();
+        editedDictionary.put(DbSchema.DictionaryTable.Cols.DictionaryID, dictionary.getDictionaryID());
+        editedDictionary.put(DbSchema.DictionaryTable.Cols.DictionaryName, dictionary.getDictionaryName());
+        editedDictionary.put(DbSchema.DictionaryTable.Cols.IsActiveDictionary, String.valueOf(dictionary.isActiveDictionary()));
+        mDataBase.insert(DbSchema.DictionaryTable.NAME, null, editedDictionary);
+        refreshDictionaries();
     }
 
     private void refreshDictionaries() {
@@ -152,6 +182,7 @@ public class DictionaryLab {
         Dictionary dictionary = new Dictionary();
         dictionary.setDictionaryID(cursor.getInt(0));
         dictionary.setDictionaryName(cursor.getString(1));
+        dictionary.setActiveDictionary(Boolean.valueOf(cursor.getString(2)));
         return dictionary;
     }
 }

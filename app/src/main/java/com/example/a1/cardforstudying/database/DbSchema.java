@@ -71,10 +71,12 @@ public class DbSchema {
         public static final class Cols {
             public static final String DictionaryID = "dictionary_id";
             public static final String DictionaryName = "dictionary_name";
+            public static final String IsActiveDictionary = "is_active_dictionary";
 
             public static final String[] dictionaryAllColumn = {
                     DictionaryID,
-                    DictionaryName
+                    DictionaryName,
+                    IsActiveDictionary
             };
         }
     }

@@ -36,7 +36,7 @@ public class PhraseFragment extends BaseFragment implements TextToSpeech.OnInitL
         Log.d(TAG, "onCreateView called");
         v = inflater.inflate(R.layout.phrase_fragment, container, false);
         phraseIndex = ((CardsForStudying) getActivity()).phraseIndex;
-
+        checkActiveDictionary();
         initGUI();
         setListener();
         showPhrase();
@@ -110,6 +110,12 @@ public class PhraseFragment extends BaseFragment implements TextToSpeech.OnInitL
             return;
         }
         this.putDataInElements();
+    }
+
+    private void checkActiveDictionary() {
+        if (DictionaryLab.get(getActivity()).getActiveDictionary() == null) {
+            getActivity().onBackPressed();
+        }
     }
 
     @Override

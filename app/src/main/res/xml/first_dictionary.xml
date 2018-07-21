@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<migration>
+<FirstDictionary>
  
 <!-- FirstDictionary -->
 
@@ -1123,67 +1123,4 @@ That means the wheel may be spinning back.
 </ExampleTranslation>
 </Word>
 
-
-<Word>
-<MeaningWord>
-
-</MeaningWord>
-<MeaningWordTranscription>
-
-</MeaningWordTranscription>
-<TranslationWord>
-сущ.:
-прил.:
-глаг.:
-</TranslationWord>
-<Example>
-
-</Example>
-<ExampleTranslation>
-	
-</ExampleTranslation>
-</Word>
-
-
-<Word>
-<MeaningWord>
-
-</MeaningWord>
-<MeaningWordTranscription>
-
-</MeaningWordTranscription>
-<TranslationWord>
-сущ.:
-прил.:
-глаг.:
-</TranslationWord>
-<Example>
-
-</Example>
-<ExampleTranslation>
-	
-</ExampleTranslation>
-</Word>
-
-
-<Word>
-<MeaningWord>
-
-</MeaningWord>
-<MeaningWordTranscription>
-
-</MeaningWordTranscription>
-<TranslationWord>
-сущ.:
-прил.:
-глаг.:
-</TranslationWord>
-<Example>
-
-</Example>
-<ExampleTranslation>
-	
-</ExampleTranslation>
-</Word>
-
-</migration>
+</FirstDictionary>

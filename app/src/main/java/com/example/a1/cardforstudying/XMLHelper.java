@@ -79,7 +79,6 @@ public class XMLHelper {
             DictionaryLab.get(context).putFirstDictionary(new Dictionary( "Default Dictionary"));
             WordLab.get(context).putFirstDictionary(words);
             PhraseLab.get(context).putFirstDictionary(phrases);
-            DictionaryLab.get(context).setActiveDictionaryByID(DictionaryLab.get(context).getDictionaries().get(0).getDictionaryID());
         } catch (Exception e) {
             Log.e(TAG, "Ошибка в парсенге first_dictionary \n" + e);
             return;

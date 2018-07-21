@@ -7,12 +7,14 @@ package com.example.a1.cardforstudying.model;
 public class Dictionary {
     private int DictionaryID;
     private String DictionaryName;
+    private boolean isActiveDictionary = false;
 
-    public Dictionary(String dictionaryName){
+    public Dictionary(String dictionaryName) {
         this.DictionaryName = dictionaryName;
     }
 
-    public Dictionary(){}
+    public Dictionary() {
+    }
 
     public int getDictionaryID() {
         return DictionaryID;
@@ -28,5 +30,13 @@ public class Dictionary {
 
     public void setDictionaryName(String dictionaryName) {
         DictionaryName = dictionaryName;
+    }
+
+    public boolean isActiveDictionary() {
+        return isActiveDictionary;
+    }
+
+    public void setActiveDictionary(boolean activeDictionary) {
+        isActiveDictionary = activeDictionary;
     }
 }

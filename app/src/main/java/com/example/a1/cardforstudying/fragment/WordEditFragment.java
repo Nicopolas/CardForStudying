@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.ListActivity;
 import com.example.a1.cardforstudying.R;
 import com.example.a1.cardforstudying.model.DictionaryLab;
@@ -41,9 +42,7 @@ public class WordEditFragment extends Fragment {
         Log.d(TAG, "onCreateView called");
         view = inflater.inflate(R.layout.word_edit_fragment, container, false);
 
-        //добавление кнопки back
-        ((ListActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setHasOptionsMenu(true);
+        addActionBar();
         initGUI();
         setListener();
 
@@ -141,5 +140,26 @@ public class WordEditFragment extends Fragment {
 
     private void back() {
         getActivity().onBackPressed();
+    }
+
+    private void addActionBar() {
+        try {
+            //добавление кнопки back
+            ((ListActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        catch (Exception eL) {
+            Log.e(TAG, "getSupportActionBar() error");
+            eL.printStackTrace();
+            try {
+                //добавление кнопки back
+                ((CardsForStudying) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+            catch (Exception eC) {
+                Log.e(TAG, "getSupportActionBar() error");
+                eL.printStackTrace();
+                back();
+            }
+        }
+        setHasOptionsMenu(true);
     }
 }

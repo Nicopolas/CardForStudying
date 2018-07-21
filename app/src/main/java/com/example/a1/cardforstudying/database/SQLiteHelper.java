@@ -70,7 +70,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private String createDictionariesTableQuery() {
         return "CREATE TABLE " + DictionaryTable.NAME + " ("
                 + DictionaryTable.Cols.DictionaryID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + DictionaryTable.Cols.DictionaryName + " TEXT" + ");";
+                + DictionaryTable.Cols.DictionaryName + " TEXT," + DictionaryTable.Cols.IsActiveDictionary + " TEXT" + ");";
     }
 
 }

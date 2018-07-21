@@ -33,6 +33,7 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView called");
         v = inflater.inflate(R.layout.cards_fragment, container, false);
+        checkActiveDictionary();
         initGUI();
         setListener();
         showWord();
@@ -88,6 +89,12 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
         mNextButton.setOnClickListener(view -> showWord(true));
 
         mPreviousButton.setOnClickListener(view -> showWord(false));
+    }
+
+    private void checkActiveDictionary() {
+        if (DictionaryLab.get(getActivity()).getActiveDictionary() == null) {
+            getActivity().onBackPressed();
+        }
     }
 
     @Override
