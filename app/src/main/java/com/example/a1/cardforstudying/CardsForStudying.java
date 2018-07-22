@@ -2,6 +2,7 @@ package com.example.a1.cardforstudying;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -73,7 +74,9 @@ public class CardsForStudying extends AppCompatActivity implements NavigationVie
                 makeToast("В разарботке");
                 break;
             case R.id.nav_about_developers:
-                makeToast("В разарботке");
+                Uri address = Uri.parse("https://hh.ru/applicant/resumes/view?resume=c49bbdf2ff0513d8f10039ed1f31795a77336e");
+                Intent openlinkIntent = new Intent(Intent.ACTION_VIEW, address);
+                startActivity(openlinkIntent);
                 break;
         }
 
