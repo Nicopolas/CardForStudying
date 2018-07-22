@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Cards For Studying</string>
+    <string name="developer_web_address">slepdog@gmail.com</string>
+    <string name="fictitious_meaning_word">Word</string>
+    <string name="fictitious_meaning_word_transcription">|wɜːrd|</string>
+    <string name="first_button_word">Слово</string>
+    <string name="second_button_word">Мир</string>
+    <string name="third_button_word">Фраза</string>
+    <string name="fourth_button_word">Суслик</string>
+    <string name="fictitious_word_translation_view">
+        <string>\nсущ.: слово, текст, сообщение</string>
+        <string>\nглаг.: выражать словами, формулировать</string>
+    </string>
+    <string name="fictitious_meaning_phrase">London is the capital of Great Britain</string>
+    <string name="fictitious_transcription_phrase">Лондон - столица Великобритании</string>
+    <string name="example">Пример</string>
+    <string name="err_inDeveloping">В разарботке</string>
+    <string name="err_empty_phrase_dictionary">Не найдено ни одной фразы в словаре</string>
+    <string name="err_mListWordIsEmpty">Не найдено ни одного слова в словаре</string>
+    <string name="err_empty_dictionary">В активном словаре меньше четырех слов</string>
+    <string name="empty_dictionary">В активном словаре нет слов</string>
+    <string name="fewer_than_four_on_dictionary">Для построения теста \nдолжно быть отмечено больше четырех слов</string>
+
+    <string name="dictionary_name">Имя словаря</string>
+    <string name="значение_word">Значение слова</string>
+    <string name="transcription_word">Tранскрипция слова</string>
+    <string name="translation_word">Перевод слова</string>
+    <string name="add_word_in_the_test">Добавить слово в тест</string>
+    <string name="correct_answer_message">Верно</string>
+    <string name="incorrect_answer_message">Попробуй еще раз</string>
+    <string name="title_activity_to_do_list"> ToDoListActivity </string>
+    <string name="drawer_dictionaries">Словари</string>
+    <string name="drawer_words_in_test">Слова в тесте</string>
+    <string name="drawer_about_developers">О разработчике</string>
+    <string name="drawer_language">Язык приложения</string>
+    <string name="menu_save">Сохранить</string>
+    <string name="menu_cancel">Отменить</string>
+    <string name="menu_add">Добавить</string>
+    <string name="menu_clear">Очистить</string>
+    <string name="menu_delete">Удалить</string>
+    <string name="menu_edit">Изменить</string>
+    <string name="menu_open">Открыть</string>
+    <string name="menu_back">Назад</string>
+    <string name="set_active">Установить активным словарем</string>
+    <string name="first_start_file_name">firstStart</string>
+    <string name="dictionary_fragment_title">Словари</string>
+    <string name="word_fragment_title">Слова</string>
+    <string name="add_new_word_title">Добавить новое слово</string>
+    <string name="set_meaning_word">Напишите здесь свое слово</string>
+    <string name="set_word_transcription">Напишите здесь транскрипцию слова, если она существует</string>
+    <string name="set_translation_word">Напишите здесь перевод слова</string>
+    <string name="set_example">Напишите здесь предложение с этим словом</string>
+    <string name="in_test">Добавить слово в тест</string>
+    <string name="name_new_dictionaries">Имя нового словаря</string>
+    <string name="phrase_fragment_title">Фразы</string>
+    <string name="set_phrase_meaning">Напишите здесь свою фразу</string>
+    <string name="set_phrase_translation">Напишите здесь перевод фразы</string>
+    <string name="set_word_in_the_test">Данное слово было добавлено в тест</string>
+    <string name="remove_word_in_the_test">Слово было исключено из теста</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>
