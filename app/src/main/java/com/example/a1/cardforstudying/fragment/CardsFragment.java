@@ -2,7 +2,6 @@ package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.v4.view.GravityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import com.example.a1.cardforstudying.CardsForStudying;
 import com.example.a1.cardforstudying.R;
 import com.example.a1.cardforstudying.model.DictionaryLab;
+import com.example.a1.cardforstudying.model.WordLab;
 
 import java.util.Locale;
 
@@ -40,6 +40,12 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
         return v;
     }
 
+    @Override
+    public void onResume() {
+        showWord();
+        super.onResume();
+    }
+
     private void initGUI() {
         mWordTextView = v.findViewById(R.id.word_text_view);
         mWordTranscriptionView = v.findViewById(R.id.word_transcription_view);
@@ -60,8 +66,7 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
         mWordTranslationView.setOnClickListener(view -> showWord(true));
 
         mExampleButton.setOnClickListener(view -> {
-            makeToast(mDataList.get(index).getExample());//в разработке
-            makeToast(mDataList.get(index).getExampleTranslation());//в разработке
+            makeToast(R.string.err_inDeveloping);//в разработке
         });
 
         mSpeechButton.setOnClickListener(view -> tts = new TextToSpeech(getActivity(), this));
@@ -69,13 +74,13 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
         mInTestButton.setOnClickListener(view -> {
             if (mDataList.get(index).isInTest()) {
                 mDataList.get(index).setInTest(false);
-                mInTestButton.setImageResource(R.drawable.outline_close_black_48);
-                makeToast(R.string.remove_word_in_the_test);
+                WordLab.get(getActivity()).saveWordInDateBase(mDataList.get(index));
+                setInTestButtonImage(false);
                 return;
             }
+            setInTestButtonImage(true);
             mDataList.get(index).setInTest(true);
-            mInTestButton.setImageResource(R.drawable.baseline_done_black_48);
-            makeToast(R.string.set_word_in_the_test);
+            WordLab.get(getActivity()).saveWordInDateBase(mDataList.get(index));
         });
 
         mEditWordButton.setOnClickListener(view -> ((CardsForStudying) getActivity()).startFragmentWithParameter(new WordEditFragment(),
@@ -105,6 +110,15 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
         mWordTextView.setText(upFirsLetter(mDataList.get(index).getMeaningWord()));
         mWordTranscriptionView.setText(mDataList.get(index).getMeaningWordTranscription());
         mWordTranslationView.setText(mDataList.get(index).getTranslationWord().replace("сущ.:", "\nсущ.:").replace("глаг.:", "\nглаг.:").replace("прил.:", "\nприл.:"));
+        setInTestButtonImage(mDataList.get(index).isInTest());
+    }
+
+    private void setInTestButtonImage(boolean inTest) {
+        if (inTest) {
+            mInTestButton.setImageResource(R.drawable.outline_close_black_48);
+            return;
+        }
+        mInTestButton.setImageResource(R.drawable.baseline_done_black_48);
     }
 
     private String upFirsLetter(String str) {
@@ -126,7 +140,7 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
             }
 
         } else {
-            Log.e("TTS", "Initilization Failed!");
+            Log.e("TTS", "Initialization Failed!");
         }
     }
 
