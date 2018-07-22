@@ -130,7 +130,7 @@ public class WordEditFragment extends Fragment {
         word.setExample(mExample.getText().toString(), null);
         word.setInTest(mInTest.isChecked());
         word.setDictionaryID(dictionaryID);
-        WordLab.get(getActivity()).createNewWordInDataBase(word);
+        WordLab.get(getActivity()).saveWordInDateBase(word);
         back();
     }
 

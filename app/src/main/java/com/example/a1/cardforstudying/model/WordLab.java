@@ -82,14 +82,32 @@ public class WordLab {
 
     public void saveWordInDateBase(Word word) {
         if (getWordByID(word.getWordId()) != null) {
-            removeWord(word);
+            recreationWordInDataBase(word);
+            return;
         }
         createNewWordInDataBase(word);
     }
 
-    public void createNewWordInDataBase(Word word) {
+    private void createNewWordInDataBase(Word word) {
         ContentValues editedWord = new ContentValues();
         editedWord.put(WordTable.Cols.WordID, getNextIDWordFromDataBase());
+        editedWord.put(WordTable.Cols.MeaningWord, word.getMeaningWord());
+        editedWord.put(WordTable.Cols.MeaningWordTranscription, word.getMeaningWordTranscription());
+        editedWord.put(WordTable.Cols.TranslationWord, word.getTranslationWord());
+        editedWord.put(WordTable.Cols.RatingWord, word.getRatingWord());
+        editedWord.put(WordTable.Cols.InTest, String.valueOf(word.isInTest()));
+        editedWord.put(WordTable.Cols.DictionaryID, word.getDictionaryID());
+        mDataBase.insert(WordTable.NAME, null, editedWord);
+        refreshWords();
+    }
+
+    private void recreationWordInDataBase(Word word) {
+        mDataBase.delete(DbSchema.WordTable.NAME,
+                WordTable.Cols.WordID + " = ?",
+                new String[]{String.valueOf(word.getWordId())});
+
+        ContentValues editedWord = new ContentValues();
+        editedWord.put(WordTable.Cols.WordID, word.getWordId());
         editedWord.put(WordTable.Cols.MeaningWord, word.getMeaningWord());
         editedWord.put(WordTable.Cols.MeaningWordTranscription, word.getMeaningWordTranscription());
         editedWord.put(WordTable.Cols.TranslationWord, word.getTranslationWord());

@@ -102,7 +102,7 @@ public class PhraseEditFragment extends Fragment {
         phrase.setPhraseMeaning(mPhraseMeaning.getText().toString());
         phrase.setPhraseTranslation(mPhraseTranslation.getText().toString());
         phrase.setDictionaryID(dictionaryID);
-        PhraseLab.get(getActivity()).createNewPhraseInDateBase(phrase);
+        PhraseLab.get(getActivity()).savePhraseInDateBase(phrase);
         back();
     }
 

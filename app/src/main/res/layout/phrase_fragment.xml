@@ -34,7 +34,7 @@
             android:id="@+id/speech_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@null"
             android:paddingRight="16dp"
             android:src="@drawable/ic_volume_mute_black_48dp" />
 
@@ -42,7 +42,7 @@
             android:id="@+id/edit_word_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@null"
             android:paddingRight="16dp"
             android:paddingTop="16dp"
             android:src="@drawable/outline_edit_black_48" />

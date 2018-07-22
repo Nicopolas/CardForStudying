@@ -77,14 +77,29 @@ public class PhraseLab {
 
     public void savePhraseInDateBase(Phrase phrase) {
         if (getPhraseByID(phrase.getPhraseID()) != null) {
-            removePhrase(phrase);
+            recreationPhraseInDataBase(phrase);
+            return;
         }
         createNewPhraseInDateBase(phrase);
     }
 
-    public void createNewPhraseInDateBase(Phrase phrase) {
+    private void createNewPhraseInDateBase(Phrase phrase) {
         ContentValues editedPhrase = new ContentValues();
         editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseID, getNextIDPhraseFromDataBase());
+        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseMeaning, phrase.getPhraseMeaning());
+        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseTranslation, phrase.getPhraseTranslation());
+        editedPhrase.put(DbSchema.PhraseTable.Cols.DictionaryID, phrase.getDictionaryID());
+        mDataBase.insert(DbSchema.PhraseTable.NAME, null, editedPhrase);
+        refreshPhrases();
+    }
+
+    private void recreationPhraseInDataBase(Phrase phrase) {
+        mDataBase.delete(DbSchema.PhraseTable.NAME,
+                DbSchema.PhraseTable.Cols.PhraseID + " = ?",
+                new String[]{String.valueOf(phrase.getPhraseID())});
+
+        ContentValues editedPhrase = new ContentValues();
+        editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseID, phrase.getPhraseID());
         editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseMeaning, phrase.getPhraseMeaning());
         editedPhrase.put(DbSchema.PhraseTable.Cols.PhraseTranslation, phrase.getPhraseTranslation());
         editedPhrase.put(DbSchema.PhraseTable.Cols.DictionaryID, phrase.getDictionaryID());
