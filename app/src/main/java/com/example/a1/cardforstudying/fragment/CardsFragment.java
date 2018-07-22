@@ -75,12 +75,14 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
             if (mDataList.get(index).isInTest()) {
                 mDataList.get(index).setInTest(false);
                 WordLab.get(getActivity()).saveWordInDateBase(mDataList.get(index));
+                makeToast(R.string.remove_word_in_the_test);
                 setInTestButtonImage(false);
                 return;
             }
-            setInTestButtonImage(true);
             mDataList.get(index).setInTest(true);
             WordLab.get(getActivity()).saveWordInDateBase(mDataList.get(index));
+            makeToast(R.string.set_word_in_the_test);
+            setInTestButtonImage(true);
         });
 
         mEditWordButton.setOnClickListener(view -> ((CardsForStudying) getActivity()).startFragmentWithParameter(new WordEditFragment(),
