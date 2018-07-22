@@ -2,6 +2,7 @@ package com.example.a1.cardforstudying.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -87,7 +88,7 @@ public class PhraseEditFragment extends Fragment {
 
         String _elementID = getArguments().getString("_elementID");
         if (_elementID == null) {
-            ((ListActivity) getActivity()).getSupportActionBar().setTitle(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
+            setTitleActionBar(DictionaryLab.get(getActivity()).getDictionaryByID(dictionaryID).getDictionaryName());
             return;
         }
         elementID = Integer.valueOf(_elementID);
@@ -95,7 +96,7 @@ public class PhraseEditFragment extends Fragment {
         phrase = PhraseLab.get(getActivity()).getPhraseByID(elementID);
         mPhraseMeaning.setText(phrase.getPhraseMeaning());
         mPhraseTranslation.setText(phrase.getPhraseTranslation());
-        ((ListActivity) getActivity()).getSupportActionBar().setTitle(phrase.getPhraseMeaning());
+        setTitleActionBar(phrase.getPhraseMeaning());
     }
 
     private void savePhrase() {
@@ -114,17 +115,26 @@ public class PhraseEditFragment extends Fragment {
         getActivity().onBackPressed();
     }
 
+    private void setTitleActionBar(String title) {
+        getActionBar().setTitle(title);
+    }
+
     private void addActionBar() {
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setHasOptionsMenu(true);
+    }
+
+    private ActionBar getActionBar() {
         try {
             //добавление кнопки back
-            ((ListActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            return ((ListActivity) getActivity()).getSupportActionBar();
         }
         catch (Exception eL) {
             Log.e(TAG, "getSupportActionBar() error");
             eL.printStackTrace();
             try {
                 //добавление кнопки back
-                ((CardsForStudying) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                return ((CardsForStudying) getActivity()).getSupportActionBar();
             }
             catch (Exception eC) {
                 Log.e(TAG, "getSupportActionBar() error");
@@ -132,6 +142,6 @@ public class PhraseEditFragment extends Fragment {
                 back();
             }
         }
-        setHasOptionsMenu(true);
+        return null;
     }
 }

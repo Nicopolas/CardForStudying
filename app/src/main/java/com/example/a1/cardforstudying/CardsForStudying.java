@@ -10,7 +10,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MenuItem;
@@ -18,9 +20,11 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.example.a1.cardforstudying.fragment.CardsFragment;
+import com.example.a1.cardforstudying.fragment.DictionariesListFragment;
 import com.example.a1.cardforstudying.fragment.EmptyDictionary;
 import com.example.a1.cardforstudying.fragment.LeftButtonFragment;
 import com.example.a1.cardforstudying.fragment.PhraseFragment;
+import com.example.a1.cardforstudying.fragment.TabsFragment;
 import com.example.a1.cardforstudying.fragment.TestFragment;
 import com.example.a1.cardforstudying.model.DictionaryLab;
 import com.example.a1.cardforstudying.model.PhraseLab;
@@ -29,11 +33,12 @@ import com.example.a1.cardforstudying.model.WordLab;
 
 import static com.example.a1.cardforstudying.XMLHelper.createFirstDictionary;
 
-public class CardsForStudying extends AppCompatActivity implements GestureDetector.OnGestureListener, NavigationView.OnNavigationItemSelectedListener {
+public class CardsForStudying extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
 
     public FragmentManager fm = getSupportFragmentManager();
     public Fragment fragment = fm.findFragmentById(R.id.fragment_container);//создание фрагмента
+    private Fragment  leftButtonFragment = fm.findFragmentById(R.id.left_btn_fragment_container);
 
     GestureDetectorCompat mDetector;
     DrawerLayout drawer;
@@ -48,17 +53,13 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cards_for_studuing);
 
-        mDetector = new GestureDetectorCompat(this, this);
+        initAppBar();
         firstStart();
 
         if (fragment == null) {
+            leftButtonFragment = new LeftButtonFragment();
             startFragment();
         }
-
-        drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Добавляем слушатель нажатий на пункт списка
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -103,7 +104,7 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
                 .replace(R.id.fragment_container, checkDataLab(fragment))
                 .commit();
         fm.beginTransaction()
-                .replace(R.id.left_btn_fragment_container, new LeftButtonFragment())
+                .replace(R.id.left_btn_fragment_container, leftButtonFragment)
                 .commit();
     }
 
@@ -116,6 +117,8 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
     }
 
     public void startFragmentWithParameter(Fragment nameFragment, int dictionaryID, int elementID) {
+        fm.beginTransaction().hide(leftButtonFragment).commit();
+
         fragment = nameFragment;
         Bundle bundleWord = new Bundle();
         bundleWord.putString("_dictionaryID", String.valueOf(dictionaryID));
@@ -212,50 +215,21 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
             drawer.closeDrawer(GravityCompat.START);
             return;
         }
-        super.onBackPressed();
-    }
-
-
-    //из GestureDetector.OnGestureListener
-    @Override
-    public boolean onDown(MotionEvent e) {
-        Log.d(TAG, "onDown");
-        return false;
-    }
-
-    @Override
-    public void onShowPress(MotionEvent e) {
-        Log.d(TAG, "onShowPress");
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-        Log.d(TAG, "onSingleTapUp");
-        return false;
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        Log.d(TAG, "onScroll");
-        if (fragment.toString().contains("CardsFragment")) {//не работает
-            startFragment(new TestFragment());
-        } else {
-            if (fragment.toString().contains("TestFragment")) {//почему-то работает
+        switch (getActiveFragmentName()) {
+            case "WordEditFragment":
                 startFragment(new CardsFragment());
-            }
+                fm.beginTransaction().show(leftButtonFragment).commit();
+                initAppBar();
+                return;
+            case "PhraseEditFragment":
+                startFragment(new PhraseFragment());
+                fm.beginTransaction().show(leftButtonFragment).commit();
+                initAppBar();
+                return;
+            default:
+                super.onBackPressed();
         }
-        return false;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent e) {
-        Log.d(TAG, "onLongPress");
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        Log.d(TAG, "onFling");
-        return false;
+        super.onBackPressed();
     }
 
     private void makeToast(int string_id) {
@@ -272,12 +246,25 @@ public class CardsForStudying extends AppCompatActivity implements GestureDetect
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
 
-    private void uploadingData() {
+    private void initAppBar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    }
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-    private void saveData() {
+        // Добавляем слушателя на drawer.
+        drawer.addDrawerListener(toggle);
 
+        // Cинхронизируем menu с drawer.
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        // Добавляем слушатель нажатий на пункт списка
+        navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportActionBar().setTitle(R.string.app_name);
     }
 
     private void firstStart() {

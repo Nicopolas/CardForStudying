@@ -9,21 +9,6 @@
     android:paddingRight="8dp"
     android:paddingTop="16dp">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:gravity="top|left|center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/menu_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:src="@drawable/services" />
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +24,7 @@
             android:src="@drawable/ic_volume_mute_black_48dp" />
 
         <ImageButton
-            android:id="@+id/edit_word_button"
+            android:id="@+id/edit_phrase_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"

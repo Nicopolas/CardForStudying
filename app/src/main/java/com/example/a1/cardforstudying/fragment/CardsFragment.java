@@ -41,7 +41,6 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
     }
 
     private void initGUI() {
-        mMenuBetton = v.findViewById(R.id.menu_button);
         mWordTextView = v.findViewById(R.id.word_text_view);
         mWordTranscriptionView = v.findViewById(R.id.word_transcription_view);
         mWordTranslationView = v.findViewById(R.id.word_translation_view);
@@ -54,9 +53,6 @@ public class CardsFragment extends BaseFragment implements TextToSpeech.OnInitLi
     }
 
     private void setListener() {
-        mMenuBetton.setOnClickListener(view ->
-                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START));
-
         mWordTextView.setOnClickListener(view -> showWord(true));
 
         mWordTranscriptionView.setOnClickListener(view -> showWord(true));

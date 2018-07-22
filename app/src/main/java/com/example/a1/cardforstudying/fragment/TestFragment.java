@@ -116,7 +116,6 @@ public class TestFragment extends BaseFragment {
     }
 
     private void initGUI() {
-        mMenuBetton = v.findViewById(R.id.menu_button);
         mWordTextView = v.findViewById(R.id.word_text_view);
         mWordTranscriptionView = v.findViewById(R.id.word_transcription_view);
 
@@ -131,9 +130,6 @@ public class TestFragment extends BaseFragment {
     }
 
     private void setListener() {
-        mMenuBetton.setOnClickListener(view ->
-                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START));
-
         mWordTextView.setOnClickListener(view -> showWord(true));
 
         mWordTranscriptionView.setOnClickListener(view -> showWord(true));

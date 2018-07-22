@@ -63,19 +63,15 @@ public class PhraseFragment extends BaseFragment implements TextToSpeech.OnInitL
     }
 
     private void initGUI() {
-        mMenuBetton = v.findViewById(R.id.menu_button);
         mNextButton = v.findViewById(R.id.next_button);
         mPreviousButton = v.findViewById(R.id.previous_button);
         mPhraseMeaning = v.findViewById(R.id.phrase_meaning_view);
         mPhraseTranslation = v.findViewById(R.id.phrase_translation_view);
         mSpeechButton = v.findViewById(R.id.speech_button);
-        mEditPhraseButton = v.findViewById(R.id.edit_word_button);
+        mEditPhraseButton = v.findViewById(R.id.edit_phrase_button);
     }
 
     private void setListener() {
-        mMenuBetton.setOnClickListener(view ->
-                ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START));
-
         mNextButton.setOnClickListener(view -> showPhrase(true));
 
         mPreviousButton.setOnClickListener(view -> showPhrase(false));

@@ -9,21 +9,6 @@
     android:paddingRight="8dp"
     android:paddingTop="16dp">
 
-    <!-- сменить на action bar (а может и нет) -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:gravity="top|left|center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/menu_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@null"
-            android:src="@drawable/services" />
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

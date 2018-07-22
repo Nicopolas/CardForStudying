@@ -24,7 +24,6 @@ import java.util.List;
 public abstract class BaseFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
 
-    protected ImageButton mMenuBetton;
     protected ImageButton mNextButton;
     protected ImageButton mPreviousButton;
 

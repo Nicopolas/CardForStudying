@@ -24,9 +24,6 @@ public class EmptyDictionary extends BaseFragment {
         Log.d(TAG,"onCreateView called");
         View v = inflater.inflate(R.layout.empty_dictionary, container, false);
 
-        mMenuBetton = v.findViewById(R.id.menu_button);
-        mMenuBetton.setOnClickListener(view -> ((CardsForStudying) getActivity()).getDrawer().openDrawer(GravityCompat.START));
-
         mEmptyDictionary = v.findViewById(R.id.empty_dictionary);
         mEmptyDictionary.setText(mMessage);
         mEmptyDictionary.setOnClickListener(view -> startActivity(new Intent(getActivity(), ListActivity.class)));
