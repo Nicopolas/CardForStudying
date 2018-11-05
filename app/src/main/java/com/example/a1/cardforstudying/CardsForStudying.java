@@ -74,7 +74,7 @@ public class CardsForStudying extends AppCompatActivity implements NavigationVie
                 makeToast("В разарботке");
                 break;
             case R.id.nav_about_developers:
-                Uri address = Uri.parse("https://hh.ru/applicant/resumes/view?resume=c49bbdf2ff0513d8f10039ed1f31795a77336e");
+                Uri address = Uri.parse("https://hh.ru/applicant/resumes/view?resume=06285ed3ff0593ce870039ed1f344d53553939");
                 Intent openlinkIntent = new Intent(Intent.ACTION_VIEW, address);
                 startActivity(openlinkIntent);
                 break;
